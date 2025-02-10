@@ -1,5 +1,5 @@
 ---
-title: "Creating an OpenAI API Key and Assistant"
+title: "OpenAI"
 description: "A step-by-step guide to generating an OpenAI API key and setting up an OpenAI Assistant."
 ---
 

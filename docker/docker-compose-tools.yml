@@ -18,7 +18,14 @@ services:
     restart: always
     networks:
       - turborepo-network
-  
+  mongodb:
+    container_name: mongodb
+    image: "mongodb/mongodb-community-server:latest"
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - turborepo-network
 networks:
   turborepo-network:
     external: true

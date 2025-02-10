@@ -1,5 +1,5 @@
 ---
-title: "Setting Up Notion OAuth"
+title: "Notion OAuth"
 description: "A step-by-step guide to setting up OAuth authentication for Notion API."
 ---
 

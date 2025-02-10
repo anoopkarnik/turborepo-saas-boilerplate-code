@@ -17,6 +17,7 @@
     "@repo/email": "*",
     "@repo/payments": "*",
     "@repo/prisma-db": "*",
+
     "@repo/recoil": "*",
     "@repo/ts-types": "*",
     "@repo/typescript-config": "*",
