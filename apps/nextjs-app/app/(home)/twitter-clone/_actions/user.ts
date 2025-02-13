@@ -17,9 +17,27 @@ export async function GetTwitterUserDetails(){
 }
 
 export async function GetAllUsers(){
-    const users = await db.twitterUser.findMany({
-          orderBy: { createdAt: "desc" },
-    })
-    console.log(users)
-    return users;
+    try{
+        const users = await db.twitterUser.findMany({
+            orderBy: { createdAt: "desc" },
+        });
+        return users;
+    }
+    catch(error){
+        console.log(error)
+        return null;
+    }
+}
+
+export async function CreateTwitterUser(){
+    const session = await auth();
+    if (!session?.user?.id) {
+        throw new Error("User not authenticated");
+    }
+    const user = await db.twitterUser.create({
+        data: {
+            userId: session.user.id,
+        },
+    });
+    return user;
 }

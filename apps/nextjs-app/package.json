@@ -17,7 +17,6 @@
     "@repo/email": "*",
     "@repo/payments": "*",
     "@repo/prisma-db": "*",
-
     "@repo/recoil": "*",
     "@repo/ts-types": "*",
     "@repo/typescript-config": "*",
@@ -51,6 +50,7 @@
     "recharts": "^2.15.0",
     "recoil": "^0.7.7",
     "standardwebhooks": "^1.0.0",
+    "swr": "^2.3.2",
     "tailwind-scrollbar": "^3.1.0"
   },
   "devDependencies": {

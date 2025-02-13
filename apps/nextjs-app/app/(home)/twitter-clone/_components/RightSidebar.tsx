@@ -18,7 +18,7 @@ export async function Users(){
     const users = await GetAllUsers()
     if(!users || users.length === 0){
         return (
-            <div className='text-destructive'>
+            <div className='text-destructive text-sm'>
                 <p>No users to show</p>
             </div>
         )

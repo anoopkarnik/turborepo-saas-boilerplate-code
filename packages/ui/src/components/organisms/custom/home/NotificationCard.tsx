@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from '../../../../lib/utils';
 import { useRouter } from 'next/navigation';
-import { useNotifications, useSetNotifications } from '@repo/recoil/notification';
+import { useNotifications, useSetNotifications } from '../../../../../../state-management/src/recoil/notification';
 import { updateNotificationAction } from '@repo/server-utils/notification';
 
 const NotificationCard = ({notification}:any) => {

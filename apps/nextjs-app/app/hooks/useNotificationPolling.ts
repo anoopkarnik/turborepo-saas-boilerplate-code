@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getNotificationsAction } from "../_actions/notifications";
 import { useRecoilState} from 'recoil';
 import { NotificationProps } from "@repo/ts-types/home/v1";
-import { notificationsState } from "@repo/recoil/notification";
+import { notificationsState } from "../../../../packages/state-management/src/recoil/notification";
 
 // The main hook
 export function useNotificationPolling(userId: string, interval: number = 30000) {

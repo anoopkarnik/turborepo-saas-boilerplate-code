@@ -12,3 +12,67 @@ datasource db {
   url      = env("DATABASE_URL_MONGODB")
 }
 
+model TwitterUser {
+    id            String          @id @default(auto()) @map("_id") @db.ObjectId
+    userId        String        
+    username      String?
+    bio           String?
+    coverImage    String?
+    profileImage  String?
+    followingIds  String[]      @db.ObjectId
+    hasNotification Boolean?    @default(false)
+              
+    notifications TwitterNotification[]
+    posts        TwitterPost[]
+    comments     TwitterComment[]
+  
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    
+  }
+  
+  model TwitterPost {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    body      String
+    
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+  
+    userId  String @db.ObjectId
+    likedIds String[] @db.ObjectId
+  
+    user TwitterUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+    comments TwitterComment[]
+  }
+  
+  model TwitterComment {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    body      String
+    
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+  
+    userId String @db.ObjectId
+    postId String @db.ObjectId
+  
+    user TwitterUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+    post TwitterPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  }
+  
+  
+  model TwitterNotification {
+    id               String          @id @default(auto()) @map("_id") @db.ObjectId
+    body             String
+    userId           String  @db.ObjectId
+  
+    createdAt        DateTime        @default(now())
+    updatedAt        DateTime        @updatedAt 
+  
+    user TwitterUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  
+  }
+  
+  

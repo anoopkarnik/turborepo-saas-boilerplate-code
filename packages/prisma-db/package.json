@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vitest",
     "postgres:generate": "npx prisma generate --schema prisma/schema.prisma",
-    "postgres:migrate": "npx prisma migrate dev --schema prisma/schema.prisma",
+    "postgres:migrate": "npx prisma migrate dev --schema prisma/schema/schema.prisma",
     "mongo:generate": "npx prisma generate --schema prisma-mongo/schema.prisma",
     "mongo:migrate": "npx prisma db push --schema prisma-mongo/schema.prisma"
   },

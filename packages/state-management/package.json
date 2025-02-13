@@ -1,5 +1,5 @@
 {
-  "name": "@repo/recoil",
+  "name": "@repo/state-management",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

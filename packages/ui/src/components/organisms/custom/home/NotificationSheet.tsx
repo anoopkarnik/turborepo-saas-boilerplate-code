@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from 'react'
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '../../../molecules/shadcn/sheet'
 import { BellIcon } from 'lucide-react'
-import {  useNotifications,useSetNotifications } from '@repo/recoil/notification'
+import {  useNotifications,useSetNotifications } from '../../../../../../state-management/src/recoil/notification'
 import {updateAllNotificationsAction} from '@repo/server-utils/notification'
 import NotificationCard from './NotificationCard'
 import { Button } from '../../../atoms/shadcn/button'
