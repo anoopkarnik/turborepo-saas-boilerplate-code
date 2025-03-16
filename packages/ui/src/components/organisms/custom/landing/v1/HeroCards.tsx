@@ -1,6 +1,5 @@
+import { TestimonialProps } from "@repo/ts-types/landing-page/testimonials";
 import { Avatar, AvatarFallback, AvatarImage } from "../../../../atoms/shadcn/avatar";
-import { Badge } from "../../../../atoms/shadcn/badge";
-import { Button, buttonVariants } from "../../../../atoms/shadcn/button";
 import {
   Card,
   CardContent,
@@ -9,23 +8,24 @@ import {
   CardTitle,
   CardFooter,
 } from "../../../../molecules/shadcn/card";
-import { Check} from "lucide-react";
 import { LightbulbIcon } from "lucide-react";
-import { HeroCardsProps } from "@repo/ts-types/landing-page/v1";
+import { TeamProps } from "@repo/ts-types/landing-page/team";
+import { FeatureWithDescriptionProps } from "@repo/ts-types/landing-page/features";
+import { PricingProps } from "@repo/ts-types/landing-page/pricing";
 import PricingItem from "../../../../molecules/custom/v1/PricingItem";
 
-const HeroCards = ({testimonials,pricingList,teamList,featuresWithDescription}:HeroCardsProps) => {
+const HeroCards = ({testimonials,teamList,features,pricingList}:{testimonials:TestimonialProps[] | undefined,
+  teamList:TeamProps[] | undefined, features:FeatureWithDescriptionProps[] | undefined,
+  pricingList: PricingProps[] | undefined
+}) => {
   return (
     <div className="hidden xl:flex flex-row flex-wrap gap-8 relative w-[700px] h-[500px]">
       {/* Testimonial */}
       <Card className="absolute w-[340px] -top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="flex flex-row items-center gap-4 pb-2">
-          <Avatar>
-            <AvatarImage
-              alt=""
-              src={testimonials?.[0]?.image}
-            />
-            <AvatarFallback>SH</AvatarFallback>
+          <Avatar className="h-10 w-10 ">
+              <AvatarImage src={testimonials && testimonials[0]?.image} className="h-full w-full object-contain" />
+              <AvatarFallback>{testimonials && testimonials[0]?.userName.slice(0,1)}</AvatarFallback>
           </Avatar>
 
           <div className="flex flex-col">
@@ -58,25 +58,26 @@ const HeroCards = ({testimonials,pricingList,teamList,featuresWithDescription}:H
         </CardContent>
       </Card>
 
-      {/* Pricing */}
+      {/* Services */}
+
       <div className="absolute top-[180px] left-[50px] w-72 ">
-        <PricingItem pricing={pricingList[1]!} />
+        {pricingList?.[1] && <PricingItem pricing={pricingList[1]} />}
       </div>
 
-      {/* Feature*/}
-      <Card className="absolute w-[350px] -right-[10px] top-[250px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      {/* Projects*/}
+      {features && <Card className="absolute w-[350px] -right-[10px] top-[250px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
           <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
             <LightbulbIcon />
           </div>
           <div>
-            <CardTitle>{featuresWithDescription[3]?.title}</CardTitle>
+            <CardTitle>{features[3]?.title}</CardTitle>
             <CardDescription className="text-md mt-2 ">
-              {featuresWithDescription[3]?.description}
+              {features[3]?.description}
             </CardDescription>
           </div>
         </CardHeader>
-      </Card>
+      </Card>}
     </div>
   );
 };

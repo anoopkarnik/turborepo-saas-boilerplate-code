@@ -1,13 +1,15 @@
-import { CancellationRefundPoliciesProps } from '@repo/ts-types/landing-page/v1'
+import { CancellationRefundPoliciesProps } from "@repo/ts-types/landing-page/legal"
 
 
-const CancellationRefundPolicies = ({lastUpdated,siteName,companyName,websiteUrl,email}:CancellationRefundPoliciesProps) => {
+
+const CancellationRefundPolicies = ({cancellationRefundPolicies}:{
+    cancellationRefundPolicies:CancellationRefundPoliciesProps}) => {
   return (
     <div className='p-6 mx-[20%]'>
         <h2 className='text-title-h1'>Return and Refund Policy</h2>
 
-        <p className="text-description mb-6">Last updated: {lastUpdated}</p>
-        <p className="mb-4">Thank you for shopping at {siteName}.</p>
+        <p className="text-description mb-6">Last updated: {cancellationRefundPolicies.lastUpdated}</p>
+        <p className="mb-4">Thank you for shopping at {cancellationRefundPolicies.siteName}.</p>
         <p className="mb-4">If, for any reason, You are not completely satisfied with a purchase We invite You to review our policy on refunds and returns. This Return and Refund Policy has been created with the help of the <a href="https://www.freeprivacypolicy.com/free-return-refund-policy-generator/" target="_blank">Free Return and Refund Policy Generator</a>.</p>
         <p className="mb-4">The following terms are applicable for any products that You purchased with Us.</p>
         
@@ -21,7 +23,7 @@ const CancellationRefundPolicies = ({lastUpdated,siteName,companyName,websiteUrl
 
         <ul className="list-disc ml-8 mb-4">
             <li className="mb-2">
-                <p><strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to {companyName}.</p>
+                <p><strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to {cancellationRefundPolicies.companyLegalName}.</p>
             </li>
             <li className="mb-2">
                 <p><strong>Goods</strong> refer to the items offered for sale on the Service.</p>
@@ -33,7 +35,7 @@ const CancellationRefundPolicies = ({lastUpdated,siteName,companyName,websiteUrl
                 <p><strong>Service</strong> refers to the Website.</p>
             </li>
             <li className="mb-2">
-                <p><strong>Website</strong> refers to {siteName}, accessible from <a href={websiteUrl} rel="external nofollow noopener" target="_blank">{websiteUrl}</a></p>
+                <p><strong>Website</strong> refers to {cancellationRefundPolicies.siteName}, accessible from <a href={cancellationRefundPolicies.websiteUrl} rel="external nofollow noopener" target="_blank">{cancellationRefundPolicies.websiteUrl}</a></p>
             </li>
             <li className="mb-2">
                 <p><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</p>
@@ -46,7 +48,7 @@ const CancellationRefundPolicies = ({lastUpdated,siteName,companyName,websiteUrl
         <p className="mb-4">In order to exercise Your right of cancellation, You must inform Us of your decision by means of a clear statement. You can inform us of your decision by:</p>
         
         <ul className="list-disc ml-8 mb-4">
-            <li className="mb-2">By email: {email}</li>
+            <li className="mb-2">By email: {cancellationRefundPolicies.supportEmailAddress}</li>
         </ul>
         <p className="mb-4">We will reimburse You no later than 14 days from the day on which We receive the returned Goods. We will use the same means of payment as You used for the Order, and You will not incur any fees for such reimbursement.</p>
         
@@ -80,7 +82,7 @@ const CancellationRefundPolicies = ({lastUpdated,siteName,companyName,websiteUrl
         <h3 className="text-title-h3 mt-4 mb-2">Contact Us</h3>
         <p className="mb-4">If you have any questions about our Returns and Refunds Policy, please contact us:</p>
         <ul className="list-disc ml-8 mb-4">
-        <li className="mb-2">By email: {email}</li>
+        <li className="mb-2">By email: {cancellationRefundPolicies.supportEmailAddress}</li>
         </ul>
     </div>
   )

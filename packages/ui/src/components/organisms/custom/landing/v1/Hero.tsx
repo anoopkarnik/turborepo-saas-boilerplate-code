@@ -1,75 +1,82 @@
-import { BookOpenIcon } from "lucide-react";
+import {  BookIcon, LogIn } from "lucide-react";
 import { Button } from "../../../../atoms/shadcn/button";
-import { buttonVariants } from "../../../../atoms/shadcn/button";
 import HeroCards  from "./HeroCards";
 import { useEffect, useState } from "react";
-import { HeroProps } from "@repo/ts-types/landing-page/v1";
-import { useSession} from "next-auth/react";
+import { HeroSectionProps } from "@repo/ts-types/landing-page/hero";
+import { FeatureWithDescriptionProps } from "@repo/ts-types/landing-page/features";
+import { TestimonialProps } from "@repo/ts-types/landing-page/testimonials";
+import { TeamProps } from "@repo/ts-types/landing-page/team";
 import { useRouter } from "next/navigation";
+import { PricingProps } from "@repo/ts-types/landing-page/pricing";
 
-const Hero = ({loginFunction,documentationLink,tagline,description,testimonials,
-    pricingList,teamList,featuresWithDescription}: HeroProps) => {
+
+const Hero = ({heroSection, features ,testimonials, pricingList,teamList}:{
+  heroSection:HeroSectionProps ,features:FeatureWithDescriptionProps[]  | undefined,testimonials:TestimonialProps[] | undefined,
+  pricingList: PricingProps[]| undefined, teamList:TeamProps[]  | undefined}) => {
     const [taglineArray,setTaglineArray] = useState<string[]>([])
-    useEffect(()=>{
-        if(tagline){
-            setTaglineArray(tagline.split(" "))
-        }
-    },[tagline])
-
-    const {data:session} = useSession()
-
     const router = useRouter()
-
+    useEffect(()=>{
+        if(heroSection.tagline){
+            setTaglineArray(heroSection.tagline.split(" "))
+        }
+    },[heroSection.tagline])
   return (
-    <section className="container grid xl:grid-cols-2 place-items-center py-20 md:py-32 gap-10 relative">
+    <section className="container grid xl:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
       <div className="text-center lg:text-start space-y-6">
-        <main className="text-5xl md:text-6xl font-bold">
-          <h1 className="inline">
-            <span className="inline bg-gradient-to-r from-[#F596D3]  to-[#D247BF] text-transparent bg-clip-text">
-              {taglineArray[0]}
-            </span>{" "}
-            {taglineArray.slice(1,2)}{" "}
-            {taglineArray.slice(2,3)}
-          </h1>{" "}
-          {taglineArray[3]}{" "}
-          <h2 className="inline">
-            <span className="inline bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] text-transparent bg-clip-text">
-              {taglineArray[4]}
-            </span>{" "}
-            {taglineArray.slice(5,)}
-          </h2>
-        </main>
+      <main className="text-5xl md:text-6xl text-left leading-tight">
+        <h1 className="inline-block">
+          <span className="bg-gradient-to-r from-[#F596D3] to-[#D247BF] text-transparent bg-clip-text">
+            {taglineArray.slice(0, Math.ceil(taglineArray.length / 3)).join(" ")}
+          </span>{" "}
+          <span>
+            {taglineArray
+              .slice(Math.ceil(taglineArray.length / 3), Math.ceil((2 * taglineArray.length) / 3))
+              .join(" ")}
+          </span>{" "}
+          <span className="bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] text-transparent bg-clip-text">
+            {taglineArray.slice(Math.ceil((2 * taglineArray.length) / 3)).join(" ")}
+          </span>
+        </h1>
+      </main>
+
 
         <p className="text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0">
-          {description}
+          {heroSection.description}
         </p>
 
-        <div className="space-y-4 md:space-y-0 md:space-x-4">
-            
-          {!session?.user && <Button onClick={loginFunction} className="w-full md:w-1/3">Get Started</Button>}
-          {session?.user &&
-            <Button onClick={()=>router.push('/')} className="w-full md:w-1/3">
-            Go to Dashboard
+        <div className="flex items-center space-y-4 md:space-y-0 md:space-x-4">
+        {heroSection.documentationLink && <div>
+            <Button
+            className="flex items-center gap-2"
+              variant="outline"
+              onClick={() => heroSection.documentationLink && router.push(heroSection.documentationLink)}
+            ><BookIcon size={20} /> Documentation
+            </Button>
+            </div>}
+            { heroSection.blogLink &&           
+            <Button
+             className="flex items-center gap-2"
+              variant="outline"
+              onClick={() => heroSection.blogLink && router.push(heroSection.blogLink)}
+            > <BookIcon size={20} />
+            Read the Blogs
             </Button>}
-
-          <a
-            rel="noreferrer noopener"
-            href={documentationLink}
-            target="_blank"
-            className={`w-full md:w-1/3 text-lg ${buttonVariants({
-              variant: "outline",
-            })}`}
-          >
-            Documentation
-            <BookOpenIcon className="ml-2 w-4 h-4" />
-          </a>
+            
+            { heroSection.getStartedLink &&           
+            <Button
+             className="flex items-center gap-2"
+              variant="default"
+              onClick={() => heroSection.getStartedLink && router.push(heroSection.getStartedLink)}
+            > <LogIn size={20} />
+            Get Started
+            </Button>}
         </div>
       </div>
 
       {/* Hero cards sections */}
       <div className="z-10">
-        <HeroCards testimonials={testimonials} pricingList={pricingList}
-         teamList={teamList} featuresWithDescription={featuresWithDescription}/>
+        <HeroCards testimonials={testimonials} teamList={teamList} 
+        features={features} pricingList={pricingList}/>
       </div>
 
       {/* Shadow effect */}

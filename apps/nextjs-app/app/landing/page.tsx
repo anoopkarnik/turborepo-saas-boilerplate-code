@@ -1,51 +1,56 @@
 "use client"
 import LandingPage from "@repo/ui/templates/landing/v1/LandingPage";
-import { routeList,featuresWithDescription,featureList, testimonials, 
-  pricingList, FAQList, footerList, teamList} from "../../lib/constants/landing-page";
+
 import { useRouter } from "next/navigation";
-import { creator, creatorLink, darkLogo, description, donateNowLink, githubLink, githubRepositoryName, githubUsername, loginPath, logo, supportEmailAddress, tagline, title } from "../../lib/constants/appDetails";
-import { Suspense } from "react";
-import LoadingCard from "@repo/ui/organisms/custom/auth/v1/LoadingCard";
+
+import { useGlobalData } from "../../context/DataContext";
+import { useToast } from "@repo/ui/hooks/use-toast";
+import { createContactAction } from "../../actions/email";
+import LoadingPage from "@repo/ui/templates/landing/v1/LoadingPage";
+import Navbar from "@repo/ui/organisms/custom/landing/v1/Navbar";
 
 export default function Landing() {
-  const documentationLink = process.env.NEXT_PUBLIC_DOCUMENTATION_URL as string;
-  const router = useRouter()
-
   
-  const  loginFunction = () => {
-      router.push(loginPath)
+  const {toast} = useToast();
+  const data = useGlobalData();
+  
+  const createContact = async (email: string): Promise<{ success?: string; error?: string }> => {
+    const res = await createContactAction(email); // Use function from newsletterSection
+    if (res?.success) {
+        toast({ title: "Success", description: res.success, variant: "default" });
+        return { success: res.success };
+    } else if (res?.error) {
+        toast({ title: "Error", description: res.error, variant: "destructive" });
+        return { error: res.error };
+    }
+    return {};
+};
+
+  const functionsToUse = {
+    createContactAction : createContact,
+}
+
+  if (data.isLoading) {
+    return (
+      <LoadingPage />
+    );
   }
 
+
   return (
-    <div>
-      <Suspense fallback={<div>
-        <LoadingCard title="Loading" description="Please wait while we are loading the page!" />
-      </div>}>
-        <LandingPage
-          donateNowLink={donateNowLink}
-          routeList={routeList} 
-          githubLink={githubLink}
-          githubUsername={githubUsername}
-          githubRepositoryName={githubRepositoryName}
-          documentationLink={documentationLink}
-          title={title}
-          logo={logo}
-          darkLogo={darkLogo}
-          loginFunction={loginFunction}
-          tagline={tagline}
-          description={description}
-          featuresWithDescription={featuresWithDescription}
-          featureList={featureList}
-          testimonials={testimonials}
-          pricingList={pricingList}
-          FAQList={FAQList}
-          footerList={footerList}
-          creator={creator}
-          creatorLink={creatorLink}
-          teamList={teamList}
-          supportEmailAddress={supportEmailAddress}
-        />
-      </Suspense>
+    <div className="relative">
+      <Navbar navbarSection={data.navbarSectionState} />
+      <LandingPage
+        heroSection={data.heroSectionState}
+        featureSection={data.featureSectionState}
+        testimonialSection={data.testimonialSectionState}
+        teamSection={data.teamSectionState}
+        faqSection={data.faqSectionState}
+        pricingSection={data.pricingSectionState}
+        newsletterSection={data.newsletterSectionState} 
+        footerSection={data.footerSectionState}
+        functionsToUse={functionsToUse}
+      />
     </div>
   );
 }

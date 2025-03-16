@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -19,9 +19,10 @@ import { MenuIcon, Coffee } from "lucide-react";
 import { ModeToggle } from "../../../../molecules/custom/v1/theme-toggle-dropdown";
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
-import { NavbarProps, RouteProps } from "@repo/ts-types/landing-page/v1";
+import { NavbarSectionProps, RouteProps } from "@repo/ts-types/landing-page/navbar";
 
-const Navbar = ({routeList,githubLink,githubUsername,githubRepositoryName,title,logo,darkLogo,donateNowLink}: NavbarProps) => {
+const Navbar = ({navbarSection,showLandingRoutes=true}: {
+  navbarSection: NavbarSectionProps,showLandingRoutes?:boolean}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const {theme} = useTheme();
   const [starCount, setStarCount] = useState<number>(0);
@@ -29,7 +30,7 @@ const Navbar = ({routeList,githubLink,githubUsername,githubRepositoryName,title,
   useEffect(() => {
     const fetchStarCount = async () => {
       try {
-        const response = await fetch("https://api.github.com/repos/"+githubUsername+"/"+ githubRepositoryName);
+        const response = await fetch(`https://api.github.com/repos/${navbarSection.githubUsername}/${navbarSection.githubRepositoryName}`);
         if (response.ok) {
           const data = await response.json();
           setStarCount(data.stargazers_count);
@@ -40,26 +41,30 @@ const Navbar = ({routeList,githubLink,githubUsername,githubRepositoryName,title,
         console.log("Error fetching star count:", error);
       }
     };
-    if(githubLink){
+    if(navbarSection?.githubLink){
       fetchStarCount();
     }
 
-  }, [theme,githubLink]);
+  }, [theme,navbarSection]);
+  
 
   return (
-    <header className="sticky border-b-[1px] top-0 z-40 w-full bg-background">
+    <header className="sticky border-b-[1px] top-0 z-40 w-full bg-background font-geistMono">
       <NavigationMenu className="mx-auto">
         <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between ">
           <NavigationMenuItem className="font-bold flex">
             <a
               rel="noreferrer noopener"
               href="/"
-              className="ml-2 font-bold text-xl flex items-center gap-2"
+              className="ml-2 flex items-center gap-2 font-cyberdyne"
             >
               {theme === "dark" ?
-               <Image src={darkLogo} alt={title} width={30} height={30} /> : 
-               <Image src={logo} alt={title} width={30} height={30} />}
-               <div className="hidden lg:flex text-paragraph font-semibold w-[200px] text-wrap leading-snug ">{title}</div>
+               <Image src={navbarSection?.darkLogo} alt={navbarSection?.title} width={30} height={30} /> : 
+               <Image src={navbarSection?.logo} alt={navbarSection?.title} width={30} height={30} />}
+               <div className="hidden lg:flex flex-col items-start text-md leading-none bg-gradient-to-r from-white to-white bg-clip-text text-transparent ">
+                  <div>{navbarSection?.title?.split(' ').slice(0, Math.ceil(navbarSection?.title?.split(' ').length / 2)).join(" ")}</div>
+                  <div>{navbarSection?.title?.split(' ').slice(Math.ceil(navbarSection?.title?.split(' ').length / 2)).join(" ")}</div>
+                </div>
             </a>
           </NavigationMenuItem>
 
@@ -82,42 +87,32 @@ const Navbar = ({routeList,githubLink,githubUsername,githubRepositoryName,title,
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col justify-center items-center gap-2 mt-4">
-                  {routeList.map(({ href, label }: RouteProps) => (
+                  {navbarSection?.routeList?.map(({ href, label }: RouteProps) => (
                     <a
                       rel="noreferrer noopener"
                       key={label}
                       href={href}
                       onClick={() => setIsOpen(false)}
-                      className={buttonVariants({ variant: "ghost" })}
+                      className={`rounded-sm ${buttonVariants({ variant: "ghost" })}`}
                     >
                       {label}
                     </a>
                   ))}
-                  <a rel="noreferrer noopener" href={donateNowLink}>    
-                    <Button size={'sm'} >
-                      Donate Now
-                    </Button>
-                  </a>
                   <a
                     rel="noreferrer noopener"
-                    href={githubLink}
+                    href={navbarSection?.githubLink}
                     target="_blank"
-                    className={`${buttonVariants({
-                      variant: "secondary",
-                      size: "sm",
+                    className={`w-[110px] border ${buttonVariants({
+                      variant: "secondary", size:"sm"
                     })}`}
                   >
                       <GitHubLogoIcon className="mr-2 w-5 h-5" />
-
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="yellow"
-                      className="w-4 h-4 mx-1"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 .587l3.668 7.429 8.332 1.151-6.064 5.868 1.516 8.252-7.452-3.915-7.452 3.915 1.516-8.252-6.064-5.868 8.332-1.151z" />
-                    </svg>
                     {starCount}
+                  </a>
+                  <a rel="noreferrer noopener" href={navbarSection?.donateNowLink}>    
+                    <Button size="sm" className="rounded-sm">
+                      Donate Now
+                    </Button>
                   </a>
                 </nav>
               </SheetContent>
@@ -125,8 +120,9 @@ const Navbar = ({routeList,githubLink,githubUsername,githubRepositoryName,title,
           </span>
 
           {/* desktop */}
+          {showLandingRoutes && 
           <nav className="hidden md:flex gap-2">
-            {routeList.map((route: RouteProps, i) => (
+            {navbarSection?.routeList?.map((route: RouteProps, i) => (
               <a
                 rel="noreferrer noopener"
                 href={route.href}
@@ -138,34 +134,24 @@ const Navbar = ({routeList,githubLink,githubUsername,githubRepositoryName,title,
                 {route.label}
               </a>
             ))}
-          </nav>
-
+          </nav>}
           <div className="hidden md:flex gap-2 items-center">
-            <a rel="noreferrer noopener" href={donateNowLink}>    
-              <Button size="sm" >
+            <a
+              rel="noreferrer noopener"
+              href={navbarSection?.githubLink}
+              target="_blank"
+              className={`border flex items-center rounded-sm ${buttonVariants({ variant: "secondary" ,size:"sm"})}`}
+            >
+              <GitHubLogoIcon className="mr-2 w-5 h-5" />
+              {starCount}
+            </a>
+            <a rel="noreferrer noopener" href={navbarSection?.donateNowLink}>    
+              <Button size="sm" className="rounded-sm" >
                 Donate Now
               </Button>
             </a>
-            <a
-              rel="noreferrer noopener"
-              href={githubLink}
-              target="_blank"
-              className={`border flex items-center ${buttonVariants({ variant: "secondary", size: "sm" })}`}
-            >
-              <GitHubLogoIcon className="mr-2 w-5 h-5" />
 
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="yellow"
-                className="w-4 h-4 mx-1"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 .587l3.668 7.429 8.332 1.151-6.064 5.868 1.516 8.252-7.452-3.915-7.452 3.915 1.516-8.252-6.064-5.868 8.332-1.151z" />
-              </svg>
-              {starCount}
-            </a>
-
-            <ModeToggle />
+            {/* <ModeToggle /> */}
           </div>
         </NavigationMenuList>
       </NavigationMenu>

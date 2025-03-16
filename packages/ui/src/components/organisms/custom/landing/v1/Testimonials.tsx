@@ -1,3 +1,4 @@
+import { TestimonialSectionProps } from "@repo/ts-types/landing-page/testimonials";
 import { Avatar, AvatarFallback, AvatarImage } from "../../../../atoms/shadcn/avatar";
 import {
   Card,
@@ -6,52 +7,61 @@ import {
   CardHeader,
   CardTitle,
 } from "../../../../molecules/shadcn/card";
-import { TestimonialProps } from "@repo/ts-types/landing-page/v1";
+import { useEffect, useState } from "react";
 
 
-const Testimonials = ({testimonials}: {testimonials: TestimonialProps[]}) => {
+const Testimonials = ({testimonialsSection}:{testimonialsSection:TestimonialSectionProps}) => {
+  const [headingArray,setHeadingArray] = useState<string[]>([])
+  useEffect(()=>{
+      if(testimonialsSection.heading){
+          setHeadingArray(testimonialsSection.heading.split(" "))
+      }
+  },[testimonialsSection.heading])
   return (
     <section
       id="testimonials"
-      className="container py-24 sm:py-32 relative"
+      className="container py-24 sm:py-32"
     >
-      <h2 className="text-3xl md:text-4xl font-bold">
-        Discover Why <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          People Love
-          </span> This Micro SaaS Boilerplate Code
-      </h2>
+    <h2 className="text-3xl md:text-4xl font-bold text-left leading-tight">
+      <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
+        {headingArray.slice(0, Math.ceil(headingArray.length / 2)).join(" ")}
+      </span>{" "}
+      <span>
+        {headingArray.slice(Math.ceil(headingArray.length / 2)).join(" ")}
+      </span>
+    </h2>
+
       <p className="text-xl text-muted-foreground pt-4 pb-8">
-        Tweets from our happy users who have used our product and loved it.
+        {testimonialsSection.description}
       </p>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:block columns-2  lg:columns-3 lg:gap-6 mx-auto space-y-4 lg:space-y-6">
-        {testimonials?.map(
-          ({ image, name, userName, comment }: TestimonialProps) => (
+        {testimonialsSection.testimonials?.map(
+          (testimonial) => (
             <Card
-              key={userName}
+              key={testimonial.userName}
               className="max-w-md md:break-inside-avoid overflow-hidden"
             >
               <CardHeader className="flex flex-row items-center gap-4 pb-2">
                 <Avatar>
                   <AvatarImage
                     alt=""
-                    src={image}
+                    src={testimonial.image}
                   />
                   <AvatarFallback>OM</AvatarFallback>
                 </Avatar>
 
                 <div className="flex flex-col">
-                  <CardTitle className="text-lg">{name}</CardTitle>
-                  <CardDescription>{userName}</CardDescription>
+                  <CardTitle className="text-lg">{testimonial.name}</CardTitle>
+                  <CardDescription>{testimonial.userName}</CardDescription>
                 </div>
               </CardHeader>
 
-              <CardContent>{comment}</CardContent>
+              <CardContent>{testimonial.comment}</CardContent>
             </Card>
           )
         )}
       </div>
-
     </section>
   );
 };

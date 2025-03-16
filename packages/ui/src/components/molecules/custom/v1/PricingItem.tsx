@@ -9,10 +9,10 @@ import {
   CardTitle,
 } from "../../../molecules/shadcn/card";
 import { Check } from "lucide-react";
-import { PricingProps } from "@repo/ts-types/landing-page/v1";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { BenefitProps, PricingProps } from "@repo/ts-types/landing-page/pricing";
 
 enum PopularPlanType {
     NO = 0,
@@ -80,13 +80,13 @@ const PricingItem = ({pricing}:{pricing:PricingProps}) => {
                 
             <CardFooter className="flex">
               <div className="space-y-4">
-                {pricing.benefitList.map((benefit: string) => (
+                {pricing.benefitList.map((benefit: BenefitProps) => (
                   <span
-                    key={benefit}
+                    key={benefit.title}
                     className="flex"
                   >
                     <Check className="text-green-500" />{" "}
-                    <h3 className="ml-2">{benefit}</h3>
+                    <h3 className="ml-2">{benefit.title}</h3>
                   </span>
                 ))}
               </div>

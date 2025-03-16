@@ -1,27 +1,17 @@
 
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "../../../packages/ui/src/styles/shadcn/shadcn-green.css"
 import "../../../packages/ui/src/styles/custom/scroll.css"
 import "../../../packages/ui/src/styles/custom/heroBackgroundAnimation.css"
+import { geistSans, geistMono, cyberdyne } from "@repo/ui/typography/font";
+
 import RootClientLayout from "./_components/RootClientLayout";
-import { description, title } from "../lib/constants/appDetails";
+import { productDetails, title } from "../lib/constants/appDetails";
 
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: title,
-  description: description,
+  description: productDetails,
 };
 
 export default function RootLayout({
@@ -30,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} >
-      <body className="px-4" >
+    <html lang="en" >
+      <body className={` ${geistSans.className} ${geistMono.variable} ${cyberdyne.variable} antialiased`} >
         <RootClientLayout>{children}</RootClientLayout>
       </body>
     </html>
