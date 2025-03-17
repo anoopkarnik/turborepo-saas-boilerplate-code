@@ -29,22 +29,22 @@ export const footerList: FooterProps[] =  [
         },
         {
             label: "Cancellation/Refund Policies",
-            href: "/landing/cancellation-refund-policies",
+            href: "/landing/legal/cancellation-refund-policies",
             type: "Legal"
         },
         {
             label: "Terms & Conditions",
-            href: "/landing/terms-of-service",
+            href: "/landing/legal/terms-of-service",
             type: "Legal"
         },
         {
             label: "Privacy Policy",
-            href: "/landing/privacy-policy",
+            href: "/landing/legal/privacy-policy",
             type: "Legal"
         },
         {
             label: "Contact Us",
-            href: "/landing/contact-us",
+            href: "/landing/legal/contact-us",
             type: "Legal"
         }
     ]

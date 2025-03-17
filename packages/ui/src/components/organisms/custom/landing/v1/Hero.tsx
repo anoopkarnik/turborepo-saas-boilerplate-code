@@ -66,8 +66,9 @@ const Hero = ({heroSection, features ,testimonials, pricingList,teamList}:{
             <Button
              className="flex items-center gap-2"
               variant="default"
+              size="lg"
               onClick={() => heroSection.getStartedLink && router.push(heroSection.getStartedLink)}
-            > <LogIn size={20} />
+            > 
             Get Started
             </Button>}
         </div>

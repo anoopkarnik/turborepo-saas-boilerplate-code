@@ -5,16 +5,17 @@ import axios from 'axios';
 export const getSaaSDetails = async () => {
     try{
         const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL + "/api/" || "http://localhost:1337/api/";
-        const database = "company-landing-page";
-        const populateNavbarSection = "populate[navbarSection][populate]p[0]=routeList"
+        const database = "saas-landing-pages";
+        const filter = "filter[slug][$eq]=saas-landing-page-1"
+        const populateNavbarSection = "populate[navbarSection][populate][0]=routeList"
         const populateHeroSection = "populate[heroSection]=true"
-        const populateAboutSection = "populate[aboutSection]=true"
-        const populateProjectsSection = "populate[projectSection][populate][projects][populate][0]=websiteDetails&populate[projectSection][populate][projects][populate][1]=notionDetails&populate[projectSection][populate][projects][populate][2]=openSourceDetails&populate[projectSection][populate][projects][populate][3]=techStack&populate[projectSection][populate][projects][populate][4]=contentDetails"
-        const populateServicesSection = "populate[serviceSection][populate][0]=services"
-        const populateTeamSection = "populate[teamSection][populate][0]=teamList"
+        const populateFaqSection = "populate[faqSection][populate][0]=faqList"
+        const populateNewsletterSection = "populate[newsletterSection]=true"
+        const populateFeatureSection = "populate[featureSection][populate][0]=featureList&populate[featureSection][populate][1]=featuresWithDescription"
         const populateTestimonialSection = "populate[testimonialSection][populate][0]=testimonials"
         const populateFooterSection = "populate[footerSection][populate][0]=footerList"
-        const url = `${baseUrl}${database}?${populateNavbarSection}&${populateHeroSection}&${populateAboutSection}&${populateServicesSection}&${populateTeamSection}&${populateTestimonialSection}&${populateProjectsSection}&${populateFooterSection}`;
+        const url = `${baseUrl}${database}?${filter}&${populateNavbarSection}&${populateHeroSection}&${populateFeatureSection}&
+        ${populateTestimonialSection}&${populateFooterSection}&${populateFaqSection}&${populateNewsletterSection}`;
         const config = {
             method: 'get',
             maxBodyLength: Infinity,
@@ -25,7 +26,7 @@ export const getSaaSDetails = async () => {
           };
           const response  = await axios.request(config);
           const result = await response.data;
-          return result.data;
+          return result.data[0];
     }
     catch(e){
         console.log(e);
@@ -36,13 +37,14 @@ export const getSaaSDetails = async () => {
 export const getLegalDetails = async () => {
   try{
       const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL + "/api/" || "http://localhost:1337/api/";
-      const database = "company-landing-page";
+      const database = "saas-landing-pages";
+      const filter = "filter[slug][$eq]=saas-landing-page-1"
       const populateNavbarSection = "populate[navbarSection]=true"
       const populateTermsOfService = "populate[termsOfService]=true"
       const populatePrivacyPolicy = "populate[privacyPolicy]=true"
       const populateCancellationRefundPolicies = "populate[cancellationRefundPolicies]=true"
       const populateContactUs = "populate[contactUs]=true"
-      const url = `${baseUrl}${database}?${populateNavbarSection}&${populateTermsOfService}&${populatePrivacyPolicy}&${populateCancellationRefundPolicies}&${populateContactUs}`;
+      const url = `${baseUrl}${database}?${filter}`;
       const config = {
           method: 'get',
           maxBodyLength: Infinity,
@@ -53,7 +55,7 @@ export const getLegalDetails = async () => {
         };
         const response  = await axios.request(config);
         const result = await response.data;
-        return result.data;
+        return result.data[0];
   }
   catch(e){
       console.log(e);

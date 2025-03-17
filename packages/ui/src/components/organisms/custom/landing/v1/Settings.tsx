@@ -20,12 +20,12 @@ const Settings = ({ data }: { data: any }) => {
   }, []);
 
   const verifyPassword = async () => {
+    
     const response = await fetch('/api/verify-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password }),
     });
-
     const result = await response.json();
 
     if (result.success) {

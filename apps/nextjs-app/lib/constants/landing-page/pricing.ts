@@ -84,7 +84,7 @@ export const pricingList: PricingProps[] = [
         price: "ꝏ",
         priceType: "",
         unregisteredHref: "https://mail.google.com/mail?view=cm&fs=1&to=support@bayesian-labs.com&su=Support",
-        registeredHref: "/https://mail.google.com/mail?view=cm&fs=1&to=support@bayesian-labs.com&su=Support",
+        registeredHref: "https://mail.google.com/mail?view=cm&fs=1&to=support@bayesian-labs.com&su=Support",
         description:
           "Hire us to customize the project as per your requirements and get all the future updates.",
         unregisteredButtonText: "Contact Us",
