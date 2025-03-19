@@ -2,11 +2,11 @@ import { Alert, AlertDescription, AlertTitle } from '@repo/ui/atoms/shadcn/alert
 import { Skeleton } from '@repo/ui/molecules/shadcn/skeleton'
 import { ShieldIcon, ShieldOffIcon, LockKeyholeIcon } from 'lucide-react'
 import React, { Suspense } from 'react'
-import { GetConnectionsForUser } from '../../_actions/connections'
 import { Card } from '@repo/ui/molecules/shadcn/card'
 import AddConnectionsList from './_components/AddConnectionsList'
 import { formatDistanceToNow } from 'date-fns'
 import DeleteConnectionDialog from './_components/DeleteConnectionDialog'
+import { GetConnectionsForUser } from '../../../actions/connections'
 
 const page = () => {
   return (

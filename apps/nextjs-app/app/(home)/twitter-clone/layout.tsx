@@ -7,7 +7,7 @@ export default function Layout ({ children }: { children: React.ReactNode }) {
   return (
     <div className='h-full'>
         <ProfileModal />
-        <div className='container mx-auto xl:px-30 h-full'>
+        <div className=' h-full w-full '>
             <div className='grid grid-cols-6 h-full'>
                 <div className='col-span-5 border-r-[1px] border-border'>
                     {children}

@@ -17,7 +17,7 @@ export const BreadcrumbsHeader = () => {
                 <BreadcrumbList>
                     <BreadcrumbItem>
                         <Button variant={'blank'} size={'xs'} 
-                        className='capitalize cursor-pointer hover:dark:text-white hover:text-black mx-0 px-0' 
+                        className='capitalize cursor-pointer  mx-0 px-0' 
                         onClick={() => router.push("/")}>
                             Home
                         </Button>
@@ -26,7 +26,7 @@ export const BreadcrumbsHeader = () => {
                         <React.Fragment key={index}>
                             <BreadcrumbItem>
                                 <Button variant={'blank'} size={'xs'} 
-                                className='capitalize cursor-pointer hover:dark:text-white hover:text-black mx-0 px-0'
+                                className='capitalize cursor-pointer  mx-0 px-0'
                                  onClick={() => router.push(getFullPath(index))}>
                                     {path}
                                 </Button>

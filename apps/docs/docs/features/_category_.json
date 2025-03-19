@@ -1,9 +1,0 @@
-{
-  "label": "Packages",
-  "position": 3,
-  "collapsible": true,
-  "link": {
-    "type": "generated-index",
-    "description": "In this section, we'll guide you through the packages that are used in the project."
-  }
-}

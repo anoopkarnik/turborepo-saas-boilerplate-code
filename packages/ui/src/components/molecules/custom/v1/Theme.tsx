@@ -9,16 +9,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../shadcn/dropdown"
+import { useTheme } from "../../../../providers/theme-provider"
 
-export function Theme({theme,setTheme}:any) {
+export function Theme() {
 
-
+  const { theme, setTheme } = useTheme();
   return (
     <DropdownMenu >
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between w-full text-xss">
           <div className="flex items-center gap-2 w-full">
-            <Columns2Icon/>
+            <Columns2Icon size={18}/>
             Theme
           </div>
           <ChevronRight size={20}/>

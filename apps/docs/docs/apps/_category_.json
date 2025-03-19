@@ -1,9 +1,0 @@
-{
-  "label": "Apps",
-  "position": 2,
-  "collapsible": true,
-  "link": {
-    "type": "generated-index",
-    "description": "In this section, we'll guide you through the apps/frameworks that are used in the project."
-  }
-}

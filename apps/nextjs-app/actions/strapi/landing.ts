@@ -9,13 +9,14 @@ export const getSaaSDetails = async () => {
         const filter = "filter[slug][$eq]=saas-landing-page-1"
         const populateNavbarSection = "populate[navbarSection][populate][0]=routeList"
         const populateHeroSection = "populate[heroSection]=true"
+        const populatePricingSection = "populate[pricingSection][populate][pricingList][populate][0]=benefitList"
         const populateFaqSection = "populate[faqSection][populate][0]=faqList"
         const populateNewsletterSection = "populate[newsletterSection]=true"
         const populateFeatureSection = "populate[featureSection][populate][0]=featureList&populate[featureSection][populate][1]=featuresWithDescription"
         const populateTestimonialSection = "populate[testimonialSection][populate][0]=testimonials"
+        const populateTeamSection = "populate[teamSection][populate][0]=teamList"
         const populateFooterSection = "populate[footerSection][populate][0]=footerList"
-        const url = `${baseUrl}${database}?${filter}&${populateNavbarSection}&${populateHeroSection}&${populateFeatureSection}&
-        ${populateTestimonialSection}&${populateFooterSection}&${populateFaqSection}&${populateNewsletterSection}`;
+        const url = `${baseUrl}${database}?${filter}&${populateNavbarSection}&${populateHeroSection}&${populateFeatureSection}&${populateTestimonialSection}&${populateFooterSection}&${populateFaqSection}&${populateNewsletterSection}&${populatePricingSection}&${populateTeamSection}`;
         const config = {
             method: 'get',
             maxBodyLength: Infinity,
@@ -44,7 +45,8 @@ export const getLegalDetails = async () => {
       const populatePrivacyPolicy = "populate[privacyPolicy]=true"
       const populateCancellationRefundPolicies = "populate[cancellationRefundPolicies]=true"
       const populateContactUs = "populate[contactUs]=true"
-      const url = `${baseUrl}${database}?${filter}`;
+      const url = `${baseUrl}${database}?${filter}&${populateNavbarSection}&${populateTermsOfService}&
+      ${populatePrivacyPolicy}&${populateCancellationRefundPolicies}&${populateContactUs}`;
       const config = {
           method: 'get',
           maxBodyLength: Infinity,

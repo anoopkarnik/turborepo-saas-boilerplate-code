@@ -1,14 +1,14 @@
-import { NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import db from "@repo/prisma-db/mongo-client"
 
-export default async function GET(res: NextApiResponse){
+export async function GET(){
     try{
         const users = await db.twitterUser.findMany(
             {orderBy:{createdAt:'desc'}}
         );
-        return res.status(200).json(users);
+        return NextResponse.json(users, { status: 200 });
     }catch(error){
         console.log(error)
-        return res.status(400).end();
+        return NextResponse.json( { message: 'Failed to fetch users' }, { status: 400 });
     }
 }

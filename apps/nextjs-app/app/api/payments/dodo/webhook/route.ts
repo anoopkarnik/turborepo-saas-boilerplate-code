@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { HandleCheckoutSessionCompleted } from "../../../../_actions/payments/dodo";
 import { Webhook } from 'standardwebhooks';
 import { headers } from "next/headers"
+import { HandleCheckoutSessionCompleted } from "../../../../../actions/payments/dodo";
 
 const webhook = new Webhook(process.env.DODO_WEBHOOK_SECRET as string);
 

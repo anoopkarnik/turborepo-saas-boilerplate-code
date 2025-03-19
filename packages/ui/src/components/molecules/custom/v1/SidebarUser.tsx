@@ -138,7 +138,7 @@ const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,git
                   Settings
                 </DropdownMenuItem>
               </SettingsDialog>
-              <a href={`https://mail.google.com/mail/u/0/?fs=1&to=${supportEmailAddress}&su=Support&tf=cm`} target="_blank" 
+              {/* <a href={`https://mail.google.com/mail/u/0/?fs=1&to=${supportEmailAddress}&su=Support&tf=cm`} target="_blank" 
               rel="noopener noreferrer">
                   <DropdownMenuItem 
                       className="flex gap-2 cursor-pointer" 
@@ -164,11 +164,11 @@ const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,git
                       <BookOpen  size={20}/>
                       Documentation
                   </DropdownMenuItem>
-              </a>
+              </a> */}
                 <DropdownMenuItem 
                       className="flex gap-2 cursor-pointer" 
                     >
-                      <Theme setTheme={setTheme}/>
+                      <Theme/>
                   </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

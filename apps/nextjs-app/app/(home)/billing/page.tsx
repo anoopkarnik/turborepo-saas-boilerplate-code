@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react'
-import { GetAvailableCredits, GetUserPurchaseHistory } from '../../_actions/payments/billing'
 import { Skeleton } from '@repo/ui/molecules/shadcn/skeleton'
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@repo/ui/molecules/shadcn/card'
 import { CoinsIcon, ArrowLeftRightIcon } from 'lucide-react'
@@ -8,6 +7,7 @@ import { Period } from '@repo/ts-types/scrape-flow/analytics'
 import { GetCreditsUsageInPeriod } from '../_actions/analytics'
 import CreditUsageChart from './_components/CreditUsageChart'
 import InvoiceBtn from './_components/InvoiceBtn'
+import { GetAvailableCredits, GetUserPurchaseHistory } from '../../../actions/payments/billing'
 
 const BillingPage = () => {
   return (

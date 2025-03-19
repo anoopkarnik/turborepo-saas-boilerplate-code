@@ -80,7 +80,7 @@ const PricingItem = ({pricing}:{pricing:PricingProps}) => {
                 
             <CardFooter className="flex">
               <div className="space-y-4">
-                {pricing.benefitList.map((benefit: BenefitProps) => (
+                {pricing.benefitList?.map((benefit: BenefitProps) => (
                   <span
                     key={benefit.title}
                     className="flex"

@@ -1,9 +1,0 @@
-{
-  "label": "Clones",
-  "position": 3,
-  "collapsible": true,
-  "link": {
-    "type": "generated-index",
-    "description": "In this section, we'll guide you through some clones of apps integrated into this boilerplate."
-  }
-}

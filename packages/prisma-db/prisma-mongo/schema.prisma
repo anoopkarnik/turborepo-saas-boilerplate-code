@@ -14,8 +14,9 @@ datasource db {
 
 model TwitterUser {
     id            String          @id @default(auto()) @map("_id") @db.ObjectId
-    userId        String        
-    username      String?
+    userId        String
+    name          String      
+    username      String
     bio           String?
     coverImage    String?
     profileImage  String?

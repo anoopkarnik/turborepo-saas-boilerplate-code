@@ -1,8 +1,6 @@
 "use client"
 import LandingPage from "@repo/ui/templates/landing/v1/LandingPage";
 
-import { useRouter } from "next/navigation";
-
 import { useGlobalData } from "../../context/DataContext";
 import { useToast } from "@repo/ui/hooks/use-toast";
 import { createContactAction } from "../../actions/email";

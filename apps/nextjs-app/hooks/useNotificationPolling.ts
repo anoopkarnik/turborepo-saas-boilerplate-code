@@ -1,10 +1,10 @@
 "use client"
 // useNotificationPolling.ts
 import { useEffect, useState } from "react";
-import { getNotificationsAction } from "../_actions/notifications";
 import { useRecoilState} from 'recoil';
 import { NotificationProps } from "@repo/ts-types/home/v1";
-import { notificationsState } from "../../../../packages/state-management/src/recoil/notification";
+import { notificationsState } from "@repo/state-management/recoil/notification";
+import { getNotificationsAction } from "../actions/notifications";
 
 // The main hook
 export function useNotificationPolling(userId: string, interval: number = 30000) {

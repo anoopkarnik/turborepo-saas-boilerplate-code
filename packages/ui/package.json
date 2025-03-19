@@ -25,6 +25,7 @@
     "@repo/eslint-config": "*",
     "@repo/ts-types": "*",
     "@repo/typescript-config": "*",
+    "@repo/email": "*",
     "@turbo/gen": "^1.12.4",
     "@types/node": "^20.11.24",
     "@types/react": "18",

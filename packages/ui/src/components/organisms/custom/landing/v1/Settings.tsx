@@ -20,13 +20,15 @@ const Settings = ({ data }: { data: any }) => {
   }, []);
 
   const verifyPassword = async () => {
-    
-    const response = await fetch('/api/verify-password', {
+    console.log('Verifying password');
+    const response = await fetch('http://localhost:3000/api/verify-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password }),
     });
+    console.log(response);
     const result = await response.json();
+    console.log(result);
 
     if (result.success) {
       localStorage.setItem('isVerified', 'true');

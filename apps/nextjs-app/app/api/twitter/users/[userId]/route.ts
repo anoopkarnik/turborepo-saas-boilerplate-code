@@ -1,9 +1,10 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import db from "@repo/prisma-db/mongo-client"
 
-export default async function GET(req: NextApiRequest, res: NextApiResponse){
+import db from "@repo/prisma-db/mongo-client"
+import { NextResponse } from "next/server";
+
+export async function GET(req: Request, {params} : {params: {userId: string}}) {
     try{
-        const {userId} = req.query;
+        const {userId} =  params;
         if(!userId || typeof userId !== 'string'){
             throw new Error('Invalid userId');
         }
@@ -17,9 +18,10 @@ export default async function GET(req: NextApiRequest, res: NextApiResponse){
                 }
             }
         })
-        return res.status(200).json({...existingUser, followersCount});
+        console.log('followersCount', followersCount)
+        return NextResponse.json({...existingUser, followersCount}, { status: 200 });
     }catch(error){
         console.log(error)
-        return res.status(400).end();
+        return NextResponse.json( { message: 'Failed to fetch follower details' }, { status: 400 });
     }
 }

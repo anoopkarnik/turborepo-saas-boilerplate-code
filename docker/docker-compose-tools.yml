@@ -23,6 +23,7 @@ services:
     image: "mongodb/mongodb-community-server:latest"
     ports:
       - "27017:27017"
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
     restart: always
     networks:
       - turborepo-network

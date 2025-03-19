@@ -42,7 +42,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         <div className="flex">
           <SidebarProvider>
             {/* Sidebar */}
-            <DocSidebar docs={docs} docCategories={docCategories} navbarSection={productDetails.navbarSectionState}/>
+            <DocSidebar docs={docs} docCategories={docCategories} navbarSection={productDetails.navbarSection}/>
             <SidebarTrigger />
             {/* Main Content */}
             <main className="flex-grow p-6">

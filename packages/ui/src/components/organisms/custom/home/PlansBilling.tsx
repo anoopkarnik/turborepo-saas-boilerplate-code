@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import SettingsHeading from '../../../molecules/custom/v1/SettingsHeading';
 import { useSession } from 'next-auth/react';
-import { PricingProps } from '@repo/ts-types/landing-page/v1';
 import PricingItem from '../../../molecules/custom/v1/PricingItem';
+import { PricingProps } from '@repo/ts-types/landing-page/pricing';
 
 const PlansBilling = ({pricingList,supportEmailAddress}:{pricingList:PricingProps[], supportEmailAddress:string}) => {
   const [sessions, setSessions] = useState<any[]>([])

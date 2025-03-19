@@ -2,11 +2,12 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-const useCurrentUser = () => {
+const useUser = (userId:string) => {
   const { data, error, isLoading, refetch } = useQuery({
-    queryKey: ['currentUser'], // Unique key for the query
+    queryKey: ['user'], // Unique key for the query
     queryFn: async () => {
-      const response = await axios.get('/api/twitter/current');
+        if (!userId) return;
+      const response = await axios.get(`/api/twitter/users/${userId}`);
       return response.data;
     },
   });
@@ -19,4 +20,4 @@ const useCurrentUser = () => {
   };
 };
 
-export default useCurrentUser;
+export default useUser;

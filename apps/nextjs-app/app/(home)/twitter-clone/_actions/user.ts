@@ -34,10 +34,13 @@ export async function CreateTwitterUser(){
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
-    const user = await db.twitterUser.create({
+    await db.twitterUser.create({
         data: {
             userId: session.user.id,
+            name: session.user.name,
+            username: "@"+session.user.name,
+            profileImage: session.user.image,
         },
     });
-    return user;
+
 }

@@ -1,5 +1,5 @@
-import { PricingProps } from "../landing-page/v1";
 import {User} from "@prisma/client";
+import { PricingProps } from "../landing-page/pricing";
 
 export interface sidebarHeaderItemsProps{
     title: string;

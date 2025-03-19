@@ -33,6 +33,24 @@ export const sendResetEmail = async (email: string, token:string) => {
     return response
 }
 
+export const sendSupportEmail = async (subject:string,body:string) => {
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+  try {
+    const response = await resend.emails.send({
+      from: "feedback@bayesian-labs.com",
+      to: "support@bayesian-labs.com",
+      subject,
+      html: `<p>${body}</p>`
+    });
+    return response;
+  } catch (error) {
+    console.log("Error sending email:", error);
+    return null;
+  }
+};
+
+
 export const createContact = async( email: string) => {
     const resend = new Resend(process.env.RESEND_API_KEY)
     const response = await resend.contacts.create({

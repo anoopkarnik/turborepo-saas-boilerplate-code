@@ -28,7 +28,7 @@ export const getDocCategories = async () => {
   export const getDocs = async () => {
     try{
         const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL + "/api/" || "http://localhost:1337/api/";
-        const database = "docs?filters[project]=company-landing-page&populate[category]=true&sort=order";
+        const database = "docs?filters[project]=turborepo-saas-boilerplate-code&populate[category]=true&sort=order&pagination[pageSize]=100";
         const url = `${baseUrl}${database}`;
         const config = {
             method: 'get',

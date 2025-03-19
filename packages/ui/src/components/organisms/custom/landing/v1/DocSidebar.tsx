@@ -4,9 +4,9 @@ import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarHeader
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '../../../../../lib/utils';
 import { NavbarSectionProps } from '@repo/ts-types/landing-page/navbar';
-import { useTheme } from '../../../../../providers/theme-provider';
 import Image from 'next/image';
 import { Separator } from '../../../../atoms/shadcn/separator';
+import { useTheme} from "../../../../../providers/theme-provider";
 
 const DocSidebar = ({ docs, docCategories, navbarSection }: {
      docs: docProps[], docCategories: docCategoryProps[], navbarSection: NavbarSectionProps}) => {
@@ -21,22 +21,22 @@ const DocSidebar = ({ docs, docCategories, navbarSection }: {
                 <SidebarMenuItem>
                     <a
                     rel="noreferrer noopener"
-                    href="/landing"
+                    href="/"
                     className="flex items-center gap-2 font-cyberdyne"
                     >
-                    {theme === "dark" ?
-                        <Image src={navbarSection?.darkLogo} alt={navbarSection?.title} width={40} height={40} /> : 
-                        <Image src={navbarSection?.logo} alt={navbarSection?.title} width={40} height={40} />}
-                        <div className="flex flex-col items-start text-md leading-none bg-gradient-to-r from-[#03a3d7] to-[#D247BF] bg-clip-text text-transparent ">
-                        <div>{navbarSection?.title?.split(' ')[0]}</div>
-                        <div>{navbarSection?.title?.split(' ')[1]}</div>
-                        </div>
+                        {theme === "dark" ?
+                        <Image src={navbarSection?.darkLogo} alt={navbarSection?.title} width={30} height={30} /> : 
+                        <Image src={navbarSection?.logo} alt={navbarSection?.title} width={30} height={30} />}
+                        <div className="hidden lg:flex flex-col items-start text-md leading-none bg-gradient-to-r from-white to-white bg-clip-text text-transparent ">
+                            <div>{navbarSection?.title?.split(' ').slice(0, Math.ceil(navbarSection?.title?.split(' ').length / 2)).join(" ")}</div>
+                            <div>{navbarSection?.title?.split(' ').slice(Math.ceil(navbarSection?.title?.split(' ').length / 2)).join(" ")}</div>
+                            </div>
                     </a>
                 </SidebarMenuItem>
             </SidebarMenu>
         </SidebarHeader>
         <Separator/>
-        <SidebarContent className='px-6'>
+        <SidebarContent className='px-6 scrollbar scrollbar-track-secondary scrollbar-thumb-sidebar'>
             {docCategories
             .map((category) => {
                 // Filter docs belonging to this category

@@ -1,12 +1,12 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { GetTwitterUserDetails } from "../../../(home)/twitter-clone/_actions/user";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextApiRequest,res: NextApiResponse){
+export async function GET(){
     try{
         const user = await GetTwitterUserDetails();
-        return res.status(200).json(user);
+        return NextResponse.json(user, { status: 200 });
     }catch(error){
         console.log(error)
-        return res.status(400).end();
+        return NextResponse.json( { message: 'Failed to fetch user details' }, { status: 200 });
     }
 }

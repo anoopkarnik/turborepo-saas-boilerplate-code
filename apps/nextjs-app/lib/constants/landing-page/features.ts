@@ -88,7 +88,7 @@ export const featuresWithDescription: FeatureWithDescriptionProps[] = [
 
   ];
 
-export const featureList= [
+export const featureList: FeatureListProps[]= [
     {title: "Landing Page"},
     {title: "Dark/Light theme"},
     {title: "Docusaurus Documentation"},

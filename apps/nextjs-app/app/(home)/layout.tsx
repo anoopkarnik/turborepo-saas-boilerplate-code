@@ -5,21 +5,22 @@ import { AppSidebar } from "@repo/ui/organisms/custom/home/AppSidebar"
 import { sidebarFooterItems, sidebarItems } from "../../lib/constants/home"
 import { useSession} from "next-auth/react";
 import { useEffect, useState } from "react";
-import LoadingCard from "@repo/ui/organisms/custom/auth/v1/LoadingCard";
 import { darkLogo, githubRepositoryName, githubUsername, logo, showCredits, supportEmailAddress, tagline, title } from "../../lib/constants/appDetails";
 import { RecoilRoot } from "recoil";
-import { SupportChat } from "@repo/ui/organisms/custom/home/SupportChat";
 import { Separator } from "@repo/ui/atoms/shadcn/separator";
 import {BreadcrumbsHeader} from "@repo/ui/molecules/custom/v1/BreadcrumbsHeader"
 import { CONNECTIONS } from "../../lib/constants/connections";
 import LoadingPage from "@repo/ui/templates/landing/v1/LoadingPage";
 import { getUserDetails } from "../../actions/user";
 import { pricingList } from "../../lib/constants/landing-page/pricing";
+import Support from "@repo/ui/organisms/custom/landing/v1/Support";
+import { useGlobalData } from "../../context/DataContext";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 
     const documentationLink = process.env.NEXT_PUBLIC_DOCUMENTATION_URL as string;
+      const data = useGlobalData(); 
 
     const { status } = useSession();
     
@@ -77,7 +78,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Separator/>
           {children}
         </div>
-        <SupportChat/>
+        <Support heroSection={data.heroSectionState} footerSection={data.footerSectionState} 
+      navbarSection={data.navbarSectionState} />
       </SidebarProvider>
     </RecoilRoot>
   )

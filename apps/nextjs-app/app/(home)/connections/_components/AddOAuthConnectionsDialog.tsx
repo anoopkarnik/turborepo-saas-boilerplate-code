@@ -15,7 +15,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useToast } from '@repo/ui/hooks/use-toast'
 import {Loader2} from 'lucide-react'
 import { ConnectionCardProps } from '@repo/ts-types/home/v1'
-import {  AddOAuthConnection } from '../../../_actions/connections'
+import { AddOAuthConnection } from '../../../../actions/connections'
 
 const AddOAuthConnectionsDialog = ({connection}:{connection:ConnectionCardProps}) => {
     const [open, setOpen] = useState(false)

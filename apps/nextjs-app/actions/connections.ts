@@ -5,8 +5,8 @@ import db from "@repo/prisma-db/client"
 import { ConnectionType } from "@repo/ts-types/home/v1";
 import { addApiKeyConnectionSchema, addApiKeyConnectionSchemaType, addOAuthConnectionSchema, addOAuthConnectionSchemaType } from "@repo/zod/scrape-flow/connection";
 import { revalidatePath } from "next/cache";
-import { symmetricEncrypt } from "../../lib/helper/encryption";
 import { redirect } from "next/navigation";
+import { symmetricEncrypt } from "../lib/helper/encryption";
 
 export async function GetConnectionsForUser(){
     const session = await auth();
@@ -63,8 +63,6 @@ export async function AddOAuthConnection(form: addOAuthConnectionSchemaType){
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
-
-    console.log(data);
 
     // Encrypt the Client ID and Client Secret before storing it
     const encryptedClientId = symmetricEncrypt(data.clientId);

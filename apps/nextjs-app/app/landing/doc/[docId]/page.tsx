@@ -1,8 +1,8 @@
 
-import { serialize } from "next-mdx-remote/serialize";
-import { getDocPost } from "../../../_actions/strapi";
+import { serialize } from "next-mdx-remote/serialize"
 import { blockProps } from "@repo/ts-types/landing-page/doc";
 import DocPostPage from "@repo/ui/organisms/custom/landing/v1/DocPostPage";
+import { getDocPost } from "../../../../actions/strapi/docs";
 
 
 export default async function DocPost({params}:{params:{docId:string}}) {

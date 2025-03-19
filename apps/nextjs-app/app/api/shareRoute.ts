@@ -1,9 +1,11 @@
 import { increaseCredits} from "@repo/prisma-db/repo/user";
 import { NextResponse } from "next/server";
 import { auth } from "@repo/auth/next-auth/auth";
-import { getUserDetails } from "../_actions/user";
+import { getUserDetails } from "../../actions/user";
+
 
 export async function shareRoute(request: Request, handler: (request: Request, body?: any,formData?:any) => Promise<Response>) {
+    console.log("what ")
     let body: any;
     const session = await auth();
 

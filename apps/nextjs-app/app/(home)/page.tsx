@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useNotificationPolling } from "../hooks/useNotificationPolling";
+import { useNotificationPolling } from "../../hooks/useNotificationPolling";
 import { useSession } from "next-auth/react";
 import LoadingCard from "@repo/ui/organisms/custom/auth/v1/LoadingCard";
 
