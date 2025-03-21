@@ -4,6 +4,7 @@ import useUser from "../../_hooks/useUser";
 import UserHero from "../../_components/UserHero";
 import { ClipLoader } from "react-spinners";
 import UserBio from "../../_components/UserBio";
+import PostFeed from "../../_components/posts/PostFeed";
 
 
 export default function UserProfile({ params }: { params: { userId: string } }) {
@@ -24,6 +25,7 @@ export default function UserProfile({ params }: { params: { userId: string } }) 
     <>
       <UserHero userId={userId} />
       <UserBio userId={userId} />
+      <PostFeed userId={userId} />
     </>
   );
 }

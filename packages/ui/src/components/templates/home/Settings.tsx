@@ -104,7 +104,7 @@ export function SettingsDialog({children, open: controlledOpen, onOpenChange: se
                     <div className="text-description mt-[1px] ml-[1px]">Settings</div>
                     <div className="flex items-center space-x-2 ">
                       <Avatar className="h-8 w-8 rounded-lg">
-                        <AvatarImage src={user?.image ?? ''} alt={user?.name ?? ''} />
+                        <AvatarImage src={user?.image ?? ''} alt={user?.name ?? ''} className="object-cover"/>
                         <AvatarFallback className="rounded-lg bg-sidebar">{user?.name?user?.name[0]?.toUpperCase() :'U'}</AvatarFallback>
                       </Avatar>
                       <div className="grid flex-1 text-left text-sm leading-tight">

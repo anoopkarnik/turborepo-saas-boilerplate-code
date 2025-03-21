@@ -2,6 +2,7 @@
 import React from 'react'
 import useUsers from '../_hooks/useUsers'
 import Avatar from './Avatar'
+import Image from 'next/image'
 
 const RightSidebar = () => {
     const {data: users =[]} = useUsers()
@@ -17,10 +18,10 @@ const RightSidebar = () => {
             <div className='flex flex-col gap-6 mt-4'>
                 {users.map((user: Record<string,any>) => (
                     <div key={user.id} className='flex gap-4 items-center'>
-                        <Avatar userId={user.id}/>
+                        <Avatar user={user}/>
                         <div className='flex flex-col'>
                             <p className='text-semibold text-sm'>{user.name}</p>
-                            <p className='text-description'>{user.username}</p>
+                            <p className='text-description'>@{user.username}</p>
                         </div>
                     </div>
                 ))}

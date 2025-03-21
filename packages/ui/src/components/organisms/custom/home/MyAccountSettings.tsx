@@ -148,7 +148,7 @@ import { useToast } from "../../../../hooks/use-toast";
                 <div className="text-description ">Profile Pic</div>
                 <div className="relative group cursor-pointer">
                   <Avatar className="h-20 w-20 rounded-full border-2 bg-secondary hover:bg-accent2">
-                    <AvatarImage src={user?.image?? ''} alt={user?.name?? ''} />
+                    <AvatarImage src={user?.image?? ''} alt={user?.name?? ''} className="object-cover" />
                     <AvatarFallback className="text-3xl">{user?.name?user?.name[0]?.toUpperCase() :'U'}</AvatarFallback>
                   </Avatar>
                   <button onClick={handleAvatarClick} className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">

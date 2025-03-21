@@ -6,6 +6,7 @@ import UserBio from "../_components/UserBio";
 import useCurrentUser from "../_hooks/useCurrentUser";
 import { CreateTwitterUser } from "../_actions/user";
 import { Button } from "@repo/ui/atoms/shadcn/button";
+import PostFeed from "../_components/posts/PostFeed";
 
 
 export default function UserProfile() {
@@ -44,8 +45,9 @@ export default function UserProfile() {
 
   return (
     <>
-      <UserHero userId={fetchedUser.userId} />
-      <UserBio userId={fetchedUser.userId} />
+      <UserHero userId={fetchedUser.id} />
+      <UserBio userId={fetchedUser.id} />
+      <PostFeed userId={fetchedUser.id} />
     </>
   );
 }

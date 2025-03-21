@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { Button } from "@repo/ui/atoms/shadcn/button";
 import { CalendarIcon } from "lucide-react";
 import useEditModal from "@repo/state-management/zustand/useEditModal"
+import useFollow from "../_hooks/useFollow";
 
 
 
@@ -16,6 +17,8 @@ export default function UserBio({userId}: { userId: string }) {
 
   const editModal = useEditModal();
 
+  const {isFollowing, toggleFollow} = useFollow(userId);
+
   const createdAt = useMemo(() => {
     if (!fetchedUser?.createdAt) return null;
     return format(new Date(fetchedUser.createdAt), "MMMM yyyy");
@@ -24,16 +27,16 @@ export default function UserBio({userId}: { userId: string }) {
   return (
     <div className="border-b-[1px] boprder-border pb-4">
       <div className="flex justify-end p-2">
-        {currentUser?.userId === userId ? (
+        {currentUser?.id === userId ? (
           <Button variant={'secondary'} onClick={editModal.onOpen}>Edit</Button>
         ):(
-          <Button variant={'secondary'} onClick={()=>{}}>Follow</Button>
+          <Button variant={isFollowing ? 'secondary' : 'default'} onClick={toggleFollow}>{isFollowing ? 'Unfollow' : 'Follow'}</Button>
         )}
       </div>
       <div className="mt-4 px-10">
         <div className="flex flex-col">
           <p className="text-foreground text-2xl font-semibold">{fetchedUser?.name}</p>
-          <p className="text-description text-md">{fetchedUser?.username}</p>
+          <p className="text-description text-md">@{fetchedUser?.username}</p>
         </div>
         <div className="flex flex-col mt-4">
           <p className="text-foreground">
