@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Workflow } from "@prisma/client"
+import { Workflow } from "@prisma/prisma/client"
 import { Card, CardContent } from '@repo/ui/molecules/shadcn/card'
 import { WorkflowExecutionStatus, WorkflowStatus } from '@repo/ts-types/scrape-flow/workflow'
 import { FileTextIcon, PlayIcon, CornerDownRightIcon, MoveRightIcon,CoinsIcon, ChevronRightIcon,

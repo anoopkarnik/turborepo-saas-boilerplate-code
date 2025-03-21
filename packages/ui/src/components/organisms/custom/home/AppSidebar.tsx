@@ -9,13 +9,11 @@ import {
 import { sidebarProps } from "@repo/ts-types/home/v1";
 import { CompanyLogoName } from "../../../molecules/custom/v1/CompanyLogoName";
 import SidebarItems from "../../../molecules/custom/v1/SidebarItems";
-import SidebarFooterItems from "../../../molecules/custom/v1/SidebarFooterItems";
 import SidebarUser  from "../../../molecules/custom/v1/SidebarUser";
 import ProgressWithCredits from "../../../molecules/custom/v1/ProgressWithCredits";
-import { UpgradeToProButton } from "../../../molecules/custom/v1/UpgradeToProButton";
 import NotificationSheet from "./NotificationSheet";
 
-export function AppSidebar({name,quote,logo,darkLogo,items,footerItems,pricingList,documentationLink,
+export function AppSidebar({name,logo,darkLogo,items,footerItems,pricingList,documentationLink,
     supportEmailAddress,githubUsername,githubRepositoryName,connections,showCredits,userDetails}:sidebarProps) {
         
     return (
@@ -24,7 +22,7 @@ export function AppSidebar({name,quote,logo,darkLogo,items,footerItems,pricingLi
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <CompanyLogoName logo={logo} darkLogo={darkLogo} name={name} quote={quote}/>
+                            <CompanyLogoName logo={logo} darkLogo={darkLogo} name={name}/>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>

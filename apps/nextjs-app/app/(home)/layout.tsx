@@ -5,7 +5,7 @@ import { AppSidebar } from "@repo/ui/organisms/custom/home/AppSidebar"
 import { sidebarFooterItems, sidebarItems } from "../../lib/constants/home"
 import { useSession} from "next-auth/react";
 import { useEffect, useState } from "react";
-import { darkLogo, githubRepositoryName, githubUsername, logo, showCredits, supportEmailAddress, tagline, title } from "../../lib/constants/appDetails";
+import { darkLogo, githubRepositoryName, githubUsername, logo, showCredits, supportEmailAddress, title } from "../../lib/constants/appDetails";
 import { RecoilRoot } from "recoil";
 import { Separator } from "@repo/ui/atoms/shadcn/separator";
 import {BreadcrumbsHeader} from "@repo/ui/molecules/custom/v1/BreadcrumbsHeader"
@@ -60,7 +60,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             name={title}
             logo={logo}
             darkLogo={darkLogo}
-            quote={tagline}
             pricingList={pricingList}
             documentationLink={documentationLink}
             supportEmailAddress={supportEmailAddress}

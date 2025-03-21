@@ -7,7 +7,7 @@
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["multiSchema","prismaSchemaFolder"]
-  output   = "../../../node_modules/@prisma/prisma/client"
+  output   = "../../../../node_modules/@prisma/prisma/client"
 }
 
 datasource db {

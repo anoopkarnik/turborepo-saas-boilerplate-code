@@ -15,7 +15,7 @@ export const sidebarItems:sidebarHeaderProps =
         ]},
         {title: "Twitter Clone", url: "/twitter-clone", icon: Twitter, isActive:true, items: [
             {title: "Notifications", url: "/twitter-clone/notifications"},
-            {title: "Profile", url: "/twitter-clone/profile"},
+            {title: "Profile", url: "/twitter-clone/users"},
 
         ]},
         {title: "Connections", url: "/connections", icon: BoxesIcon},

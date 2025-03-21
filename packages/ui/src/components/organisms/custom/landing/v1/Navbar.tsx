@@ -20,6 +20,7 @@ import { ModeToggle } from "../../../../molecules/custom/v1/theme-toggle-dropdow
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { NavbarSectionProps, RouteProps } from "@repo/ts-types/landing-page/navbar";
+import { CompanyLogoName } from "../../../../molecules/custom/v1/CompanyLogoName";
 
 const Navbar = ({navbarSection,showLandingRoutes=true}: {
   navbarSection: NavbarSectionProps,showLandingRoutes?:boolean}) => {
@@ -53,19 +54,7 @@ const Navbar = ({navbarSection,showLandingRoutes=true}: {
       <NavigationMenu className="mx-auto">
         <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between ">
           <NavigationMenuItem className="font-bold flex">
-            <a
-              rel="noreferrer noopener"
-              href="/"
-              className="ml-2 flex items-center gap-2 font-cyberdyne"
-            >
-              {theme === "dark" ?
-               <Image src={navbarSection?.darkLogo} alt={navbarSection?.title} width={30} height={30} /> : 
-               <Image src={navbarSection?.logo} alt={navbarSection?.title} width={30} height={30} />}
-               <div className="hidden lg:flex flex-col items-start text-md leading-none bg-gradient-to-r from-white to-white bg-clip-text text-transparent ">
-                  <div>{navbarSection?.title?.split(' ').slice(0, Math.ceil(navbarSection?.title?.split(' ').length / 2)).join(" ")}</div>
-                  <div>{navbarSection?.title?.split(' ').slice(Math.ceil(navbarSection?.title?.split(' ').length / 2)).join(" ")}</div>
-                </div>
-            </a>
+            <CompanyLogoName logo={navbarSection?.logo} darkLogo={navbarSection?.darkLogo} name={navbarSection?.title} />
           </NavigationMenuItem>
 
           

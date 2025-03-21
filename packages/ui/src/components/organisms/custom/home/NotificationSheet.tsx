@@ -9,7 +9,7 @@ import { Button } from '../../../atoms/shadcn/button'
 const NotificationSheet = () => {
   const notifications = useNotifications();
   const setNotifications = useSetNotifications();
-  const [unreadNotifications,setUnreadNotifications] = useState(notifications.filter((notification) => !notification.read));
+  const [unreadNotifications,setUnreadNotifications] = useState(notifications?.filter((notification) => !notification.read));
 
   useEffect(() =>{
     setUnreadNotifications(notifications.filter((notification) => !notification.read));

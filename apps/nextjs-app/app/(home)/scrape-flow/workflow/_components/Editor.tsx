@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {Workflow} from '@prisma/client'
+import {Workflow} from '@prisma/prisma/client'
 import {ReactFlowProvider} from "@xyflow/react"
 import FlowEditor from './FlowEditor'
 import Topbar from './topbar/Topbar'

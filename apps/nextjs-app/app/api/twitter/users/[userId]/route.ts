@@ -18,7 +18,6 @@ export async function GET(req: Request, {params} : {params: {userId: string}}) {
                 }
             }
         })
-        console.log('followersCount', followersCount)
         return NextResponse.json({...existingUser, followersCount}, { status: 200 });
     }catch(error){
         console.log(error)

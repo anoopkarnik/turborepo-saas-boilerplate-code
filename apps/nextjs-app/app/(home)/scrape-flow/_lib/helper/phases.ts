@@ -1,4 +1,4 @@
-import {ExecutionPhase} from '@prisma/client'
+import {ExecutionPhase} from '@prisma/prisma/client'
 
 type Phase = Pick<ExecutionPhase,"creditsConsumed">;
 

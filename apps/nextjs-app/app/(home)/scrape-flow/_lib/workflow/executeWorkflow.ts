@@ -3,7 +3,7 @@ import "server-only";
 import db from "@repo/prisma-db/client";
 import { revalidatePath } from "next/cache";
 import { ExecutionEnvironment, WorkflowExecutionStatus } from "@repo/ts-types/scrape-flow/workflow";
-import {ExecutionPhase} from '@prisma/client'
+import {ExecutionPhase} from '@prisma/prisma/client'
 import { AppNode, TaskParamType} from "@repo/ts-types/scrape-flow/node";
 import { TaskRegistry } from "./tasks/registry";
 import { ExecutorRegistry } from "./executor/registry";

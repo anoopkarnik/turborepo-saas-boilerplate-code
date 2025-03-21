@@ -2,26 +2,28 @@
 import { CompanyLogoNameProps } from "@repo/ts-types/home/v1";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export function CompanyLogoName({logo,darkLogo,name,quote}:CompanyLogoNameProps) {
+export function CompanyLogoName({logo,darkLogo,name}:CompanyLogoNameProps) {
     const {theme} = useTheme();
+    const router = useRouter();
 
     useEffect(()=>{
   
     },[theme])
 
   return (
-    <a href={'/'} className="flex gap-2 m-2">
-        <div className="flex aspect-square size-8 items-center justify-center ">
-            {theme === "dark" ?
-                <Image src={darkLogo} alt='/next.svg' width={30} height={30} /> : 
-                <Image src={logo} alt='/next.svg' width={30} height={30} />}
-        </div>
-        <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-semibold">{name}</span>
-            <span className="truncate text-xs">{quote}</span>
-        </div>
-    </a>
+      <div onClick={()=>router.push("/")}
+        className="ml-2 flex items-center gap-2 font-cyberdyne cursor-pointer"
+      >
+        {theme === "dark" ?
+          <Image src={darkLogo} alt={name} width={30} height={30} /> : 
+          <Image src={logo} alt={name} width={30} height={30} />}
+          <div className=" hidden lg:flex flex-col items-start  leading-none bg-gradient-to-r from-white to-white bg-clip-text text-transparent ">
+            <div>{name?.split(' ').slice(0, Math.ceil(name?.split(' ').length / 2)).join(" ")}</div>
+            <div>{name?.split(' ').slice(Math.ceil(name?.split(' ').length / 2)).join(" ")}</div>
+          </div>
+      </div>
   );
 }

@@ -1,4 +1,4 @@
-import {User} from "@prisma/client";
+import {User} from "@prisma/prisma/client";
 import { PricingProps } from "../landing-page/pricing";
 
 export interface sidebarHeaderItemsProps{
@@ -21,7 +21,6 @@ export interface sidebarFooterItemsProps {
 
 export interface CompanyLogoNameProps {
     name: string;
-    quote: string;
     logo: string;
     darkLogo: string;
 }

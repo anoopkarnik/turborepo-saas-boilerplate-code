@@ -14,7 +14,7 @@ datasource db {
 
 model TwitterUser {
     id            String          @id @default(auto()) @map("_id") @db.ObjectId
-    userId        String
+    userId        String          @unique
     name          String      
     username      String
     bio           String?
