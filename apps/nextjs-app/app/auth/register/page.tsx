@@ -3,7 +3,6 @@
 import RegisterPage from '@repo/ui/templates/auth/v1/RegisterPage'
 import { useSearchParams } from 'next/navigation'
 import React, { Suspense, useEffect, useState } from 'react'
-import { DEFAULT_LOGIN_REDIRECT } from '../../../routes'
 import { signIn } from 'next-auth/react'
 import { register } from '../_actions/register'
 
@@ -30,7 +29,7 @@ const RegisterContent = () => {
   const showLinkedinProvider = true
 
   const login = async (type: string) => {
-    await signIn(type, { callbackUrl: DEFAULT_LOGIN_REDIRECT })
+    await signIn(type, { callbackUrl: '/' })
   }
 
   return (

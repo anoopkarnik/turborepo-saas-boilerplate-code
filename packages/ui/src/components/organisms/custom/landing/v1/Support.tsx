@@ -17,6 +17,7 @@ import { Textarea } from "../../../../atoms/shadcn/textarea";
 import { Button } from "../../../../atoms/shadcn/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../../../molecules/shadcn/tabs";
 import { SupportChat } from "../../home/SupportChat";
+import CrispChat from "../../../../molecules/custom/v1/CrispChat";
 
 const Support = ({
   heroSection,
@@ -111,6 +112,9 @@ const Support = ({
           <TabsContent value="supportbot">
             <SupportChat />
           </TabsContent>
+          <TabsContent value="chat">
+            <CrispChat />
+          </TabsContent>
           <TabsContent value="social">
             <div className="flex flex-col gap-2">
               <p className="text-description text-sm">Follow us on:</p>
@@ -131,6 +135,7 @@ const Support = ({
           <TabsList className="absolute bottom-0 left-0 w-full  p-2 rounded-b-lg flex justify-around">
             <TabsTrigger value="feedback">Feedback</TabsTrigger>
             <TabsTrigger value="resources">Resources</TabsTrigger>
+            <TabsTrigger value="chat">Chat</TabsTrigger>
             <TabsTrigger value="supportbot">Support Bot</TabsTrigger>
             <TabsTrigger value="social">Social</TabsTrigger>
           </TabsList>

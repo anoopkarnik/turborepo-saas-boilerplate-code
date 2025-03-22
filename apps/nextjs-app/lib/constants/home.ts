@@ -1,22 +1,24 @@
 import { sidebarFooterItemsProps, sidebarHeaderProps } from "@repo/ts-types/home/v1"
-import {  Home, Inbox, AppWindowIcon, BoxesIcon, CoinsIcon,Twitter } from "lucide-react"
+import {  Home, Inbox, AppWindowIcon, BoxesIcon, CoinsIcon,Twitter, WorkflowIcon, BellIcon, CircleUserRoundIcon, BotIcon, MessageSquare, ImageIcon, VideoIcon, MusicIcon, CodeIcon } from "lucide-react"
 
 export const sidebarItems:sidebarHeaderProps = 
 {
     "Application":[
         {title: "Home", url: "/", icon: Home},
-        {title: "Systems", url: "/systems", icon: Inbox, isActive:true, items: [
-            {title: "System 1", url: "/systems/system1"},
-            {title: "System 2", url: "/systems/system2"},
-            {title: "System 3", url: "/systems/system3"},
+        {title: "Scrape Flow", url: "/scrape-flow", icon: AppWindowIcon, isActive:false, items: [
+          {title: "Workflows", url: "/scrape-flow/workflows", icon: WorkflowIcon},
         ]},
-        {title: "Scrape Flow", url: "/scrape-flow", icon: AppWindowIcon, isActive:true, items: [
-          {title: "Workflows", url: "/scrape-flow/workflows"},
-        ]},
-        {title: "Twitter Clone", url: "/twitter-clone", icon: Twitter, isActive:true, items: [
-            {title: "Notifications", url: "/twitter-clone/notifications"},
-            {title: "Profile", url: "/twitter-clone/users"},
+        {title: "Twitter Clone", url: "/twitter-clone", icon: Twitter, isActive:false, items: [
+            {title: "Notifications", url: "/twitter-clone/notifications", icon: BellIcon},
+            {title: "Profile", url: "/twitter-clone/users", icon: CircleUserRoundIcon},
 
+        ]},
+        {title: "AI SaaS", url: "/ai-saas", icon: BotIcon, isActive:false, items: [
+            {title: "Conversation", url: "/ai-saas/conversation", icon: MessageSquare},
+            {title: "Image Generation", url: "/ai-saas/image-generation", icon: ImageIcon},
+            {title: "Video Generation", url: "/ai-saas/video-generation", icon: VideoIcon},
+            {title: "Music Generation", url: "/ai-saas/music-generation", icon: MusicIcon},
+            {title: "Code Generation", url: "/ai-saas/code-generation", icon: CodeIcon},
         ]},
         {title: "Connections", url: "/connections", icon: BoxesIcon},
         {title: "Billing", url: "/billing", icon: CoinsIcon},

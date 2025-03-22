@@ -16,12 +16,12 @@ import {
 } from "../../../organisms/shadcn/sidebar";
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from "../../../../lib/utils";
-import { Button } from "../../../atoms/shadcn/button";
 
 
 const SidebarSubItems = ({item}:{item:sidebarHeaderItemsProps}) => {
     const router = useRouter()
     const pathname = usePathname();
+    
     return (
         <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
             <SidebarMenuItem >
@@ -49,7 +49,10 @@ const SidebarSubItems = ({item}:{item:sidebarHeaderItemsProps}) => {
                                             pathname===subItem.url && "bg-sidebar-accent") }
                                             onClick={(e) => { e.stopPropagation(); router.push(subItem.url as string); }}>
                                                 
-                                                <span>{subItem.title}</span>
+                                                <div className="flex items-center ">
+                                                    <subItem.icon />
+                                                    <span>{subItem.title}</span>
+                                                </div>
                                         </SidebarMenuSubButton>
                                     </SidebarMenuSubItem>
                                 ))}

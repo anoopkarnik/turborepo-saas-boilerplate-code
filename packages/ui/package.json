@@ -22,10 +22,10 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
+    "@repo/email": "*",
     "@repo/eslint-config": "*",
     "@repo/ts-types": "*",
     "@repo/typescript-config": "*",
-    "@repo/email": "*",
     "@turbo/gen": "^1.12.4",
     "@types/node": "^20.11.24",
     "@types/react": "18",
@@ -89,6 +89,7 @@
     "recharts": "^2.13.3",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "typewriter-effect": "^2.21.0",
     "vaul": "^1.1.1",
     "zod": "^3.23.8"
   }

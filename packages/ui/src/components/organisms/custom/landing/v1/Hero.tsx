@@ -8,6 +8,7 @@ import { TestimonialProps } from "@repo/ts-types/landing-page/testimonials";
 import { TeamProps } from "@repo/ts-types/landing-page/team";
 import { useRouter } from "next/navigation";
 import { PricingProps } from "@repo/ts-types/landing-page/pricing";
+import TypewriterComponent from 'typewriter-effect';
 
 
 const Hero = ({heroSection, features ,testimonials, pricingList,teamList}:{
@@ -40,9 +41,14 @@ const Hero = ({heroSection, features ,testimonials, pricingList,teamList}:{
       </main>
 
 
-        <p className="text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0">
-          {heroSection.description}
-        </p>
+        <div className="text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0">
+          <TypewriterComponent 
+            options={{
+              strings: heroSection.description ? [heroSection.description] : [],
+              autoStart: true,
+              loop: true,
+            }}/>
+        </div>
 
         <div className="flex items-center space-y-4 md:space-y-0 md:space-x-4">
         {heroSection.documentationLink && <div>

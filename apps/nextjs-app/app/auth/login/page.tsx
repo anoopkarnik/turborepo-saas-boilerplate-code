@@ -3,7 +3,6 @@
 import LoginPage from '@repo/ui/templates/auth/v1/LoginPage'
 import {  useSearchParams } from 'next/navigation'
 import React, { Suspense, useEffect, useState } from 'react'
-import { DEFAULT_LOGIN_REDIRECT } from '../../../routes'
 import { signIn } from 'next-auth/react'
 import { login } from '../_actions/login'
 
@@ -21,7 +20,7 @@ const LoginContent = () => {
   
 
   const loginWithSocials = async (type: string) => {
-    await signIn(type, { callbackUrl: DEFAULT_LOGIN_REDIRECT })
+    await signIn(type, { callbackUrl: '/' })
   }
 
   const title = 'Loading...'
