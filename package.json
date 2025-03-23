@@ -8,11 +8,9 @@
     "start": "turbo start",
     "test": "turbo test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "db:migrate": "cd packages/prisma-db && npx prisma migrate dev --name init",
-    "db:generate": "cd packages/prisma-db && npx prisma generate",
-    "db:seed": "cd packages/prisma-db && npx prisma db seed",
-    "docs:deploy": "cd apps/docs && npm run deploy-s3",
-    "docs:serve": "cd apps/docs && npm run serve -- --host 0.0.0.0 --no-open"
+    "db:migrate": "cd packages/prisma-db && npm run prisma:migrate --name init && npm run mongo:migrate --name init",
+    "db:generate": "cd packages/prisma-db && npm run postgres:generate && npm run mongo:generate",
+    "db:seed": "cd packages/prisma-db && npx prisma db seed"
   },
   "devDependencies": {
     "@repo/auth": "*",
