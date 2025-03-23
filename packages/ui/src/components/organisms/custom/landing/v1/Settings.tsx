@@ -20,8 +20,7 @@ const Settings = ({ data }: { data: any }) => {
   }, []);
 
   const verifyPassword = async () => {
-    console.log('Verifying password');
-    const response = await fetch('http://localhost:3000/api/verify-password', {
+    const response = await fetch('/api/verify-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password }),
