@@ -15,9 +15,9 @@ const AISaaS = () => {
     const router = useRouter();
 
     useEffect(() => {
-        // @ts-ignore
+            // @ts-expect-error Object possibly undefined error
         setRoutes(sidebarItems["Application"]?.filter(x => x.title=="AI SaaS")[0]?.items);
-    }, [sidebarItems])
+    }, [])
 
   return (
     <div>

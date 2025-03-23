@@ -2,7 +2,6 @@
 import React from 'react'
 import useUsers from '../_hooks/useUsers'
 import Avatar from './Avatar'
-import Image from 'next/image'
 
 const RightSidebar = () => {
     const {data: users =[]} = useUsers()

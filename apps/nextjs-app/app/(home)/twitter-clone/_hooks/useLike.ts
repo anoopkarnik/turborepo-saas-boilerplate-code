@@ -1,7 +1,6 @@
 
 import { useCallback, useMemo } from 'react';
 import useCurrentUser from './useCurrentUser'
-import useUser from './useUser';
 import { useToast } from '@repo/ui/hooks/use-toast';
 import axios from 'axios';
 import usePost from './usePost';
@@ -39,7 +38,7 @@ const useLike= ({postId, userId}:{postId:string, userId:string} ) => {
                 variant: 'destructive'
             })
         }
-    },[currentUser,hasLiked, userId, fetchPost,fetchPosts, toast])
+    },[currentUser,hasLiked, fetchPost,fetchPosts, toast,postId, fetchCurrentUser])
 
     return {
         hasLiked,

@@ -24,7 +24,7 @@ const Pricing = ({pricingSection}:{pricingSection:PricingSectionProps}) => {
         {headingArray.slice(Math.ceil(headingArray.length / 2)).join(" ")}
       </span>
     </h2>
-      <h3 className="text-xl text-center text-muted-foreground pt-4 pb-8">
+      <h3 className="text-xl text-left text-muted-foreground pt-4 pb-8">
         {pricingSection.description}
       </h3>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import Heading from '../_components/Heading'
-import { CodeIcon, MessageSquare } from 'lucide-react'
+import { CodeIcon} from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { formSchema } from '../lib/constants'
@@ -45,7 +45,7 @@ const CodeGeneration = () => {
             setMessages((current) => [...current, userMessage, response.data])
             form.reset()
         }catch(err){
-            // @ts-ignore
+            // @ts-expect-error Object possibly undefined error
             toast({title: "Error", description: err?.response.data.error , variant: 'destructive'})
             console.log(err)
         }finally{

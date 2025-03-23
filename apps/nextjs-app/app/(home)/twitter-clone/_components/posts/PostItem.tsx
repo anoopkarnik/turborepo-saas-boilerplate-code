@@ -13,10 +13,10 @@ interface PostItemProps {
     postId: string
 }
 
-const PostItem = ({userId,postId}:PostItemProps) => {
+const PostItem = ({postId}:PostItemProps) => {
     const router = useRouter();
 
-    const {data: currentUser,refetch} = useCurrentUser();
+    const {data: currentUser} = useCurrentUser();
 
     const {data, refetch: refetchPost, isLoading} = usePost(postId)
 
@@ -36,7 +36,7 @@ const PostItem = ({userId,postId}:PostItemProps) => {
         toggleLiked();
         refetchPost()
 
-    },[toggleLiked,refetch]);
+    },[toggleLiked,refetchPost]);
 
     const createdAt = useMemo(() =>{
         if(!data?.createdAt) return null;

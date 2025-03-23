@@ -43,7 +43,7 @@ const Conversation = () => {
             setMessages((current) => [...current, userMessage, response.data])
             form.reset()
         }catch(err){
-            // @ts-ignore
+            // @ts-expect-error Object possibly undefined error
             toast({title: "Error", description: err?.response.data.error , variant: 'destructive'})
             console.log(err)
         }finally{

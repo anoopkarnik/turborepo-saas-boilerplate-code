@@ -1,5 +1,4 @@
 "use client"
-import { useRouter } from 'next/navigation'
 import React from 'react'
 import usePost from '../../_hooks/usePost'
 import { ClipLoader } from 'react-spinners'
@@ -9,7 +8,6 @@ import CommentFeed from '../../_components/posts/CommentFeed'
 
 const PostView = ({params}:{params:{postId:string}}) => {
     const {postId} = params
-    const router = useRouter()
 
     const {data: fetchedPost, isLoading} = usePost(postId)
 
