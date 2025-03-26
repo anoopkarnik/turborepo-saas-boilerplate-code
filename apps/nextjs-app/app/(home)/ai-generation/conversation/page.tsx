@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import Heading from '../_components/Heading'
-import { Video } from 'lucide-react'
+import { MessageSquare } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { formSchema } from '../lib/constants'
@@ -11,10 +11,14 @@ import { Input } from '@repo/ui/atoms/shadcn/input'
 import { Button } from '@repo/ui/atoms/shadcn/button'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import { ChatCompletionMessageParam } from 'openai/src/resources.js'
 import Empty from '../_components/Empty'
 import Loader from '../_components/Loader'
+import { cn } from '@repo/ui/lib/utils'
+import UserAvatar from '../_components/UserAvatar'
+import BotAvatar from '../_components/BotAvatar'
 
-const VideoGeneration= () => {
+const Conversation = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -25,22 +29,22 @@ const VideoGeneration= () => {
     const isLoading = form.formState.isSubmitting
 
     const router = useRouter()
-    const [video, setVideo] = useState<string>()
+
+    const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([])
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try{
-            setVideo(undefined)
-            const response = await axios.post("/api/ai-saas/video-generation", values, {
-                responseType: "blob" });
-            console.log(response)
-            const blob = response.data;
-            const url = URL.createObjectURL(blob);
-            setVideo(url);
-
+            const userMessage:ChatCompletionMessageParam = {
+                role: 'user',
+                content: values.prompt
+            }
+            const newMessages = [...messages, userMessage]
+            const response = await axios.post('/api/ai-generation/conversation', {messages: newMessages})
+            setMessages((current) => [...current, userMessage, response.data])
             form.reset()
         }catch(err){
             // @ts-expect-error Object possibly undefined error
             toast({title: "Error", description: err?.response.data.error , variant: 'destructive'})
-
             console.log(err)
         }finally{
             router.refresh()
@@ -48,8 +52,8 @@ const VideoGeneration= () => {
     }
   return (
     <div className='px-4 lg:px-8'> 
-        <Heading title="Video Generation" description='Our basic video generation model.' 
-        icon={Video} iconColor='text-orange-500' bgColor='bg-orange-500/10'/>
+        <Heading title="Conversation" description='Our most advanced conversation model.' 
+        icon={MessageSquare} iconColor='text-violet-500' bgColor='bg-violet-500/10'/>
         <div >
             <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)} 
@@ -60,7 +64,7 @@ const VideoGeneration= () => {
                             <FormControl className='m-0 p-0'>
                                 <Input className='border-0 outline-none focus-visible:ring-0 bg-transparent
                                 focus-visible:ring-transparent' disabled={isLoading} 
-                                placeholder='Clown fish swimming around a coral reef' {...field}/>
+                                placeholder='How do I calculate radius of a cirle?' {...field}/>
                             </FormControl>
                         </FormItem>
                        )}
@@ -75,18 +79,24 @@ const VideoGeneration= () => {
             {isLoading && (
                 <Loader/>
             )}
-            {!video && !isLoading && (
-                <Empty label='No video generated'/>
+            {messages.length===0 && !isLoading && (
+                <Empty label='No conversation started'/>
             )}
-            {video && (
-                <video controls className='w-full aspect-video mt-8 rounded-lg border bg-background'>
-                    <source src={video} type="video/mp4"/>
-                    Your browser does not support the video tag.
-                </video>
-            )}
+            <div className='flex flex-col-reverse gap-y-4'>
+                {messages.map((message, index) => (
+                    <div 
+                        key={index}
+                        className={cn('p-8 w-full flex items-start gap-x-8 rounded-lg',
+                            message.role === 'user' ? "bg-background border-border border-[1px]" : "bg-sidebar")}
+                    >
+                        {message.role === 'user' ? <UserAvatar/> : <BotAvatar   />}
+                        {message.content as string}
+                    </div>
+                ))}
+            </div>
         </div>
     </div>
   )
 }
 
-export default VideoGeneration
+export default Conversation

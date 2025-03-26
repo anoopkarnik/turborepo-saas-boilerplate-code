@@ -1,5 +1,8 @@
 import { sidebarFooterItemsProps, sidebarHeaderProps } from "@repo/ts-types/home/v1"
-import {  Home, AppWindowIcon, BoxesIcon, CoinsIcon,Twitter, WorkflowIcon, BellIcon, CircleUserRoundIcon, BotIcon, MessageSquare, ImageIcon, VideoIcon, MusicIcon, CodeIcon } from "lucide-react"
+import {  Home, AppWindowIcon, BoxesIcon, CoinsIcon,Twitter, WorkflowIcon, BellIcon,
+     CircleUserRoundIcon, BotIcon, MessageSquare, ImageIcon, VideoIcon, MusicIcon, 
+     CodeIcon, UserPen,
+     UserPlus} from "lucide-react"
 
 export const sidebarItems:sidebarHeaderProps = 
 {
@@ -13,12 +16,15 @@ export const sidebarItems:sidebarHeaderProps =
             {title: "Profile", url: "/twitter-clone/users", icon: CircleUserRoundIcon},
 
         ]},
-        {title: "AI SaaS", url: "/ai-saas", icon: BotIcon, isActive:false, items: [
-            {title: "Conversation", url: "/ai-saas/conversation", icon: MessageSquare},
-            {title: "Image Generation", url: "/ai-saas/image-generation", icon: ImageIcon},
-            {title: "Video Generation", url: "/ai-saas/video-generation", icon: VideoIcon},
-            {title: "Music Generation", url: "/ai-saas/music-generation", icon: MusicIcon},
-            {title: "Code Generation", url: "/ai-saas/code-generation", icon: CodeIcon},
+        {title: "AI Generation", url: "/ai-generation", icon: BotIcon, isActive:false, items: [
+            {title: "Conversation", url: "/ai-generation/conversation", icon: MessageSquare},
+            {title: "Image Generation", url: "/ai-generation/image-generation", icon: ImageIcon},
+            {title: "Video Generation", url: "/ai-generation/video-generation", icon: VideoIcon},
+            {title: "Music Generation", url: "/ai-generation/music-generation", icon: MusicIcon},
+            {title: "Code Generation", url: "/ai-generation/code-generation", icon: CodeIcon},
+        ]},
+        {title: "AI Companion", url: "/ai-companion", icon: UserPen, isActive:false, items: [
+            {title: "Create Companion", url: "/ai-companion/companion", icon: UserPlus},
         ]},
         {title: "Connections", url: "/connections", icon: BoxesIcon},
         {title: "Billing", url: "/billing", icon: CoinsIcon},

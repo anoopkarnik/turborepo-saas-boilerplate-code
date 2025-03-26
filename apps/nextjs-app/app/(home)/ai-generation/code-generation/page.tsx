@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import Heading from '../_components/Heading'
-import { Music } from 'lucide-react'
+import { CodeIcon} from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { formSchema } from '../lib/constants'
@@ -11,10 +11,16 @@ import { Input } from '@repo/ui/atoms/shadcn/input'
 import { Button } from '@repo/ui/atoms/shadcn/button'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import { ChatCompletionMessageParam } from 'openai/src/resources.js'
 import Empty from '../_components/Empty'
 import Loader from '../_components/Loader'
+import { cn } from '@repo/ui/lib/utils'
+import UserAvatar from '../_components/UserAvatar'
+import BotAvatar from '../_components/BotAvatar'
+import ReactMarkdown from 'react-markdown'
+import { components } from '@repo/ui/atoms/mdx/mdxComponents'
 
-const MusicGeneration= () => {
+const CodeGeneration = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -25,18 +31,18 @@ const MusicGeneration= () => {
     const isLoading = form.formState.isSubmitting
 
     const router = useRouter()
-    const [music, setMusic] = useState<string>()
+
+    const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([])
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try{
-            setMusic(undefined)
-            const response = await axios.post("/api/ai-saas/music-generation", values, {
-                responseType: "blob", 
-              });
-          
-            const audioBlob = response.data; // Axios puts the blob directly here
-            const url = URL.createObjectURL(audioBlob);
-            setMusic(url)  
-
+            const userMessage:ChatCompletionMessageParam = {
+                role: 'user',
+                content: values.prompt
+            }
+            const newMessages = [...messages, userMessage]
+            const response = await axios.post('/api/ai-generation/code-generation', {messages: newMessages})
+            setMessages((current) => [...current, userMessage, response.data])
             form.reset()
         }catch(err){
             // @ts-expect-error Object possibly undefined error
@@ -48,8 +54,8 @@ const MusicGeneration= () => {
     }
   return (
     <div className='px-4 lg:px-8'> 
-        <Heading title="Music Generation" description='Our basic music generation model.' 
-        icon={Music} iconColor='text-emerald-500' bgColor='bg-emerald-500/10'/>
+        <Heading title="Code Generation" description='Our most advanced code generation Model.' 
+        icon={CodeIcon} iconColor='text-green-500' bgColor='bg-green-500/10'/>
         <div >
             <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)} 
@@ -60,7 +66,7 @@ const MusicGeneration= () => {
                             <FormControl className='m-0 p-0'>
                                 <Input className='border-0 outline-none focus-visible:ring-0 bg-transparent
                                 focus-visible:ring-transparent' disabled={isLoading} 
-                                placeholder='Piano Solo' {...field}/>
+                                placeholder='Create a new Fancy 3d Button Component' {...field}/>
                             </FormControl>
                         </FormItem>
                        )}
@@ -75,17 +81,28 @@ const MusicGeneration= () => {
             {isLoading && (
                 <Loader/>
             )}
-            {!music && !isLoading && (
-                <Empty label='No music generated'/>
+            {messages.length===0 && !isLoading && (
+                <Empty label='No code generated yet'/>
             )}
-            {music && (
-                <audio controls className='w-full mt-8'>
-                    <source src={music} type="audio/mpeg"/>
-                </audio>
-            )}
+            <div className='flex flex-col-reverse gap-y-4 mb-20'>
+                {messages.map((message, index) => (
+                    <div 
+                        key={index}
+                        className={cn('p-8 w-full flex items-start gap-x-8 rounded-lg ',
+                            message.role === 'user' ? "bg-background border-border border-[1px]" : "bg-sidebar")}
+                    >
+                        {message.role === 'user' ? <UserAvatar/> : <BotAvatar   />}
+                        <ReactMarkdown
+                            components={components}
+                        >
+                            {message.content as string}
+                        </ReactMarkdown>
+                    </div>
+                ))}
+            </div>
         </div>
     </div>
   )
 }
 
-export default MusicGeneration
+export default CodeGeneration

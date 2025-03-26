@@ -122,7 +122,7 @@ const Support = ({
                 ?.filter((item) => item.type === "Follow Us")
                 .map((item, index) => (
                 
-                    <DropdownMenuItem className='cursor-pointer text-sm'
+                    <DropdownMenuItem className='cursor-pointer text-sm' key={index}
                     onClick={() => window.open(item.href, "_blank")}>
                         {item.label}
                         </DropdownMenuItem>

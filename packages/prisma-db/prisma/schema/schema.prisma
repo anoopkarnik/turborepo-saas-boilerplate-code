@@ -6,13 +6,14 @@
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["multiSchema","prismaSchemaFolder"]
+  previewFeatures = ["multiSchema","prismaSchemaFolder","fullTextSearchPostgres"]
   output   = "../../../../node_modules/@prisma/prisma/client"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL_POSTGRES")
-  schemas = ["boilerplate_schema","scrapeflow_schema"]
+  schemas = ["boilerplate_schema","scrapeflow_schema","aicompanion_schema"]
 }
+
 

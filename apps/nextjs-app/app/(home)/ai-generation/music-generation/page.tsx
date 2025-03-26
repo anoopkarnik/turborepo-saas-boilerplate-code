@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import Heading from '../_components/Heading'
-import { MessageSquare } from 'lucide-react'
+import { Music } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { formSchema } from '../lib/constants'
@@ -11,14 +11,10 @@ import { Input } from '@repo/ui/atoms/shadcn/input'
 import { Button } from '@repo/ui/atoms/shadcn/button'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
-import { ChatCompletionMessageParam } from 'openai/src/resources.js'
 import Empty from '../_components/Empty'
 import Loader from '../_components/Loader'
-import { cn } from '@repo/ui/lib/utils'
-import UserAvatar from '../_components/UserAvatar'
-import BotAvatar from '../_components/BotAvatar'
 
-const Conversation = () => {
+const MusicGeneration= () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -29,18 +25,18 @@ const Conversation = () => {
     const isLoading = form.formState.isSubmitting
 
     const router = useRouter()
-
-    const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([])
-
+    const [music, setMusic] = useState<string>()
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try{
-            const userMessage:ChatCompletionMessageParam = {
-                role: 'user',
-                content: values.prompt
-            }
-            const newMessages = [...messages, userMessage]
-            const response = await axios.post('/api/ai-saas/conversation', {messages: newMessages})
-            setMessages((current) => [...current, userMessage, response.data])
+            setMusic(undefined)
+            const response = await axios.post("/api/ai-generation/music-generation", values, {
+                responseType: "blob", 
+              });
+          
+            const audioBlob = response.data; // Axios puts the blob directly here
+            const url = URL.createObjectURL(audioBlob);
+            setMusic(url)  
+
             form.reset()
         }catch(err){
             // @ts-expect-error Object possibly undefined error
@@ -52,8 +48,8 @@ const Conversation = () => {
     }
   return (
     <div className='px-4 lg:px-8'> 
-        <Heading title="Conversation" description='Our most advanced conversation model.' 
-        icon={MessageSquare} iconColor='text-violet-500' bgColor='bg-violet-500/10'/>
+        <Heading title="Music Generation" description='Our basic music generation model.' 
+        icon={Music} iconColor='text-emerald-500' bgColor='bg-emerald-500/10'/>
         <div >
             <Form {...form} >
                 <form onSubmit={form.handleSubmit(onSubmit)} 
@@ -64,7 +60,7 @@ const Conversation = () => {
                             <FormControl className='m-0 p-0'>
                                 <Input className='border-0 outline-none focus-visible:ring-0 bg-transparent
                                 focus-visible:ring-transparent' disabled={isLoading} 
-                                placeholder='How do I calculate radius of a cirle?' {...field}/>
+                                placeholder='Piano Solo' {...field}/>
                             </FormControl>
                         </FormItem>
                        )}
@@ -79,24 +75,17 @@ const Conversation = () => {
             {isLoading && (
                 <Loader/>
             )}
-            {messages.length===0 && !isLoading && (
-                <Empty label='No conversation started'/>
+            {!music && !isLoading && (
+                <Empty label='No music generated'/>
             )}
-            <div className='flex flex-col-reverse gap-y-4'>
-                {messages.map((message, index) => (
-                    <div 
-                        key={index}
-                        className={cn('p-8 w-full flex items-start gap-x-8 rounded-lg',
-                            message.role === 'user' ? "bg-background border-border border-[1px]" : "bg-sidebar")}
-                    >
-                        {message.role === 'user' ? <UserAvatar/> : <BotAvatar   />}
-                        {message.content as string}
-                    </div>
-                ))}
-            </div>
+            {music && (
+                <audio controls className='w-full mt-8'>
+                    <source src={music} type="audio/mpeg"/>
+                </audio>
+            )}
         </div>
     </div>
   )
 }
 
-export default Conversation
+export default MusicGeneration

@@ -1,0 +1,57 @@
+model Category {
+  id            String          @id @default(cuid())
+  name          String
+  companions   Companion[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@schema("aicompanion_schema")
+
+}
+
+model Companion {
+    id            String          @id @default(cuid())
+    userId        String
+    userName      String
+    src           String
+    name          String          @db.Text
+    description   String          
+    instructions  String          @db.Text
+    seed          String         @db.Text
+    
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    category      Category @relation(fields: [categoryId], references: [id])
+    categoryId    String
+
+    messages      Message[]
+
+    @@index([categoryId])
+    @@schema("aicompanion_schema")
+}
+
+enum Role {
+  user
+  system
+
+  @@schema("aicompanion_schema")
+}
+
+model Message {
+  id            String          @id @default(cuid())
+  content       String  @db.Text
+  role          Role
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  companionId String
+  userId   String
+
+  companion Companion @relation(fields: [companionId], references: [id], onDelete: Cascade)
+
+  @@index([companionId])
+  @@schema("aicompanion_schema")
+}

@@ -41,7 +41,7 @@ const ImageGeneration = () => {
     const onSubmit = async (values: z.infer<typeof imageFormSchema>) => {
         try{
             setImages([])
-            const response = await axios.post('/api/ai-saas/image-generation', values)
+            const response = await axios.post('/api/ai-generation/image-generation', values)
             const urls = response.data.map((image: {url:string})=>image.url)
             setImages(urls)
             form.reset()
