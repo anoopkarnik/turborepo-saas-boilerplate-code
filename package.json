@@ -10,6 +10,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:migrate": "cd packages/prisma-db && npm run prisma:migrate --name init && npm run mongo:migrate --name init",
     "db:generate": "cd packages/prisma-db && npm run postgres:generate && npm run mongo:generate",
+    "postinstall": "cd packages/prisma-db && npm run postgres:generate && npm run mongo:generate",
     "db:seed": "cd packages/prisma-db && npx prisma db seed"
   },
   "devDependencies": {
