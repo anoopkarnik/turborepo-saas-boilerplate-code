@@ -2,7 +2,9 @@ import { sidebarFooterItemsProps, sidebarHeaderProps } from "@repo/ts-types/home
 import {  Home, AppWindowIcon, BoxesIcon, CoinsIcon,Twitter, WorkflowIcon, BellIcon,
      CircleUserRoundIcon, BotIcon, MessageSquare, ImageIcon, VideoIcon, MusicIcon, 
      CodeIcon, UserPen,
-     UserPlus} from "lucide-react"
+     UserPlus,
+     Facebook,
+     Users} from "lucide-react"
 
 export const sidebarItems:sidebarHeaderProps = 
 {
@@ -25,6 +27,9 @@ export const sidebarItems:sidebarHeaderProps =
         ]},
         {title: "AI Companion", url: "/ai-companion", icon: UserPen, isActive:false, items: [
             {title: "Create Companion", url: "/ai-companion/companion", icon: UserPlus},
+        ]},
+        {title: "Messenger Clone", url: "/messenger-clone", icon: Facebook, isActive:true, items:[
+            {title: "Users", url: "/messenger-clone/users", icon: Users},
         ]},
         {title: "Connections", url: "/connections", icon: BoxesIcon},
         {title: "Billing", url: "/billing", icon: CoinsIcon},

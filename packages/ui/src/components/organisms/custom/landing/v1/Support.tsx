@@ -62,7 +62,7 @@ const Support = ({
       <DropdownMenuTrigger asChild>
         <div
           ref={triggerRef}
-          className="fixed bottom-4 right-6 flex items-center justify-center gap-2 p-4 rounded-full bg-sidebar-foreground/30s dark:bg-sidebar cursor-pointer opacity-80 hover:opacity-100"
+          className="fixed bottom-4 right-6 flex items-center justify-center gap-2 p-4 rounded-full bg-sidebar-foreground/30s dark:bg-sidebar cursor-pointer opacity-80 hover:opacity-100 z-50"
         >
           <MessageCircleQuestion className="w-6 h-6 text-primary" />
         </div>

@@ -8,6 +8,7 @@ import NextTopLoader from "nextjs-toploader";
 import { VercelAnalytics,VercelSpeedInsights } from "@repo/analytics/vercel.ts";
 import { GoogleAnalytics } from "@repo/analytics/google.ts";
 import { DataProvider } from "../../context/DataContext";
+import ActiveStatus from "../(home)/messenger-clone/_components/common/ActiveStatus";
 
 const RootClientLayout = ({ children }: { children: React.ReactNode }) => {
 
@@ -19,6 +20,7 @@ const RootClientLayout = ({ children }: { children: React.ReactNode }) => {
           <NextTopLoader color="#10b981" showSpinner={false} />
           <ThemeProvider defaultTheme="dark"   >
             <DataProvider>
+              <ActiveStatus/>
             {children}
             </DataProvider>
             <VercelAnalytics/>

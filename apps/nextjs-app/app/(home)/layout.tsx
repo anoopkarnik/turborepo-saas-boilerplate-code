@@ -69,7 +69,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             userDetails={userDetails}
             showCredits={showCredits}
           />
-        <div className="flex flex-col flex-1 min-h-screen">
+        <div className="flex flex-col flex-1 max-h-screen">
           <div className="flex items-center gap-4 py-2">
             <SidebarTrigger />
             <BreadcrumbsHeader />

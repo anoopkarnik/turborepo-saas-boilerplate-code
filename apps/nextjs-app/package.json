@@ -7,7 +7,8 @@
     "build": "next build ",
     "start": "next start",
     "lint": "next lint --max-warnings 20",
-    "test": "vitest"
+    "test": "vitest",
+    "static": "next build && next export"
   },
   "dependencies": {
     "@ai-sdk/react": "^1.2.2",
@@ -48,6 +49,7 @@
     "install": "^0.13.0",
     "ioredis": "^5.4.2",
     "langchain": "^0.3.19",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.471.1",
     "next": "^14.1.1",
     "next-auth": "5.0.0-beta.25",
@@ -56,6 +58,8 @@
     "path": "^0.12.7",
     "puppeteer": "^24.1.0",
     "puppeteer-core": "^10.4.0",
+    "pusher": "^5.2.0",
+    "pusher-js": "^8.4.0",
     "query-string": "^9.1.1",
     "rate-limiter-flexible": "^5.0.4",
     "razorpay": "^2.9.5",
@@ -63,6 +67,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.54.2",
     "react-markdown": "^10.1.0",
+    "react-select": "^5.10.1",
     "react-spinners": "^0.15.0",
     "recharts": "^2.15.0",
     "recoil": "^0.7.7",
@@ -73,8 +78,10 @@
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
+    "@capacitor/cli": "^7.1.0",
     "@tanstack/react-query-devtools": "^5.64.1",
     "@types/jest": "^29.5.14",
+    "@types/lodash": "^4.17.16",
     "@types/node": "^20.17.16",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",

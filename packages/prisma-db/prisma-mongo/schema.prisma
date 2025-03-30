@@ -4,7 +4,7 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../../../node_modules/@prisma-mongo/prisma/client"
-  previewFeatures = ["prismaSchemaFolder"]
+  previewFeatures = ["multiSchema","prismaSchemaFolder"]
 }
 
 datasource db {
@@ -30,7 +30,7 @@ model TwitterUser {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     
-  }
+}
   
   model TwitterPost {
     id        String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -76,4 +76,55 @@ model TwitterUser {
   
   }
   
+  model MessengerUser {
+    id            String          @id @default(auto()) @map("_id") @db.ObjectId
+    userId        String          @unique
+    name          String      
+    profileImage  String? 
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    conversationIds String[] @db.ObjectId
+    conversations Conversation[] @relation(fields: [conversationIds], references: [id])
+
+    seenMessagesIds String[] @db.ObjectId
+    seenMessages Message[] @relation("Seen", fields: [seenMessagesIds], references: [id])
+    
+    messages Message[]
+  }
   
+
+  model Conversation {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    name      String?
+    isGroup   Boolean?
+    
+    createdAt DateTime @default(now())
+    lastMessageAt DateTime @updatedAt
+
+    messageIds String[] @db.ObjectId
+    messages Message[]
+
+    userIds String[] @db.ObjectId
+    users MessengerUser[] @relation(fields: [userIds], references: [id])
+
+  }
+
+  model Message {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    body      String
+    image     String?
+
+    createdAt DateTime @default(now())
+
+    seenIds  String[] @db.ObjectId
+    seen MessengerUser[] @relation("Seen", fields: [seenIds], references: [id])
+
+    conversationId String @db.ObjectId
+    conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+    senderId String @db.ObjectId
+    sender MessengerUser @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  }
