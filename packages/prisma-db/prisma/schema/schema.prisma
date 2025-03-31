@@ -8,6 +8,7 @@ generator client {
   provider = "prisma-client-js"
   previewFeatures = ["multiSchema","prismaSchemaFolder","fullTextSearchPostgres"]
   output   = "../../../../node_modules/@prisma/prisma/client"
+  binaryTargets = ["native", "linux-musl", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
