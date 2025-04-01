@@ -1,14 +1,41 @@
 {
   "name": "nextjs-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "main": "main.js",
+  "build": {
+    "appId": "com.bayesian.boilerplate",
+    "productName": "Bayesian Boilerplate",
+    "copyright": "Copyright © 2025 Anoop",
+    "linux": {
+      "target": [
+        "snap",
+        "AppImage"
+      ],
+      "category": "Utility",
+      "icon": "public/logo.png"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "public/logo.png"
+    },
+    "snap": {
+      "grade": "stable",
+      "confinement": "strict"
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build ",
     "start": "next start",
     "lint": "next lint --max-warnings 20",
     "test": "vitest",
-    "static": "next build && next export"
+    "static": "next build && next export",
+    "desktop-app:start": "electron .",
+    "desktop-app:build": "electron-builder",
+    "desktop-app:deploy-snapstore": "snapcraft login && snapcraft upload dist/*.snap --release stable"
   },
   "dependencies": {
     "@ai-sdk/react": "^1.2.2",
@@ -86,6 +113,8 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "css-loader": "^7.1.2",
+    "electron": "35.1.2",
+    "electron-builder": "^26.0.12",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",

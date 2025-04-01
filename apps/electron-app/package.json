@@ -1,0 +1,39 @@
+{
+  "name": "saas-boilerplate-launcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "build": {
+    "appId": "com.bayesian.boilerplate",
+    "productName": "Bayesian Boilerplate",
+    "copyright": "Copyright © 2025 Anoop",
+    "linux": {
+      "target": ["snap", "AppImage"],
+      "category": "Utility",
+      "icon": "logo.png" 
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "logo.ico"
+    },
+    "snap": {
+      "grade": "stable",
+      "confinement": "strict"
+    }
+  },
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "install-locally": "sudo snap install --dangerous dist/*.snap",
+    "deploy-snapstore": "snapcraft login && snapcraft upload dist/*.snap --release stable"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "35.1.2",
+    "electron-builder": "^26.0.12"
+  }
+}
