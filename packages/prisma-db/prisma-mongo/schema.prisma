@@ -5,7 +5,7 @@ generator client {
   provider = "prisma-client-js"
   output   = "../../../node_modules/@prisma-mongo/prisma/client"
   previewFeatures = ["multiSchema","prismaSchemaFolder"]
-  binaryTargets = ["native", "linux-musl", "rhel-openssl-3.0.x"]
+  binaryTargets = ["native", "debian-openssl-1.1.x", "linux-musl"]
 }
 
 datasource db {
