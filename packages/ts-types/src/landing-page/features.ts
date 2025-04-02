@@ -16,4 +16,5 @@ featureList: FeatureListProps[];
 export interface FeatureSectionProps extends FeaturesProps {
     heading: string;
     description: string;
+    version?: string;
 }

@@ -12,5 +12,6 @@
     title: string;
     logo: string;
     darkLogo: string;
+    version?: string;
   }
   

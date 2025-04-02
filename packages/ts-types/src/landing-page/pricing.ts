@@ -25,4 +25,5 @@ export interface PricingSectionProps {
     heading: string;
     description: string;
     supportEmailAddress: string;
+    version?: string;
 }

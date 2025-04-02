@@ -7,4 +7,5 @@ export interface ServiceProps {
     services: ServiceProps[];
     heading: string;
     description: string;
+    version?: string;
   }

@@ -47,4 +47,5 @@ export interface ProjectSectionProps {
     projects: ProjectProps[];
     heading: string;
     description: string;
+    version?: string;
 }

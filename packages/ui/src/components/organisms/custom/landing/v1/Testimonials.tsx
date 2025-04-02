@@ -10,13 +10,13 @@ import {
 import { useEffect, useState } from "react";
 
 
-const Testimonials = ({testimonialsSection}:{testimonialsSection:TestimonialSectionProps}) => {
+const Testimonials = ({testimonialSection}:{testimonialSection:TestimonialSectionProps}) => {
   const [headingArray,setHeadingArray] = useState<string[]>([])
   useEffect(()=>{
-      if(testimonialsSection.heading){
-          setHeadingArray(testimonialsSection.heading.split(" "))
+      if(testimonialSection.heading){
+          setHeadingArray(testimonialSection.heading.split(" "))
       }
-  },[testimonialsSection.heading])
+  },[testimonialSection.heading])
   return (
     <section
       id="testimonials"
@@ -32,11 +32,11 @@ const Testimonials = ({testimonialsSection}:{testimonialsSection:TestimonialSect
     </h2>
 
       <p className="text-xl text-muted-foreground pt-4 pb-8">
-        {testimonialsSection.description}
+        {testimonialSection.description}
       </p>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:block columns-2  lg:columns-3 lg:gap-6 mx-auto space-y-4 lg:space-y-6">
-        {testimonialsSection.testimonials?.map(
+        {testimonialSection.testimonials?.map(
           (testimonial) => (
             <Card
               key={testimonial.userName}
@@ -47,6 +47,7 @@ const Testimonials = ({testimonialsSection}:{testimonialsSection:TestimonialSect
                   <AvatarImage
                     alt=""
                     src={testimonial.image}
+                    className="object-cover"
                   />
                   <AvatarFallback>OM</AvatarFallback>
                 </Avatar>

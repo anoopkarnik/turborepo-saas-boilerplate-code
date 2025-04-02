@@ -5,4 +5,5 @@ export interface HeroSectionProps  {
     blogLink?: string;
     tagline: string;
     description: string;
+    version?: string;
   }

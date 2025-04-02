@@ -15,4 +15,5 @@ export interface TeamProps {
     teamList: TeamProps[];
     heading: string;
     description: string;
+    version?: string;
   }

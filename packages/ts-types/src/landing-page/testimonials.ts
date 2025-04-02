@@ -9,4 +9,5 @@ export interface TestimonialSectionProps {
     testimonials: TestimonialProps[];
     heading: string;
     description: string;
+    version?: string;
 }

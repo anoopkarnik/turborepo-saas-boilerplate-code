@@ -1,6 +1,7 @@
 export interface AboutSectionProps  extends StatisticsProps{
     heading: string;
     companyDetails: string;
+    version?: string;
 
 }
 
