@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useNotificationPolling } from "../../hooks/useNotificationPolling";
-import { useSession } from "next-auth/react";
+import { useSession } from "@repo/auth/better-auth/auth-client";
 import LoadingCard from "@repo/ui/organisms/custom/auth/v1/LoadingCard";
 
 const Home = () => {
@@ -17,7 +17,9 @@ const Home = () => {
 
 
   return <div>
-    <p>Welcome!</p>
+    <pre>
+      {JSON.stringify(session, null, 2)}
+    </pre>
     </div>
 };
 

@@ -1,50 +1,40 @@
-import authConfig from "../../packages/auth/src/next-auth/auth.config"
+import { NextResponse, type NextRequest } from "next/server"
+import { getToken } from "next-auth/jwt";
+import { betterFetch } from "@better-fetch/fetch";
+import { Session } from "@repo/auth/better-auth/auth";
 
-import NextAuth from "next-auth";
-import {NextResponse} from "next/server";
+const publicRoutes = ["/landing",]
 
-const publicRoutes = [
-    "/landing","/auth/new-verification",'/api/hooks/catch','/landing/privacy-policy','/landing/terms',
-    '/api/workflows','/api/payments/dodo','/api/email','/api/verify-password'
-]
-
-const authRoutes =[
-    "/auth/login","/auth/register","/auth/error","/auth/forgot-password","/auth/reset-password",'/api/auth/callback/notion',"api/auth/login"
-]
+const authRoutes =["/sign-in","/sign-up","/error","/forgot-password","/reset-password",'/email-verified']
 
 const apiAuthPrefix = "/api/auth"
 
-const allowedOrigins = ['http://localhost', 'https://bsamaritan.com','https://bayesian-labs.com']
+const allowedOrigins = ['http://localhost:3000', 'https://bsamaritan.com','https://bayesian-labs.com']
 
 const corsOptions = {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   }
+const secret = process.env.AUTH_SECRET!;
 
-  // const rateLimiter = new RateLimiterMemory({
-  //   points:500, // Number of requests
-  //   duration: 60, // Per 1 seconds
-  // });
-  
-
-const { auth }:any = NextAuth(authConfig);
-
-export default auth(async(req:any)=>{
+export default async function middleware(req:NextRequest){
 
       // Check the origin from the request
     const origin = req.headers.get('origin') ?? ''
+    const pathName = req.nextUrl.pathname;
     const isAllowedOrigin = allowedOrigins.includes(origin)
+    
+    const { data: session} = await betterFetch<Session>(
+        "/api/auth/get-session",
+        {
+            baseURL: process.env.NEXT_PUBLIC_URL,
+            headers: {
+                cookie: req.headers.get("cookie") ?? "",
+            }
+        }
+    )
+    const isLoggedIn = !!session;
 
-    // try {
-    //     // Rate limiting based on IP address
-    //     const ip = req.ip || req.headers.get('x-forwarded-for') || 'unknown';
-
-    //     await rateLimiter.consume(ip); 
-    // // Proceed to the next middleware or route handler
-    //   } catch (rateLimiterRes) {
-    //     // If the request exceeds the limit, block it
-    //     return new NextResponse('Too Many Requests', { status: 429 });
-    //   }
 
     // Handle preflighted requests
     const isPreflight = req.method === 'OPTIONS'
@@ -67,13 +57,13 @@ export default auth(async(req:any)=>{
         response.headers.set(key, value)
       })
 
-    const { nextUrl} = req;
-    const isLoggedIn = !!req.auth
-    const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-    const isPublicRoute =  publicRoutes.some((route) => nextUrl.pathname.startsWith(route));
-    const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
-    if (isApiAuthRoute){
+      const isApiAuthRoute = pathName.startsWith(apiAuthPrefix);
+      const isPublicRoute =  publicRoutes.some((route) => pathName.startsWith(route));
+      const isAuthRoute = authRoutes.includes(pathName);
+  
+
+    if (isApiAuthRoute ){
         return response;
     }
 
@@ -83,18 +73,18 @@ export default auth(async(req:any)=>{
 
     if (isAuthRoute){
         if (isLoggedIn){
-            return Response.redirect(new URL('/',nextUrl));
+            return Response.redirect(new URL('/',req.nextUrl));
         }
         return response;
     }
 
     if (!isLoggedIn && !isPublicRoute){
-        return Response.redirect(new URL('/landing',nextUrl));
+        return Response.redirect(new URL('/landing',req.nextUrl));
     }
 
 
     return response
-})
+}
 
 export const config = {
     matcher: ['/((?!.+\\.[\\w]+$|_next).*)','/','/(api|trpc)(.*)'],

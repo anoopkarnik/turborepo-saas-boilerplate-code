@@ -1,7 +1,8 @@
 "use server"
 
-import { auth } from "@repo/auth/next-auth/auth"
+import { auth } from "@repo/auth/better-auth/auth"
 import db from "@repo/prisma-db/client"
+import { headers } from "next/headers"
 
 export const getCategories = async () => {
     const categories = await db.category.findMany({})
@@ -9,7 +10,9 @@ export const getCategories = async () => {
 }
 
 export const getCompanion = async (id: string) => {
-  const session = await auth();
+  const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     const companion = await db.companion.findUnique({
         where: {
             id: id,

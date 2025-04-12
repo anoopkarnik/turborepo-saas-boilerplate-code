@@ -6,7 +6,7 @@ dotenv.config();
 
 // This is an integration test, using real OpenAI API calls
 
-vi.mock("@repo/auth/next-auth/auth", () => ({
+vi.mock("@repo/auth/better-auth/auth", () => ({
     auth: vi.fn(() => Promise.resolve({ user: { id: "user123" } }))
 }));
 

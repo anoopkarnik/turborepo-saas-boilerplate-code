@@ -1,10 +1,9 @@
 import { sidebarFooterItemsProps, sidebarHeaderProps } from "@repo/ts-types/home/v1"
 import {  Home, AppWindowIcon, BoxesIcon, CoinsIcon,Twitter, WorkflowIcon, BellIcon,
      CircleUserRoundIcon, BotIcon, MessageSquare, ImageIcon, VideoIcon, MusicIcon, 
-     CodeIcon, UserPen,
-     UserPlus,
-     Facebook,
-     Users} from "lucide-react"
+     CodeIcon, UserPen, UserPlus, Facebook, Users,
+     SquareStackIcon,
+     FootprintsIcon} from "lucide-react"
 
 export const sidebarItems:sidebarHeaderProps = 
 {
@@ -30,6 +29,10 @@ export const sidebarItems:sidebarHeaderProps =
         ]},
         {title: "Messenger Clone", url: "/messenger-clone", icon: Facebook, isActive:true, items:[
             {title: "Users", url: "/messenger-clone/users", icon: Users},
+        ]},
+        {title: "PhotoAI Clone", url: "/photoai-clone", icon: SquareStackIcon, isActive:false, items:[
+            {title: "Train", url: "/photoai-clone/train", icon: FootprintsIcon},
+
         ]},
         {title: "Connections", url: "/connections", icon: BoxesIcon},
         {title: "Billing", url: "/billing", icon: CoinsIcon},

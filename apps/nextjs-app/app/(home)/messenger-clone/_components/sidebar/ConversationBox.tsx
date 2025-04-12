@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react'
 import { FullConversationType } from '../../types'
 import useOtherUser from '../../_hooks/useOtherUser'
-import { useSession } from 'next-auth/react'
+import { useSession } from '@repo/auth/better-auth/auth-client'
 import { useRouter } from 'next/navigation'
 import { cn } from '@repo/ui/lib/utils'
 import Avatar from '../common/Avatar'

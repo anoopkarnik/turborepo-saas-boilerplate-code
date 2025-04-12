@@ -1,10 +1,13 @@
 "use server"
 
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
 import db from "@repo/prisma-db/mongo-client";
+import { headers } from "next/headers";
 
 export async function GetTwitterUserDetails(){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -30,7 +33,9 @@ export async function GetAllUsers(){
 }
 
 export async function CreateTwitterUser(){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }

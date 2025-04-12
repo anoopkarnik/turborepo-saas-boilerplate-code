@@ -14,40 +14,23 @@ import {z} from "zod"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormResult } from "../auth/v1/FormResult";
 import SettingsHeading from "../../../molecules/custom/v1/SettingsHeading";
-import {deleteAccountAction, modifyAvatarAction, modifyNameAction, modifyPasswordAction} from "@repo/server-utils/settings"
-import { useSession} from "next-auth/react";
+import {deleteAccountAction, modifyAvatarAction,  modifyPasswordAction} from "@repo/server-utils/settings"
+import { authClient, useSession} from "@repo/auth/better-auth/auth-client";
 import { useToast } from "../../../../hooks/use-toast";
+import { useRouter } from "next/navigation";
 
   
   const MyAccountSettings = () => {
 
-    const { data:session,status,update } = useSession();
+    const { pending, data:session } = useSession();
     
       const [user, setUser] = useState<any>(null)
       const [name, setName] = useState<string>(session?.user?.name as string)
+
+    const router = useRouter();
     
-            // Refresh session manually after login
-      const refreshSession = async () => {
-        const response = await fetch("/api/auth/session");
-        const newSession = await response.json();
-        setUser(newSession?.user || null);
-      };
-    
-      useEffect(() => {
-        const fetchUserData = async () => {
-          if (status === "authenticated") {
-            setUser(session?.user || null);
-            if (!session?.user) return;
-            
-          } else if (status === "unauthenticated") {
-            refreshSession();
-          }
-        }
-        fetchUserData();
-      }, [session, status]);
 
     const inputFileRef = useRef<HTMLInputElement>(null);
-    const [confirmPassword, setConfirmPassword] = useState('');
     const [deleteAccountConfirmation, setDeleteAccountConfirmation] = useState('');
 
     const title = "My Account"
@@ -73,32 +56,34 @@ import { useToast } from "../../../../hooks/use-toast";
     async function handleSubmit(data: z.infer<typeof ResetPasswordSchema>) {
       setPasswordError("");
       setPasswordSuccess("");
-      if(user?.email === process.env.NEXT_PUBLIC_GUEST_MAIL || user?.email === process.env.NEXT_PUBLIC_ADMIN_MAIL){
+      if(session?.user?.email === process.env.NEXT_PUBLIC_GUEST_MAIL || session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_MAIL){
         setPasswordError("Guest account cannot modify password");
-        return;
       }
-      if(!confirmPassword){
+      else if(!data.confirmPassword){
         setPasswordError("Please confirm your password");
-        return;
       }
-      if (data.password !== confirmPassword) {
+      else if (data.password !== data.confirmPassword) {
         setPasswordError("Passwords do not match");
-        return;
       }
-      if(data.password){
-        const res = await modifyPasswordAction(user?.id, data.password);
-        setPasswordSuccess("Password updated successfully");
-        if (res.success){
-          toast({title: "Success", description: res?.success, variant: 'default'})
+      else if(data.password){
+        const {error} = await authClient.changePassword({
+          newPassword: data.password,
+          currentPassword: data.oldPassword,
+          revokeOtherSessions: true
+        })
+        if (error){
+          toast({title: "Error", description: error, variant: 'destructive'})
+  
         }
-        else if (res.error){
-            toast({title: "Error", description: res?.error, variant: 'destructive'})
+        else {
+          toast({title: "Success", description: "Successfully modified password", variant: 'default'})
         }
+
       }
     }
 
     const handleDeleteAccount = async () => {
-      if(user?.email === process.env.NEXT_PUBLIC_GUEST_MAIL || user?.email === process.env.NEXT_PUBLIC_ADMIN_MAIL){
+      if(session?.user?.email === process.env.NEXT_PUBLIC_GUEST_MAIL || session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_MAIL){
         setDeleteAccountError("Guest account cannot be deleted");
         return;
       }
@@ -106,38 +91,52 @@ import { useToast } from "../../../../hooks/use-toast";
         setDeleteAccountError("Please type 'permanently delete' to confirm");
         return;
       }
-      const res = await deleteAccountAction(user?.id)
-      if (res.success){
-        toast({title: "Success", description: res?.success, variant: 'default'})
+      const {error} = await authClient.deleteUser({
+        callbackURL: "/landing" // you can provide a callback URL to redirect after deletion
+      });
+      if (error){
+        toast({title: "Error", description: error, variant: 'destructive'})
       }
-      else if (res.error){
-          toast({title: "Error", description: res?.error, variant: 'destructive'})
+      else{
+        toast({title: "Success", description: "Successfully deleted Account", variant: 'default'})
+        router.push("/landing")
       }
     }
 
 
-    const handleName = async (userid:string, name:string)=>{
-      const res = await modifyNameAction(userid,name as string)
-      if (res.success){
-        toast({title: "Success", description: res?.success, variant: 'default'})
+    const handleName = async (name:string)=>{
+      const {error} = await authClient.updateUser({name})
+      if (error){
+        toast({title: "Error", description: error, variant: 'destructive'})
+
       }
-      else if (res.error){
-          toast({title: "Error", description: res?.error, variant: 'destructive'})
+      else {
+        toast({title: "Success", description: "Successfully modified name", variant: 'default'})
       }
-      update({user:{...session?.user,name}})
     }
 
-    const handleAvatar = async (userid:string,event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
-      const res  = await modifyAvatarAction(userid,file)
+      if (!file) {
+        return;
+      }
+      const formData = new FormData();
+      formData.append("file", file, file.name);
+  
+      const response = await fetch("/api/settings/modifyAvatar", {
+        method: "POST",
+        body: formData,
+      });
+      const res = await response.json();
+      const {error} = await authClient.updateUser({image: res?.url })
 
-      if (res.success){
-        toast({title: "Success", description: res?.success, variant: 'default'})
+
+      if (error){
+        toast({title: "Error", description: error, variant: 'destructive'})
       }
-      else if (res.error){
-          toast({title: "Error", description: res?.error, variant: 'destructive'})
+      else {
+        toast({title: "Success", description: "Successfully Updated Image", variant: 'default'})
       }
-      update({user:{...session?.user,image:res.data?.image}})
     }
 
 
@@ -148,8 +147,8 @@ import { useToast } from "../../../../hooks/use-toast";
                 <div className="text-description ">Profile Pic</div>
                 <div className="relative group cursor-pointer">
                   <Avatar className="h-20 w-20 rounded-full border-2 bg-secondary hover:bg-accent2">
-                    <AvatarImage src={user?.image?? ''} alt={user?.name?? ''} className="object-cover" />
-                    <AvatarFallback className="text-3xl">{user?.name?user?.name[0]?.toUpperCase() :'U'}</AvatarFallback>
+                    <AvatarImage src={session?.user?.image?? ''} alt={session?.user?.name?? ''} className="object-cover" />
+                    <AvatarFallback className="text-3xl">{session?.user?.name?session?.user?.name[0]?.toUpperCase() :'U'}</AvatarFallback>
                   </Avatar>
                   <button onClick={handleAvatarClick} className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
                     <div><CameraIcon/></div>
@@ -162,25 +161,34 @@ import { useToast } from "../../../../hooks/use-toast";
                   type="file"
                   className="hidden"
                   accept="image/*" // Accept only images
-                  onChange={(e)=>handleAvatar(user?.id,e)} // Handle file selection
+                  onChange={(e)=>handleAvatar(e)} // Handle file selection
                 />
               </div>
             </div>
             <div className="flex items-center justify-between gap-4 mt-4">
               <FloatingLabelInput id="name" label="Username" className="w-full my-2" defaultValue={name} 
               onChange={(e)=>{setName(e.target.value)}}/>
-              <Button onClick={()=>handleName(user?.id,name as string)} className="w-1/4 text-wrap">Update Username</Button>
+              <Button onClick={()=>handleName(name as string)} className="w-1/4 text-wrap">Update Username</Button>
             </div>
             {/* <div className="flex items-center justify-between gap-4 mt-4">
               <FloatingLabelInput id="email" label="Email" className="flex-grow-1 my-2" defaultValue={email} type="email"
               onChange={(e)=>{setCurrentEmail(e.target.value)}}/>
               <Button onClick={()=>{}} className="w-1/4 text-wrap" >Verify New Email Address</Button>
             </div> */}
-            <div className="text-emphasis mt-10"> Change Password</div>
-            <div className= "text-description pb-2 border-b-2">Make sure it's atleast 6 characters</div>
+            <div className="text-emphasis mt-10"> Add / Change Password</div>
+            <div className= "text-description pb-2 border-b-2">Add Password if not assigned for Accounts with Social Accounts or change password if already assigned</div>
             <div className="flex flex-col gap-4 mt-4 w-1/2">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleSubmit)}>
+                <FormField control={form.control} name="oldPassword" render={({field})=>(
+                    <FormItem>
+                      <FormControl>
+                        <FloatingLabelInput id="password" label="Current Password" type="password" className="w-full my-2"
+                        {...field}/>
+                      </FormControl>
+                      <FormMessage>{form.formState.errors.password?.message}</FormMessage>
+                    </FormItem>
+                  )}/>
                   <FormField control={form.control} name="password" render={({field})=>(
                     <FormItem>
                       <FormControl>
@@ -190,11 +198,20 @@ import { useToast } from "../../../../hooks/use-toast";
                       <FormMessage>{form.formState.errors.password?.message}</FormMessage>
                     </FormItem>
                   )}/>
-                  <FloatingLabelInput id="confirm password" label="Confirm Password" type="password" 
-                  className="w-full my-4" onChange={(e)=>{setConfirmPassword(e.target.value)}}/> 
+                  <FormField control={form.control} name="confirmPassword" render={({field})=>(
+                    <FormItem>
+                      <FormControl>
+                        <FloatingLabelInput id="password" label="Confirm Password" type="password" className="w-full my-2"
+                        {...field}/>
+                      </FormControl>
+                      <FormMessage>{form.formState.errors.confirmPassword?.message}</FormMessage>
+                    </FormItem>
+                  )}/>
                    <FormResult type="error" message={passwordError }/>
                    <FormResult type="success" message={passwordSuccess}/> 
-                  <Button type="submit" className="w-1/2 text-wrap my-4">Modify Password</Button>
+                  <Button type="submit" className="w-1/2 text-wrap my-4" >
+                  Modify Password
+                  </Button>
                 </form>
               </Form>
             </div>

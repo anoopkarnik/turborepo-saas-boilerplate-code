@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import SettingsHeading from '../../../molecules/custom/v1/SettingsHeading';
-import { useSession } from 'next-auth/react';
+import { useSession } from '@repo/auth/better-auth/auth-client';
 import PricingItem from '../../../molecules/custom/v1/PricingItem';
 import { PricingProps } from '@repo/ts-types/landing-page/pricing';
 

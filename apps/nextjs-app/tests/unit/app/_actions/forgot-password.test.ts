@@ -1,7 +1,7 @@
 import { describe, test, expect,vi } from 'vitest';
 import { getUserByEmail, createResetToken } from '@repo/prisma-db/repo/user';
 import { sendResetEmail } from '@repo/email/resend/index';
-import { ForgotPassword } from '../../../../app/auth/_actions/forgot-password';
+import { ForgotPassword } from '@repo/auth/better-auth/_actions/forgot-password';
 
 import dotenv from "dotenv";
 dotenv.config();

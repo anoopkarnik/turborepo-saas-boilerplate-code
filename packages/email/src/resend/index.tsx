@@ -3,34 +3,32 @@ import EmailVerification from '../templates/EmailVerification';
 import ResetPassword from '../templates/ResetPassword';
 
 
-export const sendVerificationEmail = async (email: string, token:string) => {
+export const sendVerificationEmail = async (email: string, verificationUrl: string) => {
     const resend = new Resend(process.env.RESEND_API_KEY)
-    const verificationLink = `${process.env.NEXT_PUBLIC_URL}/auth/new-verification?token=${token}`
-    let from = process.env.NEXT_PUBLIC_SUPPORT_MAIL || "support";
+    let from = process.env.NEXT_PUBLIC_SUPPORT_MAIL || "support@bayesian-labs.com";
     let subject = "Verify Your Email Address";
     const response = await resend.emails.send({
         from: from,
         to: email,
         subject: subject,
-        react: <EmailVerification verificationLink={verificationLink} />,
+        react: <EmailVerification verificationLink={verificationUrl} />,
     })
     return response
 }
 
 
-export const sendResetEmail = async (email: string, token:string) => {
+export const sendResetEmail = async (email: string, resetUrl: string) => {
+  const resend = new Resend(process.env.RESEND_API_KEY)
 
-    const resend = new Resend(process.env.RESEND_API_KEY)
-    const resetPasswordLink = `${process.env.NEXT_PUBLIC_URL}/auth/reset-password?token=${token}`
-    let from = process.env.NEXT_PUBLIC_SUPPORT_MAIL || "support";
-    let subject = "Verify Your Email Address";
-    const response = await resend.emails.send({
-        from: from,
-        to: email,
-        subject: subject,
-        react: <ResetPassword resetPasswordLink={resetPasswordLink} />,
-    })
-    return response
+  let from = process.env.NEXT_PUBLIC_SUPPORT_MAIL || "support@bayesian-labs.com";
+  let subject = "Reset your password";
+  const response = await resend.emails.send({
+      from: from,
+      to: email,
+      subject: subject,
+      react: <ResetPassword resetPasswordLink={resetUrl} />,
+  })
+  return response
 }
 
 export const sendSupportEmail = async (subject:string,body:string) => {

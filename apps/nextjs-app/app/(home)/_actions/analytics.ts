@@ -1,17 +1,20 @@
 "use server"
 
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
 import db from "@repo/prisma-db/client"
 import { Period } from "@repo/ts-types/scrape-flow/analytics"
 import { PeriodToDateRange } from "../../../lib/helper/dates";
 import { ExecutionPhaseStatus, WorkflowExecutionStatus } from "@repo/ts-types/scrape-flow/workflow";
 import { eachDayOfInterval, format } from "date-fns";
+import { headers } from "next/headers";
 
 const { COMPLETED, FAILED } = WorkflowExecutionStatus
 type Stats = Record<string, {success:number, failed:number}>
 
 export async function GetPeriods() {
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -39,7 +42,9 @@ export async function GetPeriods() {
 
 export async function GetStatsCardsValues(period:Period) {
     
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -85,7 +90,9 @@ export async function GetStatsCardsValues(period:Period) {
 }
 
 export async function GetWorkflowExecutionStats(period:Period) {
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -129,7 +136,9 @@ export async function GetWorkflowExecutionStats(period:Period) {
 }
 
 export async function GetCreditsUsageInPeriod(period:Period) {
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }

@@ -14,7 +14,6 @@ export const uploadImageToStrapi = async (formData:any) => {
         },
       }
     );
-    console.log("Upload successful:", response.data);
 
     return response.data; // will contain uploaded file info (URL, id, etc.)
   } catch (error) {

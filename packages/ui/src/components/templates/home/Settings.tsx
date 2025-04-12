@@ -28,7 +28,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../atoms/shadcn/avatar"
 import MyConnectionsSettings from "../../organisms/custom/home/MyConnectionsSettings"
 import SessionSettings from "../../organisms/custom/home/SessionSettings"
 import PlansBilling from "../../organisms/custom/home/PlansBilling"
-import { useSession } from "next-auth/react"
+import { useSession } from "@repo/auth/better-auth/auth-client"
 import { Button } from "../../atoms/shadcn/button"
 
 const data = {

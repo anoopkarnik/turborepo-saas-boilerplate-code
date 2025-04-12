@@ -1,18 +1,18 @@
+"use client"
 import React, { useEffect, useState } from 'react'
-import { getSessionsAction } from '@repo/server-utils/settings'
-import { useSession } from 'next-auth/react'
+import { authClient, useSession } from '@repo/auth/better-auth/auth-client'
 import SettingsHeading from '../../../molecules/custom/v1/SettingsHeading'
 import dayjs from 'dayjs';
 import { Button } from '../../../atoms/shadcn/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../../molecules/shadcn/table';
 
 const SessionSettings = () => {
     const [sessions, setSessions] = useState<any[]>([])
-    const { data:session } = useSession();
     const title = 'Sessions'
     const description = 'Manage your active sessions'
     useEffect(()=>{
         const getSessions = async () =>{
-            const sessions = await getSessionsAction(session?.user?.id as string);
+            const {error, data:sessions} = await authClient.listSessions()          
             const modifiedSessions = sessions?.map((session:any) => {  
                 const formattedCreatedDate = dayjs(session.createdAt).format('DD MMM YYYY, hh:mm A');
                 const formattedUpdatedDate = dayjs(session.updatedAt).format('DD MMM YYYY, hh:mm A'); 
@@ -22,26 +22,53 @@ const SessionSettings = () => {
                     updatedAt: formattedUpdatedDate
                 }
             })
+            console.log(modifiedSessions)
             setSessions(modifiedSessions);
         }
         getSessions();
-    },[session])
+    },[])
   return (
     <SettingsHeading title={title} description={description}>
-        <div className='flex items-center justify-between border-b-2 pb-2'>
-            <div className='text-description'>Device</div>
-            <div className='text-description'>Last Login Time</div>
-            <div className='text-description'>Location</div>
-            <div className='text-description'>Access</div>
-        </div>
-        {sessions?.map((session:any) => (
-            <div key={session.id} className='flex items-center justify-between border-b-2 py-2'>
-                <div className='text-description text-white'>{session.device ? session.device : 'Unknown'}</div>
-                <div className='text-description text-white'>{session.createdAt}</div>
-                <div className='text-description text-white'>{session.location ? session.location: 'Unknown'}</div>
-                <Button size='xs' variant='destructive' className='hover:opacity-50'>Revoke</Button>
-            </div>
-        ))}
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHead className="w-[200px]">Device</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Joined</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+            {sessions.map((session) => (
+                <TableRow key={session.id} className={session.isCurrent ? "bg-muted" : ""}>
+                    <TableCell>
+                    <div className="flex flex-col">
+                    <span className="font-medium">{session.userAgent?.split(' ')[0] || ''}</span>
+                        <span className="font-medium">{session.userAgent?.split(' ')[2] || 'Unknown'}</span>
+                        <span className="text-xs text-muted-foreground">{session.ipAddress ?? 'IP unknown'}</span>
+                    </div>
+                    </TableCell>
+                    <TableCell>{session.updatedAt}</TableCell>
+                    <TableCell>{session.createdAt}</TableCell>
+                    <TableCell>
+                    {!session.isCurrent && (
+                        <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={async () => {
+                            await authClient.revokeSession({ token: session.token });
+                            setSessions((prev) => prev.filter((s) => s.id !== session.id));
+                        }}
+                        >
+                        Revoke
+                        </Button>
+                    )}
+                    </TableCell>
+                </TableRow>
+                ))}
+
+            </TableBody>
+        </Table>
     </SettingsHeading>
   )
 }

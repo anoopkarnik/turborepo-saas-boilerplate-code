@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { useSession } from "@repo/auth/better-auth/auth-client";
 import { FullConversationType } from "../types";
 import { MessengerUser } from "@prisma-mongo/prisma/client";
 import { useMemo } from "react";

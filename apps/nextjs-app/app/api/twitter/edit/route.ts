@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import db from "@repo/prisma-db/mongo-client"
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
+import { headers } from "next/headers";
 
 export async function PATCH(req: Request){
     try{
-        const session = await auth()
+        const session = await auth.api.getSession({
+        headers: await headers(),
+    });
         if(!session?.user){
             return NextResponse.json( { message: 'Unauthorized' }, { status: 401 });
         }

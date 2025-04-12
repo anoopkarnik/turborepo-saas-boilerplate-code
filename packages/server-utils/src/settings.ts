@@ -1,18 +1,4 @@
 
-export const modifyNameAction = async (id:string,name:string) => {
-    const response = await fetch("/api/settings/modifyName", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, name }),
-      });
-    if(response.status !== 200){
-        const {error} = await response.json();
-        return {error: error || "Failed in modifying Name"};
-    }
-    const {user} = await response.json();
-    return {success: "Successfully modified Name", data:user};
-}
-
 export const modifyPasswordAction = async (id:string,password:string) => {
     const response = await fetch("/api/settings/modifyPassword", {
         method: "POST",
@@ -28,9 +14,8 @@ export const modifyPasswordAction = async (id:string,password:string) => {
     
 }
 
-export const modifyAvatarAction = async (id:string,file:any) => {
+export const modifyAvatarAction = async (file:any) => {
     const formData = new FormData();
-    formData.append("id", id);
     formData.append("file", file, file.name);
 
     const response = await fetch("/api/settings/modifyAvatar", {

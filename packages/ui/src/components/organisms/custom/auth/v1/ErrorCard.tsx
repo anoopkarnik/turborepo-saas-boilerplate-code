@@ -17,7 +17,7 @@ const ErrorCard = ({errorMessage}:ErrorCardProps) => {
         <div className='text-md font-extralight text-center'>{errorMessage || "Oops! Something went wrong!"}</div>
       </CardHeader>
       <CardFooter className='flex justify-center'>
-        <Button onClick={()=>router.push('/auth/login')} variant={'blank'}
+        <Button onClick={()=>router.push('/sign-in')} variant={'blank'}
         className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
           Back to login
         </Button>

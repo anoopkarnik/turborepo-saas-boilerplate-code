@@ -4,14 +4,17 @@ import { MemoryManager} from "../../../../(home)/ai-companion/lib/memory";
 import { ratelimit } from "../../../../(home)/ai-companion/lib/rate-limit";
 
 import Replicate from "replicate";
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
 
 import db from "@repo/prisma-db/client";
+import { headers } from "next/headers";
 
 export async function POST(req: Request, {params}: {params: {chatId: string}}){
     try{
         const {prompt} = await req.json();
-        const session = await auth();
+        const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
 
         if (!session.user) {
             return new NextResponse("User not authenticated", {status: 401});

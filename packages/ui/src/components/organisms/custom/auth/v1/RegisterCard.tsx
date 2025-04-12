@@ -1,7 +1,6 @@
-import { useState } from 'react'
+"use client"
 import {z} from "zod"
 import { Card, CardContent, CardFooter, CardHeader } from '../../../../molecules/shadcn/card';
-import { useTransition } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from '../../../../atoms/shadcn/button';
@@ -20,6 +19,7 @@ import { Input } from '../../../../atoms/shadcn/input';
 import { FormResult } from './FormResult';
 import { RegisterCardProps } from '@repo/ts-types/auth/v1';
 import { useRouter } from 'next/navigation';
+import { useState } from "react";
 const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedinProvider,
   onEmailSubmit,onGoogleProviderSubmit,onGithubProviderSubmit,onLinkedinProviderSubmit, errorMessage}:RegisterCardProps
 ) => {
@@ -28,21 +28,27 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
     defaultValues:{
       name: '',
       email: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     },
   })
 
-  const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState<string | undefined>("")
-  const [success, setSuccess] = useState<string | undefined>("")
   const router = useRouter();
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
-  function handleSubmit(data: z.infer<typeof RegisterSchema>) {
-    setError("")
-    setSuccess("")
-    startTransition(()=>{
-      onEmailSubmit(data).then((result:any)=>{setError(result.error);setSuccess(result.success)})
-    })
+  async function handleSubmit(data: z.infer<typeof RegisterSchema>) {
+    setIsPending(true)
+    const {error} = await onEmailSubmit(data)
+    if (error){
+      setError(error)
+    }
+    else{
+      setSuccess("Registration successful! Please verify your email before logging in!")
+      setError(null)
+    }
+    setIsPending(false)
   }
   return (
     <Card className='w-[400px] bg-white text-black shadow-xl shadow-white/20'>
@@ -54,37 +60,31 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-6 '>
-              <div className='space-y-4 mb-4'>
-              <FormField control={form.control} name="name" render={({field})=>(
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input disabled={isPending} type="name" placeholder='first name' className='bg-white text-black' {...field}/>
-                    </FormControl>
-                    <FormMessage/>
-                  </FormItem>
-                )}/>
-                <FormField control={form.control} name="email" render={({field})=>(
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input disabled={isPending} type="email" placeholder='example@gmail.com'  className='bg-white text-black' {...field}/>
-                    </FormControl>
-                    <FormMessage/>
-                  </FormItem>
-                )}/>
-                <FormField control={form.control} name="password" render={({field})=>(
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input disabled={isPending} placeholder='******' type="password"  className='bg-white text-black' {...field}/>
-                    </FormControl>
-                    <FormMessage/>
-                  </FormItem>
-                )}/>
-              </div>
-              <FormResult type="error" message={error}/>
-              <FormResult type="success" message={success}/>
+                {['name','email','password','confirmPassword'].map((field) => (
+                      <FormField 
+                          key={field} 
+                          name={field as keyof z.infer<typeof RegisterSchema>}
+                          render={({ field: fieldProps }) => (
+                              <FormItem>
+                                  <FormLabel>
+                                      {field.charAt(0).toUpperCase() + field.slice(1)}
+                                  </FormLabel>
+                                  <FormControl>
+                                      <Input 
+                                          type={field.includes('password') ? 'passdword' : field === 'email' ? 'email' : 'text'} 
+                                          placeholder={`Enter your ${field}`} 
+                                          autoComplete='off'
+                                          {...fieldProps} 
+                                          className='bg-white text-black'
+                                      />
+                                  </FormControl>
+                                  <FormMessage/>
+                              </FormItem>
+                          )}
+                      />
+                  ))}
+              <FormResult type="error" message={error as string}/>
+              <FormResult type="success" message={success as string}/>
               <Button  disabled={isPending}  variant="default" className="w-full" type="submit" > Register</Button>
             </form>
           </Form>
@@ -98,7 +98,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
         {showLinkedinProvider && <Button onClick={onLinkedinProviderSubmit} variant='secondary' className="w-full"><FaLinkedin/></Button>}
       </CardFooter>
       <CardFooter className='flex justify-center'>
-        <button onClick={()=>router.push('/auth/login')} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
+        <button onClick={()=>router.push('/sign-in')} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
           Already have an Account!
         </button>
       </CardFooter>

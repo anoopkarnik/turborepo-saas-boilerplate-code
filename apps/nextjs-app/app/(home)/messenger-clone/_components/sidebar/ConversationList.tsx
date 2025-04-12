@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import ConversationBox from './ConversationBox'
 import GroupChatModal from './GroupChatModal'
 import { MessengerUser } from '@prisma-mongo/prisma/client'
-import { useSession } from 'next-auth/react'
+import { useSession } from '@repo/auth/better-auth/auth-client'
 import { pusherClient } from '../../../../../lib/helper/pusher'
 
 interface ConversationListProps {

@@ -1,13 +1,16 @@
 "use server"
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
 import db from "@repo/prisma-db/mongo-client";
 import { pusherServer } from "../../../../lib/helper/pusher";
+import { headers } from "next/headers";
 
 export const createConversation = async (userId?: string, isGroup?: boolean, 
     members?: any, name?: string
 ) => {
     try {
-        const session = await auth();
+        const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
         if (!session?.user?.id) {
             throw new Error("User not authenticated");
         }
@@ -101,7 +104,9 @@ export const createConversation = async (userId?: string, isGroup?: boolean,
 
 export const getConversations = async () => {
     try {
-        const session = await auth();
+        const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
         if (!session?.user?.id) {
             throw new Error("User not authenticated");
         }
@@ -149,7 +154,9 @@ export const getConversationById = async (conversationId: string) => {
 export const makeConversationSeen = async (conversationId: string) => {
 
     try{
-        const session = await auth();
+        const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
         if (!session?.user?.id) {
             throw new Error("User not authenticated");
         }
@@ -225,7 +232,9 @@ export const makeConversationSeen = async (conversationId: string) => {
 
 export const deleteConversation = async (conversationId: string) => {
     try {
-        const session = await auth();
+        const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
         if (!session?.user?.id) {
             throw new Error("User not authenticated");
         }

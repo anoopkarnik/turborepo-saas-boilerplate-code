@@ -4,7 +4,7 @@ import { Textarea } from '../../../atoms/shadcn/textarea';
 import { chatWithAssistant} from "../../../../../../ai/src/openai/assistant";
 import { ChatBubbleIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { useSession } from '@repo/auth/better-auth/auth-client';
 import { Skeleton } from '../../../molecules/shadcn/skeleton';
 
 
@@ -50,7 +50,7 @@ export const SupportChat = () => {
       <div className="flex justify-between items-center">
         <h3 className="font-semibold">Support Chat</h3>
       </div>
-      <div className=" text-foreground h-[500px]  overflow-y-auto p-4 flex flex-col gap-2 text-paragraph scrollbar scrollbar-track-secondary scrollbar-thumb-sidebar">
+      <div className=" text-foreground h-[500px]   overflow-y-auto p-4 flex flex-col gap-2 text-paragraph scrollbar scrollbar-track-secondary scrollbar-thumb-sidebar">
         {messages.slice(1).map((message, index) => (
           <div
             key={index}

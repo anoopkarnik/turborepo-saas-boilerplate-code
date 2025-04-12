@@ -1,12 +1,12 @@
 "use server"
 
 import DodoPayments from 'dodopayments';
-import { auth } from '@repo/auth/next-auth/auth';
+import { auth } from '@repo/auth/better-auth/auth';
 import db from '@repo/prisma-db/client';
 import { redirect } from 'next/navigation';
 import { CountryCode } from 'dodopayments/resources/misc/supported-countries.mjs';
 import { getCreditsPack, PackId } from '../../lib/constants/billing';
-
+import { headers } from 'next/headers';
 const client = new DodoPayments({
   bearerToken: process.env['DODO_PAYMENTS_API_KEY'], // This is the default and can be omitted
   environment: 'test_mode', // defaults to 'live_mode'
@@ -15,7 +15,9 @@ const client = new DodoPayments({
 
 export async function PurchaseCreditsWithDodo(packId: PackId) {
 
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }

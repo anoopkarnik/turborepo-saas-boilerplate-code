@@ -7,7 +7,7 @@ export const pricingList: PricingProps[] = [
         popular: 1,
         price: "$0",
         priceType: "",
-        unregisteredHref: "/auth/login",
+        unregisteredHref: "/sign-in",
         registeredHref: "/",
         description:
           "To test live how this project works, you can use this trial plan and perform 20 credits worth of operations.",
@@ -26,7 +26,7 @@ export const pricingList: PricingProps[] = [
         popular: 0,
         price: "$1.99",
         priceType: "",
-        unregisteredHref: "/auth/login",
+        unregisteredHref: "/sign-in",
         registeredHref: "/billing",
         description:
           "To test live how this project works, you can use this trial plan and perform 200 credits worth of operations.",
@@ -45,7 +45,7 @@ export const pricingList: PricingProps[] = [
         popular: 0,
         price: "$4.99",
         priceType: "",
-        unregisteredHref: "/auth/login",
+        unregisteredHref: "/sign-in",
         registeredHref: "/billing",
         description:
           "To test live how this project works, you can use this trial plan and perform 500 credits worth of operations.",
@@ -64,7 +64,7 @@ export const pricingList: PricingProps[] = [
         popular: 0,
         price: "$9.99",
         priceType: "",
-        unregisteredHref: "/auth/login",
+        unregisteredHref: "/sign-in",
         registeredHref: "/billing",
         description:
           "To test live how this project works, you can use this trial plan and perform 1000 credits worth of operations.",

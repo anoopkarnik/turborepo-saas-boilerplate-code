@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect } from 'react'
 import { FullMessageType } from '../../types'
-import { useSession } from 'next-auth/react'
+import { useSession } from '@repo/auth/better-auth/auth-client'
 import { cn } from '@repo/ui/lib/utils'
 import Avatar from '../common/Avatar'
 import { format } from 'date-fns'

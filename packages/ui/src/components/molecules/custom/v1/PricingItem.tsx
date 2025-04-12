@@ -11,7 +11,7 @@ import {
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession } from "@repo/auth/better-auth/auth-client";
 import { BenefitProps, PricingProps } from "@repo/ts-types/landing-page/pricing";
 
 enum PopularPlanType {

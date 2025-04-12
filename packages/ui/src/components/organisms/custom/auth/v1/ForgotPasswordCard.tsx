@@ -18,31 +18,24 @@ import { Input } from '../../../../atoms/shadcn/input';
 import { FormResult } from './FormResult';
 import { ForgotPasswordCardProps } from '@repo/ts-types/auth/v1';
 import { useRouter } from 'next/navigation';
+import LoadingButton from '../../../../molecules/custom/v1/LoadingButton';
 
 const ForgotPasswordCard = ({errorMessage,successMessage,resetFunction}
   :ForgotPasswordCardProps
 ) => {
+  const [pending, setPending] = useState(false)
   const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
     resolver: zodResolver(ForgotPasswordSchema),
     defaultValues:{
       email: '',
     },
   })
-  const [error, setError] = useState<string | undefined>("")
-  const [success, setSuccess] = useState<string | undefined>("")
 
-  const [isPending, startTransition] = useTransition()
 
   async function handleSubmit(data: z.infer<typeof ForgotPasswordSchema>) {
-    setError("")
-    setSuccess("")
-    startTransition(() => {
-      resetFunction(data.email)
-        .then((result: any) => {
-          setError(result?.error);
-          setSuccess(result?.success);
-        })
-    });
+    setPending(true)
+      await resetFunction(data.email)
+      setPending(false)
   }
 
   const router = useRouter();
@@ -61,20 +54,22 @@ const ForgotPasswordCard = ({errorMessage,successMessage,resetFunction}
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input disabled={isPending}  type="email" placeholder='example@gmail.com'  className='bg-white text-black'  {...field}/>
+                    <Input  type="email" placeholder='example@gmail.com'  className='bg-white text-black'  {...field}/>
                   </FormControl>
                   <FormMessage/>
                 </FormItem>
               )}/>
             </div>
-            <FormResult type="error" message={error}/>
-            <FormResult type="success" message={success}/>
-            <Button  disabled={isPending}  variant="default" type="submit">Send Email</Button>
+            <FormResult type="error" message={errorMessage}/>
+            <FormResult type="success" message={successMessage}/>
+            <LoadingButton variant="default" pending={pending}>
+              Send Email
+            </LoadingButton>
           </form>
         </Form>
       </CardContent>
       <CardFooter className='flex justify-center'>
-        <Button onClick={()=>router.push('/auth/login')} variant={'blank'}
+        <Button onClick={()=>router.push('/sign-in')} variant={'blank'}
         className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
           Go to Login Page
         </Button>

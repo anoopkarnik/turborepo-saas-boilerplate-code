@@ -73,7 +73,7 @@ model TwitterUser {
     updatedAt        DateTime        @updatedAt 
   
     user TwitterUser @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
   
   }
   

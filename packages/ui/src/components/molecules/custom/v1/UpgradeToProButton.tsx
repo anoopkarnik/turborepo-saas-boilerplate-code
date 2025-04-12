@@ -3,7 +3,7 @@
 import { load } from "@cashfreepayments/cashfree-js";
 import { Button } from "../../../atoms/shadcn/button";
 
-import { useSession } from "next-auth/react";
+import { useSession } from "@repo/auth/better-auth/auth-client";
 import { useEffect, useState } from "react";
 import {createOrder} from "@repo/server-utils/cashfree"
 import { CrownIcon } from "lucide-react";

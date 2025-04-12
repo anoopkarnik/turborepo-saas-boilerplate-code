@@ -1,11 +1,14 @@
-import { auth } from "@repo/auth/next-auth/auth"
+import { auth } from "@repo/auth/better-auth/auth"
 import { NextResponse } from "next/server"
 import db from "@repo/prisma-db/client"
+import { headers } from "next/headers";
 
 export async function POST(req: Request) {
     try{
         const body = await req.json()
-        const session = await auth();
+        const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
         const {src, name, description, instructions, seed, categoryId} = body
 
         if (!session.user) {

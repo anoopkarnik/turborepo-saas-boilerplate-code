@@ -8,7 +8,6 @@ const useActiveChannel = () => {
     const [activeChannel, setActiveChannel] = useState<Channel| null>(null);
 
     useEffect(() => {
-        console.log("useActiveChannel");
         let channel = activeChannel
 
         if (!channel) {
@@ -20,7 +19,6 @@ const useActiveChannel = () => {
             members.each((member: Record<string, any>) => {
                 initialMembers.push(member.id);
             });
-            console.log("Initial members: ", initialMembers);
             set(initialMembers);
         });
         

@@ -5,7 +5,7 @@ import { Companion, Message } from '@prisma/prisma/client'
 import { Button } from '@repo/ui/atoms/shadcn/button';
 import { ChevronLeft, Edit, MessageSquare, MoreVertical, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { useSession } from '@repo/auth/better-auth/auth-client';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@repo/ui/molecules/shadcn/dropdown';
 import { useToast } from '@repo/ui/hooks/use-toast';
 import axios from 'axios';

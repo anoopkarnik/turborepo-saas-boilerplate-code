@@ -1,6 +1,6 @@
 "use server"
 
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
 import db from "@repo/prisma-db/client"
 import { AppNode, TaskType } from "@repo/ts-types/scrape-flow/node";
 import { ExecutionPhaseStatus, WorkflowExecutionPlan, WorkflowExecutionStatus, WorkflowExecutionTrigger, WorkflowStatus } from "@repo/ts-types/scrape-flow/workflow";
@@ -14,6 +14,7 @@ import { CalculateWorkflowCost } from "../_lib/workflow/helpers";
 import parser  from "cron-parser";
 import { CreateFlowNode } from "../_lib/workflow/tasks/CreateFlowNode";
 import { getAppUrl } from "../../../../lib/helper/appUrl";
+import { headers } from "next/headers";
 
 const initialFlow: { nodes: AppNode[]; edges: Edge[]} ={
     nodes: [],
@@ -23,7 +24,9 @@ const initialFlow: { nodes: AppNode[]; edges: Edge[]} ={
 initialFlow.nodes.push(CreateFlowNode(TaskType.LAUNCH_BROWSER))
 
 export async function GetWorflowsForUser(){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -42,7 +45,9 @@ export async function CreateWorkflow(form: createWorkflowSchemaType){
     if(!success){
         throw new Error("Invalid form data");
     }
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -61,7 +66,9 @@ export async function CreateWorkflow(form: createWorkflowSchemaType){
 }
 
 export async function DeleteWorkflow(id:string) {
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -75,7 +82,9 @@ export async function DeleteWorkflow(id:string) {
 }
 
 export async function UpdateWorkflow({id,definition}:{id:string,definition:string}){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -104,7 +113,9 @@ export async function UpdateWorkflow({id,definition}:{id:string,definition:strin
 }
 
 export async function RunWorkflow(form: {workflowId:string, flowDefinition?:string}){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -190,7 +201,9 @@ export async function RunWorkflow(form: {workflowId:string, flowDefinition?:stri
 }
 
 export async function GetWorkflowExecutionWithPhases(executionId: string){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -211,7 +224,9 @@ export async function GetWorkflowExecutionWithPhases(executionId: string){
 }
 
 export async function GetWorkflowPhaseDetails(phaseId: string){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -232,7 +247,9 @@ export async function GetWorkflowPhaseDetails(phaseId: string){
 }
 
 export async function GetWorkflowExecutions(workflowId: string){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -249,7 +266,9 @@ export async function GetWorkflowExecutions(workflowId: string){
 }
 
 export async function PublishWorkflow({id,flowDefinition}:{id:string,flowDefinition:string}){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -296,7 +315,9 @@ export async function PublishWorkflow({id,flowDefinition}:{id:string,flowDefinit
 
 
 export async function UnpublishWorkflow({id}:{id:string}){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -328,7 +349,9 @@ export async function UnpublishWorkflow({id}:{id:string}){
 }
 
 export async function UpdateWorkflowCron({id,cron}:{id:string,cron:string}){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -354,7 +377,9 @@ export async function UpdateWorkflowCron({id,cron}:{id:string,cron:string}){
 }
 
 export async function RemoveWorkflowSchedule(id:string){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -376,7 +401,9 @@ export async function DuplicateWorkflow(form: duplicateWorkflowSchemaType){
     if(!success){
         throw new Error("Invalid form data");
     }
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }

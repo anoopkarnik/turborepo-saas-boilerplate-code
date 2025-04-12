@@ -1,6 +1,6 @@
 "use client"
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/atoms/shadcn/avatar'
-import { useSession } from 'next-auth/react'
+import { useSession } from '@repo/auth/better-auth/auth-client'
 import React from 'react'
 
 const UserAvatar = () => {

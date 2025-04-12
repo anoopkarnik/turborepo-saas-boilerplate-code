@@ -2,7 +2,7 @@ import { Card, CardContent } from '../../../../molecules/shadcn/card';
 import { BeatLoader } from 'react-spinners';
 import { LoadingCardProps } from '@repo/ts-types/auth/v1';
 
-const LoadingCard = ({title,description}:LoadingCardProps) => {
+const LoadingCard = ({title="Loading",description="Please wait while we are loading the page!"}:LoadingCardProps) => {
 
   return (
     <div className='w-full flex items-center justify-center mt-10 bg-black min-h-full'>
@@ -10,7 +10,7 @@ const LoadingCard = ({title,description}:LoadingCardProps) => {
         <CardContent>
           <div className='flex flex-col items-center justify-center gap-4'>
             <div className='text-4xl font-black animate-pulse text-center mb-4'>
-              Loading {title}
+              {title}
             </div>
             <div className='text-lg animate-pulse text-center'>
               {description}

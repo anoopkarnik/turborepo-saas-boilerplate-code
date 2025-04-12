@@ -1,7 +1,7 @@
 "use server"
 
 import { getUserById } from "@repo/prisma-db/repo/user";
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
 
 export const getUserDetails = async () => {
     const session = await auth();

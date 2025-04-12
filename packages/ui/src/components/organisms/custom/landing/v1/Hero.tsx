@@ -1,3 +1,4 @@
+"use client"
 import {  BookIcon, LogIn } from "lucide-react";
 import { Button } from "../../../../atoms/shadcn/button";
 import HeroCards  from "./HeroCards";
@@ -20,7 +21,8 @@ const Hero = ({heroSection, features ,testimonials, pricingList,teamList}:{
         if(heroSection.tagline){
             setTaglineArray(heroSection.tagline.split(" "))
         }
-    },[heroSection.tagline])
+        console.log(heroSection)
+    },[heroSection.tagline,heroSection.getStartedLink,heroSection.documentationLink,heroSection.blogLink])
   return (
     <section className="container grid xl:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
       <div className="text-center lg:text-start space-y-6">

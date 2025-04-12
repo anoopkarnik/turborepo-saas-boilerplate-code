@@ -1,7 +1,8 @@
 "use server"
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
 import db from "@repo/prisma-db/mongo-client";
 import { pusherServer } from "../../../../lib/helper/pusher";
+import { headers } from "next/headers";
 
 export const getMessages = async (conversationId: string) => {
     try {
@@ -31,7 +32,9 @@ export const createMessage = async ({conversationId,message,image}:{
 }) => {
 
     try {
-        const session = await auth();
+        const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
         if (!session?.user?.id) {
             throw new Error("User not authenticated");
         }

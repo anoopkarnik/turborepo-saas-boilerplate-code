@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import {  getCompanionWithMessages } from '../../_actions/prisma'
 import { ClipLoader } from 'react-spinners'
-import { useSession } from 'next-auth/react'
+import { useSession } from '@repo/auth/better-auth/auth-client'
 import ChatClient from '../../_components/ChatClient'
 
 

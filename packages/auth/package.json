@@ -14,9 +14,11 @@
   "license": "ISC",
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
+    "@repo/email": "*",
     "@repo/prisma-db": "*",
     "@repo/zod": "*",
     "bcryptjs": "^2.4.3",
+    "better-auth": "^1.2.5",
     "next-auth": "5.0.0-beta.25",
     "ua-parser-js": "^2.0.0"
   },

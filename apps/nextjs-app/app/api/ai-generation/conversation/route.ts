@@ -1,8 +1,8 @@
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
-import { getUserDetails } from "../../../../actions/user";
 import { increaseCredits } from "@repo/prisma-db/repo/user";
+import { headers } from "next/headers";
 
 const configuration = {
     apiKey: process.env.OPENAI_API_KEY,
@@ -12,18 +12,19 @@ const openai = new OpenAI(configuration);
 
 export async function POST(req: Request){
     try{
-        const session = await auth();
+        const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
         if(!session){
             return NextResponse.json({error: "Unauthorized"}, {status: 401});
         }
         const body = await req.json();
         const {messages} = body;
 
-        const userDetails = await getUserDetails();
-        if (!userDetails) {
+        if (!session.user) {
             return NextResponse.json({error:"User details not found"},{status:400});
         }
-        if (userDetails?.creditsUsed>=userDetails?.creditsTotal) {
+        if (session.user?.creditsUsed>=session.user?.creditsTotal) {
             return NextResponse.json({error:"Credits exhausted"},{status:400});
         }
         await increaseCredits(session.user.id,10);

@@ -1,13 +1,16 @@
 "use server"; // Ensure this stays a server action
 
 import OpenAI from "openai";
-import {auth} from "@repo/auth/next-auth/auth"
+import {auth} from "@repo/auth/better-auth/auth"
+import { headers } from "next/headers";
 
 const threadMap = new Map<string, string>();
 
 
 export async function handleAssistantMessage(chatMessage: string) {
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if(!session){
         throw new Error("User not authenticated")
     }

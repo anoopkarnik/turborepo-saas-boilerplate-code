@@ -1,9 +1,9 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import OpenAI from "openai";
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
 import { handleAssistantMessage } from "../../../src/openai/assistantServer";
 
-vi.mock("@repo/auth/next-auth/auth", () => ({
+vi.mock("@repo/auth/better-auth/auth", () => ({
     auth: vi.fn(() => Promise.resolve({ user: { id: "user123" } }))
 }));
 

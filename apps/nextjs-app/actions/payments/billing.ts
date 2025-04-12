@@ -1,14 +1,17 @@
 "use server"
 
-import { auth } from "@repo/auth/next-auth/auth";
+import { auth } from "@repo/auth/better-auth/auth";
 import db from "@repo/prisma-db/client";
 import { LogCollector } from "@repo/ts-types/scrape-flow/log";
 import { billingAddressSchemaType } from "@repo/zod/billing";
 import { createNewCustomer } from "./dodo";
+import { headers } from "next/headers";
 
 
 export async function GetAvailableCredits(){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -62,7 +65,9 @@ export async function decrementCredits(userId:string, amount: number, logCollect
 }
 
 export async function GetUserPurchaseHistory() {
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -78,7 +83,9 @@ export async function GetUserPurchaseHistory() {
 }
 
 export async function AddUserAddress(form: billingAddressSchemaType){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -125,7 +132,9 @@ export async function AddUserAddress(form: billingAddressSchemaType){
 }
 
 export async function GetUserAddress(){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }

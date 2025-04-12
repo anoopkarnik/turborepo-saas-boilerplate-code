@@ -1,15 +1,19 @@
 "use server"
 
-import { auth } from "@repo/auth/next-auth/auth";
 import db from "@repo/prisma-db/client"
 import { ConnectionType } from "@repo/ts-types/home/v1";
 import { addApiKeyConnectionSchema, addApiKeyConnectionSchemaType, addOAuthConnectionSchema, addOAuthConnectionSchemaType } from "@repo/zod/scrape-flow/connection";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { symmetricEncrypt } from "../lib/helper/encryption";
+import { auth } from "@repo/auth/better-auth/auth";
+import { headers } from "next/headers";
 
 export async function GetConnectionsForUser(){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    console.log(session);
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -30,7 +34,9 @@ export async function AddApiKeyConnection(form: addApiKeyConnectionSchemaType){
         throw new Error("Invalid form data");
     }
 
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -59,7 +65,9 @@ export async function AddOAuthConnection(form: addOAuthConnectionSchemaType){
         throw new Error("Invalid form data");
     }
 
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -93,7 +101,9 @@ export async function AddOAuthConnection(form: addOAuthConnectionSchemaType){
 
 
 export async function DeleteConnection(name: string){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -111,7 +121,9 @@ export async function DeleteConnection(name: string){
 }
 
 export async function GetConnectionByUserIdAndConnection(connection: string){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
@@ -131,7 +143,9 @@ export async function GetConnectionByUserIdAndConnection(connection: string){
 }
 
 export async function updateConnectionDetails(id: string, details: any){
-    const session = await auth();
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }

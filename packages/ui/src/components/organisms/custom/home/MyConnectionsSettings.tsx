@@ -3,7 +3,7 @@ import SettingsHeading from '../../../molecules/custom/v1/SettingsHeading'
 import { ConnectionCardProps } from '@repo/ts-types/home/v1'
 import ConnectionCard from '../../../molecules/custom/v1/ConnectionCard'
 import { deleteConnectionAction, getConnectionsAction } from '@repo/server-utils/connections'
-import { useSession} from "next-auth/react";
+import { useSession} from "@repo/auth/better-auth/auth-client";
 import Image from 'next/image'
 import { Button } from '../../../atoms/shadcn/button'
 import ConfirmDialog from '../../../molecules/custom/v1/ConfirmDialog'

@@ -1,13 +1,5 @@
 "use client"
-import Hero from '../../../organisms/custom/landing/v1/Hero';
-import Testimonials from '../../../organisms/custom/landing/v2/Testimonials';
-import Footer from '../../../organisms/custom/landing/v1/Footer';
-import Team  from '../../../organisms/custom/landing/v1/Team';
-import Newsletter from '../../../organisms/custom/landing/v1/Newsletter';
 import { LandingPageProps } from '@repo/ts-types/landing-page/landing-page';
-import FAQ from '../../../organisms/custom/landing/v1/FAQ';
-import Pricing from '../../../organisms/custom/landing/v1/Pricing';
-import Features from '../../../organisms/custom/landing/v1/Features';
 import { sectionRegistry } from './SectionRegistry';
 
 const LandingPage = ({heroSection,featureSection,testimonialSection,

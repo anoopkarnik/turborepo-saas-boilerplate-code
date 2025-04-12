@@ -12,3 +12,4 @@ export const createContactAction = async (email:string) => {
         return {"error": "Failed to subscribe to our newsletter"}
     }
 }
+

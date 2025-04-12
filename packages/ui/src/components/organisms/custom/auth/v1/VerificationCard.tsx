@@ -23,7 +23,7 @@ const VerificationCard = ({errorMessage,successMessage}:VerificationCardProps) =
         </div>
       </CardContent>
       <CardFooter className='flex justify-center'>
-      <button onClick={()=>router.push('/auth/login')} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
+      <button onClick={()=>router.push('/sign-in')} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
           Back to Login
       </button>
       </CardFooter>

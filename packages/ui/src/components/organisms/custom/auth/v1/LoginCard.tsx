@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from 'react'
 import {z} from "zod"
 import { Card, CardContent, CardFooter, CardHeader } from '../../../../molecules/shadcn/card';
@@ -5,7 +7,6 @@ import { useTransition } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from '../../../../atoms/shadcn/button';
-import { LoginSchema } from '@repo/zod/auth'
 import {  useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -20,11 +21,14 @@ import { Input } from '../../../../atoms/shadcn/input';
 import { FormResult } from './FormResult';
 import { LoginCardProps } from '@repo/ts-types/auth/v1';
 import { useRouter } from 'next/navigation';
+import { LoginSchema } from '@repo/zod/auth';
+import LoadingButton from '../../../../molecules/custom/v1/LoadingButton';
 
 const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedinProvider,onEmailSubmit,
   onGoogleProviderSubmit,onGithubProviderSubmit,onLinkedinProviderSubmit,errorMessage}
   :LoginCardProps
 ) => {
+  const [pending, setPending] = useState(false)
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues:{
@@ -33,47 +37,30 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
     },
   })
 
-  const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState<string | undefined>(errorMessage)
-  const [success, setSuccess] = useState<string | undefined>("")
+
   const router = useRouter();
 
   async function handleSubmit(data: z.infer<typeof LoginSchema>) {
-    setError("")
-    setSuccess("")
-    startTransition(()=>{
-      onEmailSubmit(data)
-      .then((data:any)=>{
-          setError(data?.error);
-          setSuccess(data?.success);
-      })
-    })
+    setPending(true)
+      await onEmailSubmit(data)
+      setPending(false)
+    
   }
 
   async function loginAsGuest(){
-    setError("")
-    setSuccess("")
+    setPending(true)
     let data = {email: process.env.NEXT_PUBLIC_GUEST_MAIL, password: process.env.NEXT_PUBLIC_GUEST_PASSWORD}
-    startTransition(()=>{
-      onEmailSubmit(data)
-      .then((data:any)=>{
-          setError(data?.error);
-          setSuccess(data?.success);
-      })
-    })
+    await onEmailSubmit(data)
+    setPending(false)
+      
   }
 
   async function loginAsAdmin(){
-    setError("")
-    setSuccess("")
+    setPending(true)
     let data = {email: process.env.NEXT_PUBLIC_ADMIN_MAIL, password: process.env.NEXT_PUBLIC_ADMIN_PASSWORD}
-    startTransition(()=>{
-      onEmailSubmit(data)
-      .then((data:any)=>{
-          setError(data?.error);
-          setSuccess(data?.success);
-      })
-    })
+    
+    await onEmailSubmit(data)
+    setPending(false)
   }
   
   return (
@@ -86,12 +73,12 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-6'>
-              <div className='space-y-4 mb-4'>
+              <div className='space-y-4'>
                 <FormField control={form.control} name="email" render={({field})=>(
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} type="email" placeholder='example@gmail.com'  className='bg-white text-black' {...field}/>
+                      <Input disabled={pending} type="email" placeholder='example@gmail.com'  className='bg-white text-black' {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
@@ -100,16 +87,17 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} placeholder='******' type="password"  className='bg-white text-black' {...field}/>
+                      <Input disabled={pending} placeholder='******' type="password"  className='bg-white text-black' {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
                 )}/>
               </div>
-              <button type="button" onClick={()=>router.push('/auth/forgot-password')} className='text-sm text-left text-black/60 hover:text-black cursor-pointer hover:underline'>Forgot Password</button>
-              <FormResult type="error" message={error }/>
-              <FormResult type="success" message={success}/>
-              <Button className='w-full' disabled={isPending} variant="default" type="submit">Login</Button>
+              <button type="button" onClick={()=>router.push('/forgot-password')} className='text-sm text-left text-black/60 hover:text-black cursor-pointer hover:underline'>Forgot Password</button>
+              <FormResult type="error" message={errorMessage }/>
+              <LoadingButton variant="default" pending={pending}>
+                Login
+              </LoadingButton>
             </form>
           </Form>
         </CardContent>}
@@ -119,11 +107,15 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
         {showLinkedinProvider && <Button className='w-full' onClick={onLinkedinProviderSubmit} variant='secondary'><FaLinkedin/></Button>}
       </CardFooter>
       <CardFooter className='flex flex-col gap-4 justify-center'>
-        <Button className='w-full' disabled={isPending} variant="default" onClick={loginAsGuest}>Login as Guest</Button>
-        <Button className='w-full' disabled={isPending} variant="default" onClick={loginAsAdmin}>Login as Admin</Button>
+          <LoadingButton variant="default" pending={pending} onClick={loginAsGuest}>
+            Login as Guest
+          </LoadingButton> 
+          <LoadingButton variant="default" pending={pending} onClick={loginAsAdmin}>
+            Login as Admin
+          </LoadingButton>         
       </CardFooter>
       <CardFooter className='flex justify-center'>
-        <button onClick={()=>router.push('/auth/register')} 
+        <button onClick={()=>router.push('/sign-up')} 
         className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
           Don't have an Account?
         </button>

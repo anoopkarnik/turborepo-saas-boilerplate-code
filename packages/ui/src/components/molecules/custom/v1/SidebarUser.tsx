@@ -33,40 +33,21 @@ import {
 import { UserProps } from "@repo/ts-types/home/v1"
 import { SettingsDialog } from "../../../templates/home/Settings"
 import { Theme } from "./Theme"
-import { signOut, useSession } from "next-auth/react"
+import { authClient, signOut, useSession } from "@repo/auth/better-auth/auth-client"
 import { useTheme } from "next-themes"
+import { useRouter } from "next/navigation"
 
 const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,githubRepositoryName,
    connections,pricingList}:UserProps) => {
 
   const { data:session,status } = useSession();
 
-  const [user, setUser] = useState<any>(null)
 
         // Refresh session manually after login
-  const refreshSession = async () => {
-    const response = await fetch("/api/auth/session");
-    const newSession = await response.json();
-    setUser(newSession?.user || null);
-  };
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (status === "authenticated") {
-        setUser(session?.user || null);
-        if (!session?.user) return;
-        
-      } else if (status === "unauthenticated") {
-        refreshSession();
-      }
-    }
-    fetchUserData();
-  }, [session, status]);
 
   const { isMobile } = useSidebar()
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
 
   const handleSettingsClick = (e: React.MouseEvent) => {
     // Prevent the dropdown from closing
@@ -75,6 +56,11 @@ const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,git
     
     // Open the settings dialog
     setIsSettingsOpen(true)
+  }
+  const router = useRouter()
+  const handleSignout = async() =>{
+    await authClient.signOut()
+    router.push('/landing')
   }
 
   return (
@@ -87,12 +73,12 @@ const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,git
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user?.image ?? ''} alt={user?.name ?? ''}  className="object-cover"/>
-                <AvatarFallback className="rounded-lg">{user?.name?user?.name[0]?.toUpperCase() :'U'}</AvatarFallback>
+                <AvatarImage src={session?.user?.image ?? ''} alt={session?.user?.name ?? ''}  className="object-cover"/>
+                <AvatarFallback className="rounded-lg">{session?.user?.name?session?.user?.name[0]?.toUpperCase() :'U'}</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user?.name}</span>
-                <span className="truncate text-xs">{user?.email}</span>
+                <span className="truncate font-semibold">{session?.user?.name}</span>
+                <span className="truncate text-xs">{session?.user?.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -106,12 +92,12 @@ const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,git
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user?.image ?? ''} alt={user?.name ?? ''} className="object-cover"/>
-                  <AvatarFallback className="rounded-lg">{user?.name?user?.name[0]?.toUpperCase() :'U'}</AvatarFallback>
+                  <AvatarImage src={session?.user?.image ?? ''} alt={session?.user?.name ?? ''} className="object-cover"/>
+                  <AvatarFallback className="rounded-lg">{session?.user?.name?session?.user?.name[0]?.toUpperCase() :'U'}</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user?.name}</span>
-                  <span className="truncate text-xs">{user?.email}</span>
+                  <span className="truncate font-semibold">{session?.user?.name}</span>
+                  <span className="truncate text-xs">{session?.user?.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
@@ -138,33 +124,6 @@ const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,git
                   Settings
                 </DropdownMenuItem>
               </SettingsDialog>
-              {/* <a href={`https://mail.google.com/mail/u/0/?fs=1&to=${supportEmailAddress}&su=Support&tf=cm`} target="_blank" 
-              rel="noopener noreferrer">
-                  <DropdownMenuItem 
-                      className="flex gap-2 cursor-pointer" 
-                    >
-                      <MessageCircle size={20}/>
-                      Support
-                    </DropdownMenuItem>
-              </a>
-              <a href={`https://github.com/${githubUsername}/${githubRepositoryName}/issues/new`} target="_blank" 
-              rel="noopener noreferrer">
-                  <DropdownMenuItem 
-                      className="flex gap-2 cursor-pointer" 
-                    >
-                      <Send  size={20}/>
-                      Feedback / Issues
-                    </DropdownMenuItem>
-              </a>
-              <a href={documentationLink} target="_blank" 
-              rel="noopener noreferrer">
-                  <DropdownMenuItem 
-                      className="flex gap-2 cursor-pointer" 
-                    >
-                      <BookOpen  size={20}/>
-                      Documentation
-                  </DropdownMenuItem>
-              </a> */}
                 <DropdownMenuItem 
                       className="flex gap-2 cursor-pointer" 
                     >
@@ -172,9 +131,7 @@ const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,git
                   </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex gap-2 cursor-pointer" onClick={
-              ()=> signOut()
-            }>
+            <DropdownMenuItem className="flex gap-2 cursor-pointer" onClick={handleSignout}>
               <LogOut  size={20} />
               Log out
             </DropdownMenuItem>

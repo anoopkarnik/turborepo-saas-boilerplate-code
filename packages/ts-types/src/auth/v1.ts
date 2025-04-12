@@ -13,8 +13,8 @@ export interface DataResultProps {
 
 
 export interface LoadingCardProps {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
 }
 
 
@@ -74,25 +74,3 @@ export interface ForgotPasswordCardProps {
  export interface ErrorCardProps {
     errorMessage?:string;
   }
-
-//Complex Interfaces for Auth Pages
-
-export interface LoginPageProps extends LoginCardProps,QuoteProps,LoadingCardProps{
-
-}
-
-export interface RegisterPageProps extends RegisterCardProps,QuoteProps,LoadingCardProps{
-
-}
-
-export interface ErrorPageProps extends ErrorCardProps,QuoteProps{
-}
-
-export interface ForgotPasswordPageProps extends ForgotPasswordCardProps,QuoteProps,LoadingCardProps{
-}
-
-export interface VerificationPageProps extends VerificationCardProps,QuoteProps,LoadingCardProps{
-}
-
-export interface ResetPasswordPageProps extends ResetPasswordCardProps,QuoteProps,LoadingCardProps{
-}

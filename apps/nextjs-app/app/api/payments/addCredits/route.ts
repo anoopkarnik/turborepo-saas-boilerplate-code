@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
-import { auth } from  "@repo/auth/next-auth/auth";
+import { auth } from  "@repo/auth/better-auth/auth";
 import db from "@repo/prisma-db/client";
+import { headers } from "next/headers";
 
 export async function POST(request: Request) {
     try {
         // Get the current session
         const {quantity} = await request.json();
-        const session = await auth();
+        const session = await auth.api.getSession({
+        headers: await headers(),
+    });;
     
         // Ensure the user is authenticated
         if (!session?.user?.id) {
