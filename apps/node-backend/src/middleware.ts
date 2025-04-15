@@ -1,18 +1,23 @@
-import { RequestHandler } from "express";
-import { verifyAuthToken } from "./utils/auth";
+// middleware/authMiddleware.ts
+import jwt from "jsonwebtoken";
+import { Request, Response, NextFunction } from "express";
 
-export const authMiddleware: RequestHandler = (req, res, next) => {
-    console.log('req.headers', req.headers);
-  const token = req.headers.authorization?.split(" ")[1];
-    console.log("token", token);
-  const user = verifyAuthToken(token || "");
-  console.log("user", user);
+export const authMiddleware = (req: Request,res: Response,next: NextFunction) => {
+  const authHeader = req.headers.authorization;
 
-  if (!user) {
-    res.status(403).json({ error: "Forbidden" });
-    return;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    res.status(401).json({ message: "Unauthorized: No token provided" });
   }
 
-  (req as any).user = user;
-  next();
+  const token  = authHeader?.split(" ")[1] as string;
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) 
+    // @ts-ignore
+    req.userId = (decoded as any).id; 
+    next(); // ✅ All good, continue
+  } catch (err) {
+    console.error("JWT Verification Error:", err);
+    res.status(401).json({ message: "Unauthorized: Invalid token" });
+  }
 };

@@ -46,7 +46,6 @@ export const ImagesUploader = ({  onChange, placeholder }: ImagesUploadProps) =>
 
         const formData = new FormData();
         formData.append("file", zippedContent);
-
         const {success,url} = await uploadZipAction(formData);
         if (success){
           toast({
@@ -54,7 +53,8 @@ export const ImagesUploader = ({  onChange, placeholder }: ImagesUploadProps) =>
             description: "Your images have been zipped & uploaded successfully.",
             variant: "default",
           });
-        }{
+        }
+        else {
           toast({
             title: "Upload failed",
             description: "There was an error uploading your images.",
@@ -71,7 +71,7 @@ export const ImagesUploader = ({  onChange, placeholder }: ImagesUploadProps) =>
         setUploading(false);
       }
     },
-    [onChange]
+    [onChange,toast]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

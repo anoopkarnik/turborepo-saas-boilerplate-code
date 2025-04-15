@@ -4,4 +4,6 @@ export abstract class BaseModel {
     abstract generateImage(prompt: string, tensorPath: string):Promise<{request_id: string, response_url: string}>
 
     abstract trainModel(zipUrl: string, triggerWord: string):Promise<{request_id: string, response_url: string}>
+
+    abstract generateImageSync(tensorPath: string):Promise<{imageUrl: string}>
 }

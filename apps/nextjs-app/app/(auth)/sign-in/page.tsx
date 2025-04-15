@@ -26,7 +26,7 @@ const LoginContent = () => {
   }
 
   const loginWithEmail = async (data:  z.infer<typeof LoginSchema>) => {
-    const {error} = await authClient.signIn.email(data)
+    const {error} = await authClient.signIn.email(data )
     if (error) {
       setError(error.message)
     } else {

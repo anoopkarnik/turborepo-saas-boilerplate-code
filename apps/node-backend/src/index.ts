@@ -8,7 +8,7 @@ import cors from "cors";
 
 import dotenv from "dotenv";
 import { FalAIModel } from "./models/FalAIModel";
-import { authMiddleware } from "./middleware"
+import { authMiddleware } from "./middleware";
 
 dotenv.config();
 
@@ -17,12 +17,8 @@ const falAiModel = new FalAIModel();
 const app = express();
 const PORT = process.env.PORT || 8020;
 
-const USER_ID = "abc"
-
-
 app.use(express.json());
 app.use(cors())
-app.use(authMiddleware)
 
 app.get("/pre-signed-url", async ( req, res) => {
   const r2Client = new S3Client({
@@ -48,9 +44,7 @@ app.get("/pre-signed-url", async ( req, res) => {
 })
 
 
-app.post("/ai/training", async (req, res) => {
-  console.log("Training model")
-  console.log(req.body)
+app.post("/ai/training", authMiddleware , async (req, res) => {
   const parsedBody = TrainModel.safeParse(req.body);
 
   if (!parsedBody.success) {
@@ -70,7 +64,8 @@ app.post("/ai/training", async (req, res) => {
       ethnicity: parsedBody.data.ethnicity,
       eyeColor: parsedBody.data.eyeColor,
       bald: parsedBody.data.bald,
-      userId: USER_ID,
+      // @ts-ignore
+      userId:  req.userId!,
       falAiRequestId: request_id,
       zipUrl: parsedBody.data.zippedImages
     }
@@ -82,8 +77,9 @@ app.post("/ai/training", async (req, res) => {
 
 })
 
-app.post("/ai/generate", async (req, res) => {
+app.post("/ai/generate", authMiddleware, async (req, res) => {
   const parsedBody = GenerateImage.safeParse(req.body);
+
 
   if (!parsedBody.success) {
     res.status(411).json({ message: "Input Incorrent" });
@@ -96,21 +92,26 @@ app.post("/ai/generate", async (req, res) => {
     }
   })
 
-  if (!model) {
-    res.status(404).json({ message: "Model not found" });
+  if (!model || !model.tensorPath) {
+    res.status(411).json({ message: "Model not found" });
     return;
   }
+
+  console.log("Model found", model);
   const {request_id, response_url} = await falAiModel.generateImage(
     parsedBody.data.prompt,
-    model?.tensorPath!
+    model.tensorPath!
   )
+
+  
 
   // Call the image generation API here with the parsed data
   const data = await db.outputImages.create({
     data: {
       prompt: parsedBody.data.prompt,
       modelId: parsedBody.data.modelId,
-      userId: USER_ID,
+      // @ts-ignore
+      userId:  req.userId!,
       imageUrl: "",
       falAiRequestId: request_id,
     }
@@ -120,7 +121,7 @@ app.post("/ai/generate", async (req, res) => {
   })
 })
 
-app.post("/pack/generate", async(req, res) => {
+app.post("/pack/generate", authMiddleware, async(req, res) => {
   const parsedBody = GenerateImagesFromPack.safeParse(req.body);
 
   if (!parsedBody.success) {
@@ -145,7 +146,8 @@ app.post("/pack/generate", async(req, res) => {
     data: prompts.map((prompt,index) => ({
       prompt: prompt.prompt,
       modelId: parsedBody.data.modelId,
-      userId: USER_ID,
+      // @ts-ignore
+      userId:  req.userId!,
       imageUrl: "",
       falAiRequestId: requestIds[index]?.request_id || "",
     }))
@@ -156,22 +158,23 @@ app.post("/pack/generate", async(req, res) => {
 
 })
 
-app.get("/pack/bulk", async (req, res) => {
+app.get("/pack/bulk", authMiddleware, async (req, res) => {
 
     const packs = await db.packs.findMany({})
     res.json({packs})
   
 })
 
-app.get("/image/bulk", async (req, res) => {
-  const ids = req.query.images as string;
+app.get("/image/bulk", authMiddleware, async (req, res) => {
+  const ids = req.query.images as string[];
   const limit = req.query.limit as string ?? "10";
   const offset = req.query.offset as string ?? "0";
 
   const imagesData = await db.outputImages.findMany({
     where: {
-      id: {in: ids.split(",")},
-      userId: USER_ID
+      id: { in: ids},
+      // @ts-ignore
+      userId:  req.userId!,
     },
     take: parseInt(limit),
     skip: parseInt(offset),
@@ -184,9 +187,26 @@ app.get("/image/bulk", async (req, res) => {
 
 })
 
+app.get("/models", authMiddleware, async (req, res) => {
+ 
+  const models = await db.photoModel.findMany({
+    where: {
+      // @ts-ignore
+      OR: [{userId: req.userId!}, {open: true}],
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  })
+
+  res.json({models})
+
+})
 
 app.post("/fal-ai/webhook/train", async (req, res) => {
   const requestId = req.body.request_id;
+
+  const { imageUrl } = await falAiModel.generateImageSync(req.body.tensor_path);
 
   await db.photoModel.updateMany({
     where: {
@@ -195,6 +215,7 @@ app.post("/fal-ai/webhook/train", async (req, res) => {
     data: {
       trainingStatus: "Generated",
       tensorPath: req.body.tensor_path,
+      thumbnail: imageUrl ,
     }
   });
 
@@ -206,6 +227,7 @@ app.post("/fal-ai/webhook/train", async (req, res) => {
 app.post("/fal-ai/webhook/image", async (req, res) => {
   
   const requestId = req.body.request_id;
+  console.log("Request ID:", requestId);
 
   await db.outputImages.updateMany({
     where:{

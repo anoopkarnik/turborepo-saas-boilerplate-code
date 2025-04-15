@@ -48,19 +48,22 @@ enum ModelTrainingStatusEnum {
 }
 
 model PhotoModel {
-    id          String   @id @default(cuid())
-    name        String
-    type        ModelyTypeEnum
-    age         Int
-    ethnicity   EthnicityEnum
-    eyeColor    EyeColorEnum
-    bald        Boolean
+    id             String   @id @default(cuid())
+    name           String
+    type           ModelyTypeEnum
+    age            Int
+    ethnicity      EthnicityEnum
+    eyeColor       EyeColorEnum
+    bald           Boolean
+    thumbnail      String?
 
-    triggerWord String?
-    tensorPath String?
+    triggerWord    String?
+    tensorPath     String?
     trainingStatus ModelTrainingStatusEnum @default(Pending)
     falAiRequestId String?  
-    zipUrl      String
+    zipUrl         String
+
+    open           Boolean @default(false)
 
     outputImages OutputImages[]
 
@@ -100,6 +103,9 @@ model OutputImages {
 model Packs {
     id          String   @id @default(cuid())
     name        String
+    description String    @default("")
+    imageUrl1    String   @default("")
+    imageUrl2    String   @default("")
     prompts     PackPrompts[]
 
     @@schema("photoai_schema")

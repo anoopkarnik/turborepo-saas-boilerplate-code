@@ -1,7 +1,7 @@
 import { betterAuth, BetterAuthOptions } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import db from '@repo/prisma-db/client'
-import { admin,  openAPI } from "better-auth/plugins";
+import { admin,  openAPI, jwt } from "better-auth/plugins";
 import { sendResetEmail, sendVerificationEmail } from "@repo/email/resend/index";
  
 

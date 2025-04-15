@@ -7,6 +7,9 @@ const LandingPage = ({heroSection,featureSection,testimonialSection,
  }: LandingPageProps) => {
 
     const HeroSection = sectionRegistry?.hero?.[heroSection?.version as keyof typeof sectionRegistry.hero || "v1"];
+
+    // const HeroSection = sectionRegistry?.hero?.["v1"]
+
     const FeatureSection = sectionRegistry?.features?.[featureSection?.version as keyof typeof sectionRegistry.features || "v1"];
     const TestimonialSection = sectionRegistry?.testimonials?.[testimonialSection?.version as keyof typeof sectionRegistry.testimonials || "v1"];
     const TeamSection = sectionRegistry?.team?.[teamSection?.version as keyof typeof sectionRegistry.team || "v1"];

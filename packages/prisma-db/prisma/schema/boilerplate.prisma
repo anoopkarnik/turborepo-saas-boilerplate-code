@@ -80,7 +80,7 @@ model Verification {
   @@schema("boilerplate_schema")
 }
 
-model JWKS {
+model jwks {
   id        String   @id @default(cuid()) @map("_id")
   publicKey String
   privateKey String
