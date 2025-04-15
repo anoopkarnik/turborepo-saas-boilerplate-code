@@ -18,4 +18,4 @@ RUN npm run build --workspace=apps/node-backend
 EXPOSE 8020
 
 # Run the backend server
-CMD ["node", "app/apps/node-backend/dist/index.js"]
+CMD ["node", "apps/node-backend/dist/index.js"]
