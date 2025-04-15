@@ -24,6 +24,7 @@ COPY --from=builder /app/dist/apps/node-backend ./dist
 
 # Install only production dependencies
 RUN npm install --omit=dev
+RUN npm run db:generate
 
 # Expose the backend port
 EXPOSE 8020
