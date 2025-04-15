@@ -36,7 +36,6 @@ export const ImageUploader = ({ value, onChange }: ImageUploadProps) => {
         formData.append("files", file);
         formData.append("folder", "AI Companions");
         const result = await uploadImageToStrapi(formData);
-        console.log(result);
         if (result?.[0]) {
             onChange(process.env.NEXT_PUBLIC_STRAPI_URL + result[0].url);
         } else {

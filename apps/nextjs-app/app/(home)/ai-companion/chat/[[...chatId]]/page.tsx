@@ -26,7 +26,6 @@ const ChatId =  ({params}: ChatIdProps) => {
             if(!params.chatId) return
             const companion = await getCompanionWithMessages(
                 params.chatId?.[0] as string,session?.data?.user?.id as string)
-            console.log(companion)
             setCompanion(companion)
             setIsLoading(false)
         }

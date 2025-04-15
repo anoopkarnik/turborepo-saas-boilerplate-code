@@ -16,9 +16,7 @@ export async function shareRoute(request: Request, handler: (request: Request, b
     const contentType = request.headers.get("content-type");
 
     if (contentType?.includes("application/json")) {
-        console.log("JSON",request)
         body = await request.json(); // Parse JSON body
-        console.log("Body",body)
         if (!session) {
             return NextResponse.json({error:"User details not found"},{status:400});
         }

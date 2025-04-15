@@ -21,7 +21,6 @@ const Hero = ({heroSection, features ,testimonials, pricingList,teamList}:{
         if(heroSection.tagline){
             setTaglineArray(heroSection.tagline.split(" "))
         }
-        console.log(heroSection)
     },[heroSection.tagline,heroSection.getStartedLink,heroSection.documentationLink,heroSection.blogLink])
   return (
     <section className="container grid xl:grid-cols-2 place-items-center py-20 md:py-32 gap-10">

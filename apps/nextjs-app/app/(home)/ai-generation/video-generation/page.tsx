@@ -31,7 +31,6 @@ const VideoGeneration= () => {
             setVideo(undefined)
             const response = await axios.post("/api/ai-generation/video-generation", values, {
                 responseType: "blob" });
-            console.log(response)
             const blob = response.data;
             const url = URL.createObjectURL(blob);
             setVideo(url);

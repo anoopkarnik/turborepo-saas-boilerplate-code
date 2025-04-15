@@ -22,7 +22,6 @@ const SessionSettings = () => {
                     updatedAt: formattedUpdatedDate
                 }
             })
-            console.log(modifiedSessions)
             setSessions(modifiedSessions);
         }
         getSessions();

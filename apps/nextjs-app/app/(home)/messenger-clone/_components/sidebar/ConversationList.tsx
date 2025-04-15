@@ -32,7 +32,6 @@ const ConversationList = ({conversations,users}:ConversationListProps) => {
        }
        setItems(conversations)
        const newHandler = (conversation: FullConversationType) => {
-          console.log('newHandler', conversation)
           setItems((current) => {
             if (current.find((c) => c.id === conversation.id)) {
               return current

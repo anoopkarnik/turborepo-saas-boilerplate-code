@@ -21,7 +21,6 @@ const Hero = ({heroSection, features ,testimonials, pricingList,teamList}:{
         if(heroSection.tagline){
             setTaglineArray(heroSection.tagline.split(" "))
         }
-        console.log(heroSection)
     },[heroSection.tagline,heroSection.getStartedLink,heroSection.documentationLink,heroSection.blogLink])
   return (
     <section className="container flex flex-col justify-center items-center py-20 md:py-32 gap-10">
@@ -88,7 +87,7 @@ const Hero = ({heroSection, features ,testimonials, pricingList,teamList}:{
             <CarouselContent>
             <div className="shadow"></div>
                 <CarouselItem>
-
+                    
                 </CarouselItem>
                 <CarouselItem>...</CarouselItem>
                 <CarouselItem>...</CarouselItem>

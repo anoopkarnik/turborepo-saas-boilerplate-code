@@ -13,7 +13,6 @@ export async function GetConnectionsForUser(){
     const session = await auth.api.getSession({
         headers: await headers(),
     });
-    console.log(session);
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }

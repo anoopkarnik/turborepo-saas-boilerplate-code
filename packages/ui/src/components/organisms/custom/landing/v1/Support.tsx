@@ -49,9 +49,7 @@ const Support = ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ subject, message }),
       });
-      console.log(response);
       const result = await response.json();
-      console.log(result);
       setSubject("");
       setMessage("");
     }

@@ -25,9 +25,7 @@ const Settings = ({ data }: { data: any }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password }),
     });
-    console.log(response);
     const result = await response.json();
-    console.log(result);
 
     if (result.success) {
       localStorage.setItem('isVerified', 'true');

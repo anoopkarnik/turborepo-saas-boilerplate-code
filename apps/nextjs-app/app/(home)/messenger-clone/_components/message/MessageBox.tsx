@@ -19,11 +19,9 @@ const MessageBox = ({data,isLast}:MessageBoxProps) => {
     const [seenList, setSeenList] = React.useState<string[]>([])
 
     useEffect(() => {
-        console.log('seenList1', data.seen)
         const seenList = (data.seen || [])
         .filter((user) => user.userId !== data.sender.userId)
         .map((user) => user.name)
-        console.log('seenList2', seenList)
         setSeenList(seenList)
     }, [data.seen, data.sender.userId])
 
