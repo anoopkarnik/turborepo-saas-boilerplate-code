@@ -101,7 +101,7 @@ export const auth:any = betterAuth({
               }
             
             const verificationUrl = `${process.env.NEXT_PUBLIC_URL}/api/auth/verify-email?token=${token}
-            &callbackURL=${process.env.EMAIL_VERIFICATION_CALLBACK_URL}`;
+            &callbackURL=${process.env.NEXT_PUBLIC_URL}/email-verified`;
             await sendVerificationEmail(user.email,verificationUrl)
         },
     }
