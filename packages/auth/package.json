@@ -7,7 +7,8 @@
     "test": "vitest"
   },
   "exports": {
-    "./*": "./src/*.ts"
+    "./*": "./src/*.ts",
+    "./components/*": "./src/components/*.tsx"
   },
   "keywords": [],
   "author": "",
@@ -16,10 +17,13 @@
     "@auth/prisma-adapter": "^2.7.4",
     "@repo/email": "*",
     "@repo/prisma-db": "*",
+    "@repo/ui": "*",
     "@repo/zod": "*",
     "bcryptjs": "^2.4.3",
     "better-auth": "^1.2.5",
+    "lucide-react": "^0.503.0",
     "next-auth": "5.0.0-beta.25",
+    "react-spinners": "^0.17.0",
     "ua-parser-js": "^2.0.0"
   },
   "devDependencies": {

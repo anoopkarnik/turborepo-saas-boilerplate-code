@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "vitest",
     "postgres:generate": "npx prisma generate --schema prisma/schema",
@@ -12,9 +13,6 @@
   },
   "keywords": [],
   "author": "",
-  "prisma": {
-    "seed": " ts-node --transpile-only prisma/seeds/seed.ts"
-  },
   "exports": {
     "./client": "./src/index.ts",
     "./mongo-client": "./src/mongo.ts",

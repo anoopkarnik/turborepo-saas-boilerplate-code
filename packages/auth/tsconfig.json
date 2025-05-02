@@ -6,6 +6,6 @@
       "@ui/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*","next-auth.d.ts"],
+  "include": ["src/**/*","next-auth.d.ts", "../ui/src/components/organisms/misc/LoadingCard.tsx"],
   "exclude": ["node_modules"]
 }

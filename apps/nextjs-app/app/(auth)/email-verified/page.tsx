@@ -1,12 +1,12 @@
 'use client'
 
-import React, { Suspense} from 'react'
-import LoadingCard from '@repo/ui/organisms/custom/auth/v1/LoadingCard'
-import VerificationCard from '@repo/ui/organisms/custom/auth/v1/VerificationCard'
-import Quote from '@repo/ui/organisms/custom/auth/v1/Quote'
-import { author, credential, quote } from '../../../lib/constants/auth'
+import React from 'react'
+import { quote } from '../../../lib/constants/auth'
+import VerificationCard from '@repo/auth/components/authflow/organisms/v1/VerificationCard'
+import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
 
-const NewVerificationContent = () => {
+
+const Verification = () => {
 
 
   return (
@@ -15,18 +15,11 @@ const NewVerificationContent = () => {
             <VerificationCard errorMessage={"Email Not Verified"} successMessage={"Email Verified"}/>
         </div>
         <div className='hidden lg:block bg-white'>
-            <Quote quote={quote} author={author} credential={credential}/>
+            <Quote quote={quote}/>
         </div>
     </div>
   )
 }
 
-const NewVerification = () => {
-  return (
-    <Suspense fallback={<LoadingCard/>}>
-      <NewVerificationContent />
-    </Suspense>
-  )
-}
 
-export default NewVerification
+export default Verification

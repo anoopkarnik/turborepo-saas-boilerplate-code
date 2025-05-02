@@ -6,13 +6,13 @@ import "../../../packages/ui/src/styles/custom/heroBackgroundAnimation.css"
 import { geistSans, geistMono, cyberdyne } from "@repo/ui/typography/font";
 import { productDetails, title } from "../lib/constants/appDetails";
 import { ThemeProvider } from "@repo/ui/providers/theme-provider";
-import { Toaster } from "@repo/ui/molecules/custom/v1/Toaster";
+import { Toaster } from "@repo/ui/molecules/home/Toaster/v1";
 import { TanstackProvider } from "../providers/tanstack-provider";
 import NextTopLoader from "nextjs-toploader";
 import { VercelAnalytics,VercelSpeedInsights } from "@repo/analytics/vercel.ts";
 import { GoogleAnalytics } from "@repo/analytics/google.ts";
 import { DataProvider } from "../context/DataContext";
-import ActiveStatus from "./(home)/messenger-clone/_components/common/ActiveStatus";
+import ActiveStatus from "./(home)/(clones)/messenger-clone/_components/common/ActiveStatus";
 
 
 

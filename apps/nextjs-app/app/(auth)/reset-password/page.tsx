@@ -3,12 +3,13 @@
 import { useSearchParams } from 'next/navigation'
 import React, { Suspense,  useState } from 'react'
 
-import ErrorCard from '@repo/ui/organisms/custom/auth/v1/ErrorCard'
-import Quote from '@repo/ui/organisms/custom/auth/v1/Quote'
-import { author, credential, quote } from '../../../lib/constants/auth'
-import LoadingCard from '@repo/ui/organisms/custom/auth/v1/LoadingCard'
-import ResetPasswordCard from '@repo/ui/organisms/custom/auth/v1/ResetPasswordCard'
+import { quote } from '../../../lib/constants/auth'
+
 import { authClient } from '@repo/auth/better-auth/auth-client'
+import ErrorCard from '@repo/auth/components/authflow/organisms/v1/ErrorCard'
+import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
+import ResetPasswordCard from '@repo/auth/components/authflow/organisms/v1/ResetPasswordCard'
+import LoadingCard from '@repo/ui/organisms/misc/LoadingCard/v1'
 
 const ResetPasswordContent = () => {
 
@@ -37,11 +38,11 @@ const ResetPasswordContent = () => {
   if (error){
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2 '>
-          <div className='flex items-center justify-center bg-gradient-to-br from-violet-400/30 to-black/90 dark:bg-gradient-to-br'>
+          <div className='flex items-center justify-center bg-gradient-to-br from-primary to-sidebar dark:bg-gradient-to-br'>
               <ErrorCard errorMessage={error}/>
           </div>
-          <div className='invisible lg:visible bg-white'>
-              <Quote quote={quote} author={author} credential={credential}/>
+          <div className='invisible lg:visible '>
+              <Quote quote={quote} />
           </div>
     </div>
     )
@@ -50,12 +51,12 @@ const ResetPasswordContent = () => {
   else {
     return (
       <div className='min-h-screen grid grid-cols-1 lg:grid-cols-2 '>
-      <div className='flex items-center justify-center bg-gradient-to-br from-primary to-black dark:bg-gradient-to-br'>
+      <div className='flex items-center justify-center bg-gradient-to-br from-primary to-sidebar dark:bg-gradient-to-br'>
           <ResetPasswordCard token={token as string} resetFunction={resetPassword} 
           errorMessage={error} successMessage={success}/>
       </div>
-      <div className='hidden lg:block bg-white'>
-          <Quote quote={quote} author={author} credential={credential}/>
+      <div className='hidden lg:block'>
+          <Quote quote={quote} />
       </div>
   </div>
     )

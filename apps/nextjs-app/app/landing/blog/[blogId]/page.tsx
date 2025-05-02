@@ -1,7 +1,7 @@
 import { blockProps } from "@repo/ts-types/landing-page/blog";
-import BlogPostPage from "@repo/ui/templates/landing/v1/BlogPostPage";
+import BlogPostPage from "@repo/ui/templates/landing/BlogPostPage/v1";
 import { serialize } from "next-mdx-remote/serialize";
-import { getBlogPost } from "../../../../actions/strapi/blogs";
+import { getBlogPost } from "@repo/storage/strapi/blogs";
 
 
 export default async function BlogPost({params}:{params:{blogId:string}}) {

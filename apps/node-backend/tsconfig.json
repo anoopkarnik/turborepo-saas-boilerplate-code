@@ -1,8 +1,10 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
-    "module": "NodeNext",   // force this to avoid hybrid NodeNext issues
     "target": "ES2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "noEmit": false,
@@ -10,5 +12,5 @@
     "skipLibCheck": true,
     "typeRoots": ["./types", "./node_modules/@types"]
   },
-  "include": ["src","src/types.d.ts"]
+  "include": ["src"]
 }

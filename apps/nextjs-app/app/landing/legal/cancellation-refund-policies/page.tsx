@@ -1,9 +1,9 @@
 "use client"
 
 import React from 'react';
-import CancellationRefundPoliciesPage from '@repo/ui/templates/landing/v1/CancellationRefundPoliciesPage';
+import CancellationRefundPoliciesPage from '@repo/ui/templates/landing/CancellationRefundPoliciesPage/v1';
 import { useGlobalData } from '../../../../context/DataContext';
-import LoadingPage from '@repo/ui/templates/landing/v1/LoadingPage';
+import LoadingPage from '@repo/ui/templates/landing/LoadingPage/v1';
 
 const CancellationRefundPolicies = () => {
         const data = useGlobalData();

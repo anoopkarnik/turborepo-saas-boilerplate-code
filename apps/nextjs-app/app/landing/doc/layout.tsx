@@ -1,10 +1,10 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import {  InboxIcon } from 'lucide-react';
-import DocSidebar from '@repo/ui/organisms/custom/landing/v1/DocSidebar';
+import DocSidebar from '@repo/ui/organisms/landing/DocSidebar/v1';
 import { SidebarProvider, SidebarTrigger } from '@repo/ui/organisms/shadcn/sidebar';
-import { getDocCategories, getDocs } from '../../../actions/strapi/docs';
-import { getSaaSDetails } from '../../../actions/strapi/landing';
+import { getDocCategories, getDocs } from '@repo/storage/strapi/docs';
+import { getSaaSDetails } from '@repo/storage/strapi/landing';
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
 

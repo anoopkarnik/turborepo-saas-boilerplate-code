@@ -1,18 +1,19 @@
 "use client"
 
 import { SidebarProvider, SidebarTrigger } from "@repo/ui/organisms/shadcn/sidebar"
-import { AppSidebar } from "@repo/ui/organisms/custom/home/AppSidebar"
+import { AppSidebar } from "@repo/ui/organisms/sidebar/AppSidebar/v1"
 import { sidebarFooterItems, sidebarItems } from "../../lib/constants/home"
 import { useSession} from "@repo/auth/better-auth/auth-client";
 import { darkLogo, githubRepositoryName, githubUsername, logo, showCredits, supportEmailAddress, title } from "../../lib/constants/appDetails";
 import { RecoilRoot } from "recoil";
 import { Separator } from "@repo/ui/atoms/shadcn/separator";
-import {BreadcrumbsHeader} from "@repo/ui/molecules/custom/v1/BreadcrumbsHeader"
-import { CONNECTIONS } from "../../lib/constants/connections";
-import LoadingPage from "@repo/ui/templates/landing/v1/LoadingPage";
+import {BreadcrumbsHeader} from "@repo/ui/molecules/home/BreadcrumbsHeader/v1"
+import { CONNECTIONS } from "@repo/connections/lib/constants";
+import LoadingPage from "@repo/ui/templates/landing/LoadingPage/v1";
 import { pricingList } from "../../lib/constants/landing-page/pricing";
-import Support from "@repo/ui/organisms/custom/landing/v1/Support";
+import Support from "@repo/ui/organisms/support/Support/v1";
 import { useGlobalData } from "../../context/DataContext";
+import { redirect } from "next/navigation";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -24,8 +25,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     
 
+
     if (isPending) {
-        return <LoadingPage/>
+      return <LoadingPage />;
+    }
+    
+    if (!session) {
+      redirect("/landing");
     }
 
   return (

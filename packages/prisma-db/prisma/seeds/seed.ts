@@ -4,10 +4,10 @@ import { createAdminUser, createGuestUser } from './fakeUsers'
 
 
 async function main () {
-    await createGuestUser()
-    await createAdminUser()
-    await createCategories()
-    await createFTSIndex()
+    // await createGuestUser()
+    // await createAdminUser()
+    // await createCategories()
+    // await createFTSIndex()
 }
 
 main()

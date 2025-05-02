@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 import { symmetricDecrypt, symmetricEncrypt } from '../../../../lib/helper/encryption';
-import { GetConnectionByUserIdAndConnection, updateConnectionDetails } from '../../../../actions/connections';
+import { GetConnectionByUserIdAndConnection, updateConnectionDetails } from '@repo/connections/connections'
 
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get('code');

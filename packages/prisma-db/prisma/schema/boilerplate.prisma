@@ -19,6 +19,8 @@ model User {
   connections   Connection[]
   notifications Notification[]
   workflows     Workflow[]
+  userToProjects UserToGithubProject[]
+  questionsAsked    Question[]
   password      String?
 
   createdAt DateTime @default(now())

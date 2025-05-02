@@ -1,0 +1,133 @@
+model GithubProject {
+    id            String   @id @default(cuid()) @map("_id")
+    name          String
+    githubUrl     String
+
+    deletedAt     DateTime?
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    userToProjects UserToGithubProject[]
+    commits  GithubCommit[]
+    sourceCodeEmbeddings SourceCodeEmbedding[]
+    savedQuestions     Question[]
+    meetings          Meeting[]
+
+    @@schema("github_schema")
+}
+
+model UserToGithubProject {
+    id            String   @id @default(cuid()) @map("_id")
+    userId        String
+    githubProjectId String
+
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    githubProject GithubProject @relation(fields: [githubProjectId], references: [id], onDelete: Cascade)
+
+    @@schema("github_schema")
+    @@unique([userId, githubProjectId])
+}
+
+model GithubCommit {
+    id            String   @id @default(cuid()) @map("_id")
+    projectId     String
+    commitMessage String
+    commitHash    String
+    commitAuthorName String
+    commitAuthorAvatar String
+    commitDate DateTime
+    summary     String
+
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    project GithubProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+    @@schema("github_schema")
+}
+
+model Question {
+    id            String   @id @default(cuid()) @map("_id")
+    question      String
+    answer        String
+
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    fileReferences Json?
+
+    projectId     String
+    project       GithubProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+    userId     String
+    user       User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    @@schema("github_schema")
+}
+
+enum MeetingStatus {
+    PROCESSING
+    COMPLETED
+
+    @@schema("github_schema")
+}
+
+model Meeting {
+    id            String   @id @default(cuid()) @map("_id")
+
+
+    name          String
+    meetingUrl    String
+    status        MeetingStatus @default(PROCESSING)
+
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    projectId     String
+    project       GithubProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+    issues       Issue[]
+    
+    @@schema("github_schema")
+}
+
+model Issue {
+    id            String   @id @default(cuid()) @map("_id")
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    start         String
+    end           String
+    gistId       String
+    headline      String
+    summary       String
+
+    meetingId     String
+    meeting       Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+
+
+    
+    @@schema("github_schema")
+}
+
+
+
+model SourceCodeEmbedding {
+    id            String   @id @default(cuid()) @map("_id")
+    projectId     String
+    
+    sourceCode        String
+    fileName         String
+    summary         String
+    summaryEmbedding Unsupported("vector(1536)")?
+
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    project GithubProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+    @@schema("github_schema")
+
+}

@@ -1,32 +1,41 @@
 version: '3'
 services:
-  db:
-    image: postgres
+  local-db:
+    image: pgvector/pgvector:pg17  # or pg15, pg14 — whatever version you want
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: postgres
     ports:
-      - 5440:5432
-  redis:
-    container_name: redis
-    image: "redis:latest"
-    command: redis-server --bind 0.0.0.0
-    ports:
-      - "6379:6379"
-    restart: always
+      - 5435:5432
     networks:
       - turborepo-network
-  mongodb:
-    container_name: mongodb
-    image: "mongodb/mongodb-community-server:latest"
-    ports:
-      - "27017:27017"
-    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+
+  local-db-backup:
+    image: pgvector/pgvector:pg17  # or pg15, pg14 — whatever version you want
     restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - 5434:5432
     networks:
       - turborepo-network
+
+  cloud-db-backup:
+    image: pgvector/pgvector:pg17
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - 5433:5432
+    networks:
+      - turborepo-network
+
 networks:
   turborepo-network:
     external: true

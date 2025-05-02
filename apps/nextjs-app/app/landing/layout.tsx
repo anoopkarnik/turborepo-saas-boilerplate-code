@@ -2,9 +2,8 @@
 
 import React from 'react'
 import {  useGlobalData } from '../../context/DataContext';
-import Settings from '@repo/ui/organisms/custom/landing/v1/Settings';
-import Support from '@repo/ui/organisms/custom/landing/v1/Support';
-
+import Settings from '@repo/ui/organisms/landing/Settings/v1';
+import Support from '@repo/ui/organisms/support/Support/v1';
 
 const Layout= ({ children }: { children: React.ReactNode }) => {
   const data = useGlobalData(); // Use global data

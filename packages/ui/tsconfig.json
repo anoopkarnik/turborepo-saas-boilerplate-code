@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src"],
+  "include": ["src", "../auth/src/components/authmanagement/organisms/v1/MyAccountSettings.tsx", "../auth/src/components/authmanagement/organisms/v1/SessionSettings.tsx", "../payments/src/components/molecules/v1/PricingItem.tsx", "../payments/src/components/molecules/v1/ProgressWithCredits.tsx", "../payments/src/components/organisms/v1/PlansBilling.tsx", "../payments/src/components/organisms/v1/Payment.tsx", "../payments/src/components/molecules/v1/UpgradeToProButton.tsx"],
   "exclude": ["node_modules", "dist"],
 }

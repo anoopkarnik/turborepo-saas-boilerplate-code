@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import Navbar from '@repo/ui/organisms/custom/landing/v1/Navbar';
+import Navbar from '@repo/ui/organisms/landing/Navbar/v1';
 import { useGlobalData } from '../../../context/DataContext';
 
 

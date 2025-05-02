@@ -2,13 +2,15 @@
 
 import { useSearchParams } from 'next/navigation'
 import React, { Suspense, useEffect, useState } from 'react'
-import LoadingCard from '@repo/ui/organisms/custom/auth/v1/LoadingCard'
-import RegisterCard from '@repo/ui/organisms/custom/auth/v1/RegisterCard'
-import { author, credential, quote } from '../../../lib/constants/auth'
-import Quote from '@repo/ui/organisms/custom/auth/v1/Quote'
+
+import { quote } from '../../../lib/constants/auth'
+
 import { authClient } from '@repo/auth/better-auth/auth-client'
 import { z } from 'zod'
-import { RegisterSchema } from '@repo/zod/auth'
+import { RegisterSchema } from '@repo/auth/utils/zod'
+import RegisterCard from '@repo/auth/components/authflow/organisms/v1/RegisterCard'
+import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
+import LoadingCard from '@repo/ui/organisms/misc/LoadingCard/v1'
 
 const RegisterContent = () => {
   const searchParams = useSearchParams()
@@ -35,7 +37,7 @@ const RegisterContent = () => {
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 '>
-        <div className='flex items-center justify-center bg-gradient-to-br from-primary to-black dark:bg-gradient-to-br'>
+        <div className='flex items-center justify-center bg-gradient-to-br from-primary to-sidebar dark:bg-gradient-to-br'>
             <RegisterCard showEmail={true} 
               showGoogleProvider={true} showGithubProvider={true} 
               showLinkedinProvider={true} onEmailSubmit={register} 
@@ -44,8 +46,8 @@ const RegisterContent = () => {
               onLinkedinProviderSubmit={()=>loginWithSocials('linkedin')} 
                 errorMessage={urlError}/>
         </div>
-        <div className='invisible lg:visible bg-white'>
-            <Quote quote={quote} author={author} credential={credential}/>
+        <div className='invisible lg:visible '>
+            <Quote quote={quote} />
         </div>
     </div>
   )

@@ -1,7 +1,7 @@
 // apps/backend/index.ts
 import express from "express";
-import {TrainModel, GenerateImage, GenerateImagesFromPack} from "@repo/zod/photo-ai/index"
-import db from "@repo/prisma-db/client"
+import  {TrainModel, GenerateImage, GenerateImagesFromPack} from "@repo/zod/photo-ai/index"
+import db from '@repo/prisma-db/client'
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import cors from "cors";
@@ -136,14 +136,14 @@ app.post("/pack/generate", authMiddleware, async(req, res) => {
   }) 
 
   let requestIds: {request_id: string, response_url: string }[] = await Promise.all(prompts.map(
-    async (prompt) => {
+    async (prompt:any) => {
       return await falAiModel.generateImage(prompt.prompt, parsedBody.data.modelId);
     }
   ));
 
   // Call the image generation API here with the parsed data
   const images = await db.outputImages.createManyAndReturn({
-    data: prompts.map((prompt,index) => ({
+    data: prompts.map((prompt:any,index:number) => ({
       prompt: prompt.prompt,
       modelId: parsedBody.data.modelId,
       // @ts-ignore
@@ -153,7 +153,7 @@ app.post("/pack/generate", authMiddleware, async(req, res) => {
     }))
   })
   res.json({
-    images: images.map((image) => image.id)
+    images: images.map((image:any) => image.id)
   })
 
 })

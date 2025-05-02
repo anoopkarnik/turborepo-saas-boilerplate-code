@@ -1,11 +1,11 @@
 "use client"
-import LandingPage from "@repo/ui/templates/landing/v1/LandingPage";
+import LandingPage from "@repo/ui/templates/landing/LandingPage/v1";
 
 import { useGlobalData } from "../../context/DataContext";
 import { useToast } from "@repo/ui/hooks/use-toast";
 import { createContactAction } from "../../actions/email";
-import LoadingPage from "@repo/ui/templates/landing/v1/LoadingPage";
-import Navbar from "@repo/ui/organisms/custom/landing/v1/Navbar";
+import LoadingPage from "@repo/ui/templates/landing/LoadingPage/v1";
+import Navbar from "@repo/ui/organisms/landing/Navbar/v1";
 
 export default function Landing() {
   

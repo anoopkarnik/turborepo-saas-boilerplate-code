@@ -2,13 +2,15 @@
 
 import {  useRouter } from 'next/navigation'
 import React, { Suspense, useState } from 'react'
-import LoadingCard from '@repo/ui/organisms/custom/auth/v1/LoadingCard'
-import LoginCard from '@repo/ui/organisms/custom/auth/v1/LoginCard'
-import Quote from '@repo/ui/organisms/custom/auth/v1/Quote'
-import { author, credential, quote } from '../../../lib/constants/auth'
+
+import { quote } from '../../../lib/constants/auth'
 import { authClient } from '@repo/auth/better-auth/auth-client'
 import { z } from 'zod'
-import { LoginSchema } from '@repo/zod/auth'
+import { LoginSchema } from '@repo/auth/utils/zod'
+import LoginCard from '@repo/auth/components/authflow/organisms/v1/LoginCard'
+import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
+import LoadingCard from '@repo/ui/organisms/misc/LoadingCard/v1'
+import { waitFor } from '../../../lib/helper/waitFor'
 
 
 const LoginContent = () => {
@@ -18,6 +20,7 @@ const LoginContent = () => {
 
   const loginWithSocials = async (type: string) => {
     const {error} = await authClient.signIn.social({provider: type})
+    await waitFor(2000)
     if (error) {
       setError(error.message)
     } else {
@@ -36,7 +39,7 @@ const LoginContent = () => {
 
   return (
     <div className='min-h-screen grid grid-cols-1 lg:grid-cols-2 '>
-        <div className='flex items-center justify-center bg-gradient-to-br from-primary to-black dark:bg-gradient-to-br'>
+        <div className='flex items-center justify-center bg-gradient-to-br from-primary to-sidebar dark:bg-gradient-to-br'>
             <LoginCard showEmail={true} showGoogleProvider={true} 
             showGithubProvider={true}
               showLinkedinProvider={true} onEmailSubmit={loginWithEmail} 
@@ -45,8 +48,8 @@ const LoginContent = () => {
               onLinkedinProviderSubmit={()=>loginWithSocials('linkedin')} 
               errorMessage={error}/>
         </div>
-        <div className='hidden lg:block bg-white'>
-            <Quote quote={quote} author={author} credential={credential}/>
+        <div className='hidden lg:block '>
+            <Quote quote={quote}/>
         </div>
     </div>
   )

@@ -1,9 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server"
-import { getToken } from "next-auth/jwt";
 import { betterFetch } from "@better-fetch/fetch";
 import { Session } from "@repo/auth/better-auth/auth";
 
-const publicRoutes = ["/landing",]
+const publicRoutes = ["/landing"]
 
 const authRoutes =["/sign-in","/sign-up","/error","/forgot-password","/reset-password",'/email-verified']
 

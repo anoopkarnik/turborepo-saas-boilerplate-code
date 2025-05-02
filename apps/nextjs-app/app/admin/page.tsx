@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/molecules/shadcn/card";
-import UsersTable from "../../components/admin/UsersTable";
+import UsersTable from "@repo/ui/organisms/admin/UsersTable";
 
 export default async function AdminDashboard() {
     return (

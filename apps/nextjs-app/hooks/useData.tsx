@@ -14,7 +14,7 @@ import { termsOfService } from "../lib/constants/legal/termsOfService";
 import { privacyPolicy } from "../lib/constants/legal/privacyPolicy";
 import { cancellationRefundPolicies } from "../lib/constants/legal/cancellationRefundPolicies";
 import { contactUs } from "../lib/constants/legal/contactUs";
-import { getLegalDetails, getSaaSDetails } from "../actions/strapi/landing";
+import { getLegalDetails, getSaaSDetails } from "@repo/storage/strapi/landing";
 
 export const useData = () => {
   const [isLoading, setIsLoading] = useState(true);

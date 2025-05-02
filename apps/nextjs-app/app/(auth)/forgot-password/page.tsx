@@ -1,10 +1,10 @@
 'use client'
 
 import React, {useState } from 'react'
-import ForgotPasswordCard from '@repo/ui/organisms/custom/auth/v1/ForgotPasswordCard'
-import Quote from '@repo/ui/organisms/custom/auth/v1/Quote'
-import { author, credential, quote } from '../../../lib/constants/auth'
+import {quote } from '../../../lib/constants/auth'
 import { authClient } from '@repo/auth/better-auth/auth-client'
+import ForgotPasswordCard from '@repo/auth/components/authflow/organisms/v1/ForgotPasswordCard'
+import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
 
 const ForgotPasswordClient = () => {
 
@@ -29,11 +29,11 @@ const ForgotPasswordClient = () => {
 
   return (
     <div className='min-h-screen grid grid-cols-1 lg:grid-cols-2 '>
-        <div className='flex items-center justify-center bg-gradient-to-br from-primary to-black dark:bg-gradient-to-br'>
+        <div className='flex items-center justify-center bg-gradient-to-br from-primary to-sidebar dark:bg-gradient-to-br'>
             <ForgotPasswordCard resetFunction={ResetPasswordFunction} errorMessage={error} successMessage={success}/>
         </div>
-        <div className='hidden lg:block bg-white'>
-            <Quote quote={quote} author={author} credential={credential}/>
+        <div className='hidden lg:block '>
+            <Quote quote={quote}/>
         </div>
     </div>
   )

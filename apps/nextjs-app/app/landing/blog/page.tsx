@@ -1,8 +1,8 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { InboxIcon } from 'lucide-react';
-import BlogListPage from '@repo/ui/templates/landing/v1/BlogListPage';
-import { getBlogs } from '../../../actions/strapi/blogs';
+import BlogListPage from '@repo/ui/templates/landing/BlogListPage/v1';
+import { getBlogs } from '@repo/storage/strapi/blogs';
 
 export default function  Blogs() {
     const [blogs, setBlogs] = useState([]);

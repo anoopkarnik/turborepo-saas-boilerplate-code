@@ -1,8 +1,10 @@
 "use client"
-import ErrorCard from '@repo/ui/organisms/custom/auth/v1/ErrorCard'
-import Quote from '@repo/ui/organisms/custom/auth/v1/Quote'
+
+
 import React from 'react'
-import { author, credential, quote } from '../../../lib/constants/auth'
+import { quote } from '../../../lib/constants/auth'
+import ErrorCard from '@repo/auth/components/authflow/organisms/v1/ErrorCard'
+import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
 
 const ErrorTemp = () => {
 
@@ -12,7 +14,7 @@ const ErrorTemp = () => {
               <ErrorCard errorMessage={"Oops! Something went wrong!"}/>
           </div>
           <div className='invisible lg:visible bg-white'>
-              <Quote quote={quote} author={author} credential={credential}/>
+              <Quote quote={quote} />
           </div>
     </div>
   )
