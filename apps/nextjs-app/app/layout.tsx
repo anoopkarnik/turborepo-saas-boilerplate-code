@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "../../../packages/ui/src/styles/shadcn/shadcn-green.css"
 import "../../../packages/ui/src/styles/custom/scroll.css"
 import "../../../packages/ui/src/styles/custom/heroBackgroundAnimation.css"
+import "../../../packages/ui/src/styles/custom/spotlight.css"
 import { geistSans, geistMono, cyberdyne } from "@repo/ui/typography/font";
 import { productDetails, title } from "../lib/constants/appDetails";
 import { ThemeProvider } from "@repo/ui/providers/theme-provider";

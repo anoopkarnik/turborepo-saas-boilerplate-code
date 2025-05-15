@@ -23,7 +23,7 @@ export async function generateEmbedding(summary: string,modelType:string='text-e
     apiKey?:string
 ) {
     if(!apiKey){
-        apiKey = await getApiKeyFromType('openai')
+        apiKey = await getApiKeyFromType('OpenAI');
     }
     const openai = new OpenAI({
       apiKey: apiKey,

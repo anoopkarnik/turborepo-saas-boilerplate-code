@@ -22,7 +22,7 @@ const LandingPage = ({heroSection,featureSection,testimonialSection,
   return (
     <div className='flex flex-col items-center justify-center'>
       <HeroSection heroSection={heroSection} features={featureSection?.featuresWithDescription} testimonials={testimonialSection?.testimonials} 
-      teamList={teamSection?.teamList} pricingList={pricingSection?.pricingList}/>
+      teamList={teamSection?.teamList} pricingList={pricingSection?.pricingList} videoUrl={heroSection?.videoUrl}/>
       {featureSection  && (featureSection.featureList.length>0 || featureSection.featuresWithDescription.length>0) && 
        <FeatureSection featureSection={featureSection} />}
       {testimonialSection && 

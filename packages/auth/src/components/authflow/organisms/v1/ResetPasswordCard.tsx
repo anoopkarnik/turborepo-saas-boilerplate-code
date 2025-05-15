@@ -35,7 +35,7 @@ const ResetPasswordCard = ({errorMessage,successMessage,token,resetFunction}:Res
   }
   const router = useRouter();
   return (
-    <Card className='w-[40%] text-black shadow-xl shadow-white/20'>
+    <Card className='w-[40%]shadow-xl shadow-white/20'>
       <CardHeader>
         <div className='text-4xl font-bold text-center'>Reset Password</div>
         <div className='text-md font-extralight text-center'>Enter New Password</div>

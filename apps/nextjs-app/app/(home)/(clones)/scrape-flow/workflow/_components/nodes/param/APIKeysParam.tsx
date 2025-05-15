@@ -5,8 +5,8 @@ import {ParamProps} from '@repo/ts-types/scrape-flow/param'
 import { Label } from '@repo/ui/atoms/shadcn/label'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/select'
 import { useQuery } from '@tanstack/react-query'
-import { ConnectionType } from '@repo/ts-types/home/v1'
 import { GetConnectionsForUser } from '../../../../../../../../../../packages/connections/src/connections'
+import { ConnectionType } from '@repo/connections/lib/ts-types'
 
 const APIKeysParam = ({param,updateNodeParamValue,value}:ParamProps) => {
   const id = useId()

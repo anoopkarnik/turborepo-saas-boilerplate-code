@@ -10,7 +10,7 @@ import { Skeleton } from '../../../molecules/shadcn/skeleton';
 
 export const SupportChat = () => {
   const [messages, setMessages] = useState<any[]>([]);
-  const [userInput, setUserInput] = useState<string>('Hello');
+  const [userInput, setUserInput] = useState<string>('');
   const [waitingForReply, setWaitingForReply] = useState(false);
   const [firstMessage, setFirstMessage] = useState(true);
 
@@ -35,7 +35,8 @@ export const SupportChat = () => {
 
   const handleChatOpening = async () => {
     if(firstMessage){
-      await sendMessage();
+      setMessages((prevMessages) => [...prevMessages, { role: 'assistant',
+         value: "Hello! How can I assist you today?" }]);
       setFirstMessage(false);
     }
   }

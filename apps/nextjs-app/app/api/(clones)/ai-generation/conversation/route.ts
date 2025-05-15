@@ -13,8 +13,8 @@ const openai = new OpenAI(configuration);
 export async function POST(req: Request){
     try{
         const session = await auth.api.getSession({
-        headers: await headers(),
-    });;
+            headers: await headers(),
+        });;
         if(!session){
             return NextResponse.json({error: "Unauthorized"}, {status: 401});
         }

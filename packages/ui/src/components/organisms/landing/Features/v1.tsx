@@ -32,7 +32,7 @@ const Features = ({featureSection}:{featureSection:FeatureSectionProps}) => {
       <p className="text-muted-foreground text-xl mt-4 mb-8 ">
         {featureSection.description}
       </p>
-
+{/* 
       <div className="flex flex-wrap md:justify-center gap-4 mb-4">
         {featureSection.featureList?.map((feature: any) => (
           <div key={feature.title}>
@@ -44,7 +44,7 @@ const Features = ({featureSection}:{featureSection:FeatureSectionProps}) => {
             </Badge>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {featureSection.featuresWithDescription?.map((feature) => (
@@ -53,7 +53,7 @@ const Features = ({featureSection}:{featureSection:FeatureSectionProps}) => {
               <CardTitle>{feature.title}</CardTitle>
             </CardHeader>
 
-            <CardContent>{feature.description}</CardContent>
+            {/* <CardContent>{feature.description}</CardContent> */}
 
             <CardFooter>
               <img

@@ -38,7 +38,7 @@ const Testimonials = ({testimonialSection}:{testimonialSection:TestimonialSectio
   }, [api, current]);
 
   return (
-    <div className="w-full  py-24 sm:py-32 space-y-8 relative">
+    <section id="testimonials" className="w-full  py-24 sm:py-32 space-y-8 relative">
       <div className="container mx-auto">
         <div className="flex flex-col gap-10">
         <div>
@@ -85,7 +85,7 @@ const Testimonials = ({testimonialSection}:{testimonialSection:TestimonialSectio
       </div>
                   {/* Shadow effect */}
                   <div className="shadow"></div>
-    </div>
+    </section>
   );
 };
 

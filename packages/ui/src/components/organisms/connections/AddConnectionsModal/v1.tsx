@@ -3,7 +3,7 @@ import { FormControl, FormField, FormItem } from '../../../molecules/shadcn/form
 import { Button } from '../../../atoms/shadcn/button'
 import { useRouter } from 'next/navigation';
 import { useToast } from '../../../../hooks/use-toast';
-import { ConnectionCardFormProps } from '@repo/ts-types/home/v1';
+import { ConnectionCardFormProps } from '@repo/connections/lib/ts-types';
 import {useSession} from "@repo/auth/better-auth/auth-client";
 import { createConnectionAction } from '@repo/server-utils/connections';
 import { FloatingLabelInput } from '../../../molecules/shadcn/floating-label-input';

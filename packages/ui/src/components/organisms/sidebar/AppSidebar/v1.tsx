@@ -14,7 +14,7 @@ import ProgressWithCredits from "../../../../../../payments/src/components/molec
 import NotificationSheet from "../../home/NotificationSheet/v1";
 
 export function AppSidebar({name,logo,darkLogo,items,footerItems,pricingList,documentationLink,
-    supportEmailAddress,githubUsername,githubRepositoryName,connections,showCredits,userDetails}:sidebarProps) {
+    supportEmailAddress,githubUsername,githubRepositoryName,showCredits,userDetails}:sidebarProps) {
         
     return (
         <Sidebar>
@@ -39,7 +39,7 @@ export function AppSidebar({name,logo,darkLogo,items,footerItems,pricingList,doc
                 <ProgressWithCredits creditsUsed={userDetails?.creditsUsed } creditsTotal={userDetails?.creditsTotal}/>}
                 <SidebarUser  pricingList={pricingList}
                       documentationLink={documentationLink} supportEmailAddress={supportEmailAddress} githubUsername={githubUsername} 
-                      githubRepositoryName={githubRepositoryName} connections={connections}/>
+                      githubRepositoryName={githubRepositoryName} />
             </SidebarFooter>
         </Sidebar>
     );

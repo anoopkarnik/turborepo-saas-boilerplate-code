@@ -38,7 +38,7 @@ import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation"
 
 const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,githubRepositoryName,
-   connections,pricingList}:UserProps) => {
+    pricingList}:UserProps) => {
 
   const { data:session,status } = useSession();
 
@@ -113,7 +113,6 @@ const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,git
                     setIsDropdownOpen(true)
                   }
                 }}
-                connections={connections}
                 pricingList={pricingList}
                 supportEmailAddress={supportEmailAddress}
               >

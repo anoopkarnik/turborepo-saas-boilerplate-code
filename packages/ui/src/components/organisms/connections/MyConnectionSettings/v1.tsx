@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import SettingsHeading from '../../../molecules/settings/SettingsHeader/v1'
-import { ConnectionCardProps } from '@repo/ts-types/home/v1'
+import { ConnectionCardProps } from '@repo/connections/lib/ts-types'
 import ConnectionCard from '../../../molecules/connections/ConnectionCard/v1'
 import { deleteConnectionAction, getConnectionsAction } from '@repo/server-utils/connections'
 import { useSession} from "@repo/auth/better-auth/auth-client";

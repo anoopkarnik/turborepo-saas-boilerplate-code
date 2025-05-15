@@ -8,7 +8,6 @@ import { darkLogo, githubRepositoryName, githubUsername, logo, showCredits, supp
 import { RecoilRoot } from "recoil";
 import { Separator } from "@repo/ui/atoms/shadcn/separator";
 import {BreadcrumbsHeader} from "@repo/ui/molecules/home/BreadcrumbsHeader/v1"
-import { CONNECTIONS } from "@repo/connections/lib/constants";
 import LoadingPage from "@repo/ui/templates/landing/LoadingPage/v1";
 import { pricingList } from "../../lib/constants/landing-page/pricing";
 import Support from "@repo/ui/organisms/support/Support/v1";
@@ -48,7 +47,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             supportEmailAddress={supportEmailAddress}
             githubUsername={githubUsername}
             githubRepositoryName={githubRepositoryName}
-            connections={CONNECTIONS}
             userDetails={session?.user}
             showCredits={showCredits}
           />

@@ -8,7 +8,7 @@ export const getSaaSDetails = async () => {
         const database = "saas-landing-pages";
         const filter = "filter[slug][$eq]=saas-landing-page-1"
         const populateNavbarSection = "populate[navbarSection][populate][0]=routeList"
-        const populateHeroSection = "populate[heroSection]=true"
+        const populateHeroSection = "populate[heroSection][populate][0]=images"
         const populatePricingSection = "populate[pricingSection][populate][pricingList][populate][0]=benefitList"
         const populateFaqSection = "populate[faqSection][populate][0]=faqList"
         const populateNewsletterSection = "populate[newsletterSection]=true"

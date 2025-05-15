@@ -44,7 +44,7 @@ const data = {
 }
 
 
-export function SettingsDialog({children, open: controlledOpen, onOpenChange: setControlledOpen,connections,
+export function SettingsDialog({children, open: controlledOpen, onOpenChange: setControlledOpen,
   pricingList,supportEmailAddress,openedTab}: SettingsDialogProps) {
   
     const { data:session,status } = useSession();
@@ -114,8 +114,6 @@ export function SettingsDialog({children, open: controlledOpen, onOpenChange: se
           <main className="flex flex-1 flex-col overflow-auto h-[90vh] bg-sidebar">
             {currentOpenedTab === "My Account" && 
             <MyAccountSettings/>}
-            {currentOpenedTab === "My Connections" && 
-            <MyConnectionsSettings connections={connections} />}
             {currentOpenedTab === "Sessions" && 
             <SessionSettings />}
             {currentOpenedTab === "Plans & Billing" &&

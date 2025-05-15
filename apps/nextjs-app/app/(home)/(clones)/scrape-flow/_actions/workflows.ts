@@ -155,6 +155,7 @@ export async function RunWorkflow(form: {workflowId:string, flowDefinition?:stri
         }
         executionPlan = result.executionPlan;
     }
+    console.log("Execution plan",executionPlan);
     
     const execution = await db.workflowExecution.create({
         data:{

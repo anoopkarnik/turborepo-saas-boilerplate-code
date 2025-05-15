@@ -6,4 +6,11 @@ export interface HeroSectionProps  {
     tagline: string;
     description: string;
     version?: string;
+    videoUrl?: string;
+    images?: imageWithTitleProps[];
+}
+
+  export interface imageWithTitleProps {
+    title: string;
+    imageUrl: string;
   }

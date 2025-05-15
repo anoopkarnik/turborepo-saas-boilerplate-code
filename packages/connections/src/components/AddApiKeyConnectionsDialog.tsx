@@ -14,7 +14,7 @@ import { Textarea } from '@repo/ui/atoms/shadcn/textarea'
 import { useMutation } from '@tanstack/react-query'
 import { useToast } from '@repo/ui/hooks/use-toast'
 import {Loader2} from 'lucide-react'
-import { ConnectionCardProps } from '@repo/ts-types/home/v1'
+import { ConnectionCardProps } from '@repo/connections/lib/ts-types'
 import { AddApiKeyConnection } from '../connections'
 
 const AddApiKeyConnectionsDialog = ({connection}:{connection:ConnectionCardProps}) => {

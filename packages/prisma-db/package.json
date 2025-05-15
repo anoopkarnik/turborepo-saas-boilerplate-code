@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "vitest",
     "postgres:generate": "npx prisma generate --schema prisma/schema",
     "postgres:migrate": "npx prisma migrate dev --schema prisma/schema",
     "mongo:generate": "npx prisma generate --schema prisma-mongo/schema.prisma",
     "mongo:migrate": "npx prisma db push --schema prisma-mongo/schema.prisma"
+  },
+  "prisma": {
+    "seed": " ts-node --transpile-only prisma/seeds/seed.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,5 @@
 # Stage 1: Builder
-FROM node:18-alpine AS builder
+FROM node:18
 
 # Create app directory inside container
 WORKDIR /app
@@ -12,7 +12,7 @@ RUN npm install
 
 # Build only the node-backend app
 RUN npm run db:generate
-RUN npm run build --workspace=apps/node-backend
+RUN cd apps/node-backend && npm run build
 
 # Expose the backend port
 EXPOSE 8020

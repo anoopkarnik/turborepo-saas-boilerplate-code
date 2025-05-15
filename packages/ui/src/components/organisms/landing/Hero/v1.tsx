@@ -12,9 +12,9 @@ import { PricingProps } from "@repo/ts-types/landing-page/pricing";
 import TypewriterComponent from 'typewriter-effect';
 
 
-const Hero = ({heroSection, features ,testimonials, pricingList,teamList}:{
+const Hero = ({heroSection, features ,testimonials, pricingList,teamList,videoUrl}:{
   heroSection:HeroSectionProps ,features:FeatureWithDescriptionProps[]  | undefined,testimonials:TestimonialProps[] | undefined,
-  pricingList: PricingProps[]| undefined, teamList:TeamProps[]  | undefined}) => {
+  pricingList: PricingProps[]| undefined, teamList:TeamProps[]  | undefined, videoUrl: string | undefined}) => {
     const [taglineArray,setTaglineArray] = useState<string[]>([])
     const router = useRouter()
     useEffect(()=>{

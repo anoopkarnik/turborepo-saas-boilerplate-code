@@ -18,6 +18,7 @@ function isValidSecret(secret: string){
 }
 
 export async function GET(request: Request){
+    console.log("Executing workflow");
     const authHeader = request.headers.get("Authorization");
 
     if ( !authHeader || !authHeader.startsWith("Bearer ")){

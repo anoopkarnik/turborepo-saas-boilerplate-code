@@ -17,6 +17,7 @@ import { decrementCredits } from "../../../../../../../../packages/payments/src/
 
 
 export async function executeWorkflow(executionId: string, nextRunAt?: Date) {
+    console.log("Executing workflow with id", executionId)
     const execution = await db.workflowExecution.findUnique({
         where: {
             id: executionId
@@ -37,7 +38,6 @@ export async function executeWorkflow(executionId: string, nextRunAt?: Date) {
 
     // Setup execution environment
     const environment = {phases:{}}
-
     // Initialize workflow Execution
     await initializeWorkflowExecution(executionId, execution.workflowId, nextRunAt)
 

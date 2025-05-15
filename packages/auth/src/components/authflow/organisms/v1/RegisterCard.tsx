@@ -53,7 +53,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
   return (
     <Card className='w-[400px] shadow-xl shadow-white/20'>
       <CardHeader>
-        <div className='text-4xl font-bold text-center text-black'>Register</div>
+        <div className='text-4xl font-bold text-center '>Register</div>
         <div className='text-md font-extralight text-center'>Create an account</div>
       </CardHeader>
       {showEmail &&
