@@ -1,6 +1,7 @@
 // sectionRegistry.ts
 import FAQ from '../../organisms/landing/FAQ/v1';
-import Features from '../../organisms/landing/Features/v1';
+import FeaturesV1 from '../../organisms/landing/Features/v1';
+import FeaturesV2 from '../../organisms/landing/Features/v2';
 import Footer from '../../organisms/landing/Footer/v1';
 import HeroV1 from '../../organisms/landing/Hero/v1';
 import HeroV2 from '../../organisms/landing/Hero/v2';
@@ -36,7 +37,8 @@ export const sectionRegistry = {
     v1: Pricing
   },
   features: {
-    v1: Features
+    v1: FeaturesV1,
+    v2: FeaturesV2
   }
   // Add other sections like team, faq, pricing, etc.
 };

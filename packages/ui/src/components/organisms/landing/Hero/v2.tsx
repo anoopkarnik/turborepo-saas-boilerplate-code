@@ -12,7 +12,7 @@ import TypewriterComponent from 'typewriter-effect';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../../../molecules/shadcn/carousel";
 import { BackgroundBeams } from "../../../molecules/aceternity/background-beams";
 import Image from "next/image";
-import { Spotlight } from "../../../molecules/aceternity/Spotlight";
+import { Spotlight } from "../../../molecules/aceternity/spotlight-new";
 import { LampContainer } from "../../../molecules/aceternity/lamp";
 import { ContainerScroll } from "../../aceternity/container-scroll-animation";
 
@@ -30,6 +30,7 @@ const Hero = ({heroSection, features ,testimonials, pricingList,teamList,videoUr
     },[heroSection.tagline,heroSection.getStartedLink,heroSection.documentationLink,heroSection.blogLink])
   return (
     <section className="container flex flex-col justify-center items-center py-20 md:py-32  gap-10 relative ">
+
         <div className="text-center space-y-6 lg:mt-28">
             <main className="text-5xl md:text-6xl text-center leading-tight">
               <h1 className="inline-block">
@@ -92,8 +93,8 @@ const Hero = ({heroSection, features ,testimonials, pricingList,teamList,videoUr
       to-[#03a3d7] blur-3xl max-w-5xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 " /> */}
 
         <Carousel className="w-full z-10   ">
-        <ContainerScroll titleComponent={<></>}>
-              <CarouselContent className="">
+            <ContainerScroll titleComponent={<></>}>
+                <CarouselContent className="">
 
 
                     {heroSection.images?.map((image, index) => (
@@ -111,13 +112,13 @@ const Hero = ({heroSection, features ,testimonials, pricingList,teamList,videoUr
                             </div>
                         </CarouselItem>
                     ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext/>
-              </ContainerScroll>
-          </Carousel>
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext/>
+            </ContainerScroll>
+        </Carousel>
 
-         </div>
+      </div>
 
       <BackgroundBeams />
     </section>

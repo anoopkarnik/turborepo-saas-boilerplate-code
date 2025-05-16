@@ -3,6 +3,7 @@ export interface TestimonialProps {
     name: string;
     userName: string;
     comment: string;
+    title?: string;
   }
 
 export interface TestimonialSectionProps {

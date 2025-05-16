@@ -60,22 +60,23 @@ const Testimonials = ({testimonialSection}:{testimonialSection:TestimonialSectio
             <CarouselContent>
                 {testimonialSection.testimonials?.map((testimonial) => (
                     <CarouselItem className="lg:basis-1/4" key={testimonial.name}>
-                    <div className="bg-muted rounded-md p-6 min-h-[200px] ">
-                        <div className="flex flex-col justify-between ">
+                    <div className="bg-muted rounded-md p-6 min-h-[200px] flex flex-col justify-between ">
                             <div className="flex flex-col">
                                 <h3 className="text-exmphasis tracking-tight">
                                 {testimonial.comment}
                                 </h3>
                             </div>
-                            <p className="flex flex-row gap-2 text-sm items-center">
-                                <span className="text-muted-foreground">By</span>{" "}
-                                    <Avatar className="h-4 w-4 overflow-hidden">
-                                        <AvatarImage src={testimonial.image} className="h-full w-full object-contain" />
-                                        <AvatarFallback>{testimonial.userName.slice(0,1)}</AvatarFallback>
-                                    </Avatar>
-                                <span>{testimonial.name}</span>
-                            </p>
-                        </div>
+                            <div className="flex flex-row gap-2 items-center">
+                                <Avatar className="h-10 w-10 overflow-hidden">
+                                    <AvatarImage src={testimonial.image} className="h-full w-full object-cover" />
+                                    <AvatarFallback>{testimonial.userName.slice(0,1)}</AvatarFallback>
+                                </Avatar>
+                                <div className="flex flex-col items-start text-">
+                                    <div className="text-sm ">{testimonial.name}</div>
+                                    <div className="text-description">{testimonial.title}</div>
+                                </div>
+                               
+                            </div>
                     </div>
                     </CarouselItem>
                 ))}

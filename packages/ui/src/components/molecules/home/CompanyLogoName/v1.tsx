@@ -18,10 +18,10 @@ export function CompanyLogoName({logo,darkLogo,name}:CompanyLogoNameProps) {
         className="ml-2 flex items-center gap-2 font-cyberdyne cursor-pointer"
       >
         {theme === "dark" ?
-          <Image src={darkLogo} alt={name} width={30} height={30} /> : 
-          <Image src={logo} alt={name} width={30} height={30} />}
+          <Image src={darkLogo} alt={name} width={35} height={30} /> : 
+          <Image src={logo} alt={name} width={35} height={30} />}
           <div className=" hidden lg:flex flex-col items-start  leading-none bg-gradient-to-r from-white 
-          to-white bg-clip-text text-transparent text-sm font-light ">
+          to-white bg-clip-text text-transparent text-md font-bold ">
             <div>{name?.split(' ').slice(0, Math.ceil(name?.split(' ').length / 2)).join(" ")}</div>
             <div>{name?.split(' ').slice(Math.ceil(name?.split(' ').length / 2)).join(" ")}</div>
           </div>

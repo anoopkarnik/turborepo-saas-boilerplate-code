@@ -2,6 +2,7 @@ export interface FeatureWithDescriptionProps {
     title: string;
     href?: string;
     description: string;
+    category?: string;
   }
 
 export interface FeatureListProps {

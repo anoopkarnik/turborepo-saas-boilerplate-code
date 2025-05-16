@@ -1,6 +1,7 @@
 "use client"
 import { LandingPageProps } from '@repo/ts-types/landing-page/landing-page';
 import { sectionRegistry } from '../SectionRegistry';
+import { Spotlight } from '../../../molecules/aceternity/spotlight-new';
 
 const LandingPage = ({heroSection,featureSection,testimonialSection,
   teamSection,faqSection,newsletterSection,pricingSection,footerSection,functionsToUse
@@ -20,7 +21,8 @@ const LandingPage = ({heroSection,featureSection,testimonialSection,
     
 
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className='flex flex-col items-center justify-center relative overflow-x-hidden'>
+              <Spotlight />
       <HeroSection heroSection={heroSection} features={featureSection?.featuresWithDescription} testimonials={testimonialSection?.testimonials} 
       teamList={teamSection?.teamList} pricingList={pricingSection?.pricingList} videoUrl={heroSection?.videoUrl}/>
       {featureSection  && (featureSection.featureList.length>0 || featureSection.featuresWithDescription.length>0) && 
