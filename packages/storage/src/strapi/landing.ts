@@ -45,8 +45,7 @@ export const getLegalDetails = async () => {
       const populatePrivacyPolicy = "populate[privacyPolicy]=true"
       const populateCancellationRefundPolicies = "populate[cancellationRefundPolicies]=true"
       const populateContactUs = "populate[contactUs]=true"
-      const url = `${baseUrl}${database}?${filter}&${populateNavbarSection}&${populateTermsOfService}&
-      ${populatePrivacyPolicy}&${populateCancellationRefundPolicies}&${populateContactUs}`;
+      const url = `${baseUrl}${database}?${filter}&${populateNavbarSection}&${populateTermsOfService}&${populatePrivacyPolicy}&${populateCancellationRefundPolicies}&${populateContactUs}`;
       const config = {
           method: 'get',
           maxBodyLength: Infinity,

@@ -105,10 +105,10 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
       <CardFooter className='text-description text-wrap mx-2 text-center'>
         <span>
           By signing up, you agree to our <button
-            onClick={() => router.push('/landing/terms-of-service')} 
+            onClick={() => router.push('/landing/legal/terms-of-service')} 
             className='cursor-pointer text-blue-400 hover:text-blue-800'> Terms of Service, </button> 
           <button
-            onClick={() => router.push('/landing/privacy-policy')} 
+            onClick={() => router.push('/landing/legal/privacy-policy')} 
             className='cursor-pointer text-blue-400 hover:text-blue-800'> Privacy Policy.
           </button>
         </span>
