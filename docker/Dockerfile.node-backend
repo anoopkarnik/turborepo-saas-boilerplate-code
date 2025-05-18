@@ -1,34 +1,43 @@
-# Stage 1: Builder
+# --- Builder Stage ---
 FROM node:18 AS builder
 
 WORKDIR /app
 
-# Copy only package manifests for install (enables layer caching)
+# Copy ONLY root package files and lockfile for dependency installation layer
 COPY package.json package-lock.json ./
-COPY apps/node-backend/package.json apps/node-backend/
-# (repeat for any shared packages, e.g., COPY packages/db/package.json packages/db/)
-# Add additional workspaces as needed
 
+# Copy the workspace package.jsons (so npm install works with monorepo deps)
+COPY apps/node-backend/package.json apps/node-backend/
+# Repeat this line for each dependency your backend needs!
+COPY packages/zod-validation/package.json packages/zod-validation/
+COPY packages/prisma-db/package.json packages/prisma-db/
+# ...repeat for any other local packages needed by node-backend...
+
+# Install dependencies (npm workspaces handles local packages)
 RUN npm install
 
-# Now copy the rest of the code
+# Copy the rest of the code
 COPY . .
 
-# Build the backend app only
-RUN npm run db:generate
-RUN npm run build --workspaces
+# Build everything (or just the backend and its deps)
+RUN cd apps/node-backend && npm run build
 
-# Stage 2: Runner
+# --- Production Stage ---
 FROM node:18 AS runner
 
 WORKDIR /app
 
-# Copy built code and node_modules from builder
+# Copy only built backend app and node_modules from builder
 COPY --from=builder /app/apps/node-backend/dist ./apps/node-backend/dist
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/apps/node-backend/node_modules ./apps/node-backend/node_modules
+
+# If your local packages (e.g., prisma-db, zod-validation) are needed at runtime, copy their built code too:
+COPY --from=builder /app/packages/zod-validation /app/packages/zod-validation
+COPY --from=builder /app/packages/prisma-db /app/packages/prisma-db
+# ...repeat for other needed packages...
+
+# Copy backend package.json if needed (optional for some setups)
 COPY --from=builder /app/apps/node-backend/package.json ./apps/node-backend/package.json
-COPY --from=builder /app/packages/ /app/packages/
 
 EXPOSE 8020
 
