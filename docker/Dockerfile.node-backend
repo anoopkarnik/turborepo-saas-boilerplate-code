@@ -31,4 +31,4 @@ COPY --from=builder /app/apps/node-backend/package.json ./apps/node-backend/pack
 
 EXPOSE 8020
 
-CMD ["node", "apps/node-backend/dist/index.js"]
+CMD ["node", "apps/node-backend/dist/index.cjs"]
