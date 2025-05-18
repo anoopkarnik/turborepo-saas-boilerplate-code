@@ -1,21 +1,34 @@
 # Stage 1: Builder
-FROM node:18
+FROM node:18 AS builder
 
-# Create app directory inside container
 WORKDIR /app
 
-# Copy full monorepo into container
-COPY . .
+# Copy only package manifests for install (enables layer caching)
+COPY package.json package-lock.json ./
+COPY apps/node-backend/package.json apps/node-backend/
+# (repeat for any shared packages, e.g., COPY packages/db/package.json packages/db/)
+# Add additional workspaces as needed
 
-# Install all dependencies across monorepo (supports npm workspaces)
 RUN npm install
 
-# Build only the node-backend app
+# Now copy the rest of the code
+COPY . .
+
+# Build the backend app only
 RUN npm run db:generate
 RUN cd apps/node-backend && npm run build
 
-# Expose the backend port
+# Stage 2: Runner
+FROM node:18 AS runner
+
+WORKDIR /app
+
+# Copy built code and node_modules from builder
+COPY --from=builder /app/apps/node-backend/dist ./apps/node-backend/dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/apps/node-backend/node_modules ./apps/node-backend/node_modules
+COPY --from=builder /app/apps/node-backend/package.json ./apps/node-backend/package.json
+
 EXPOSE 8020
 
-# Run the backend server
 CMD ["node", "apps/node-backend/dist/index.js"]
