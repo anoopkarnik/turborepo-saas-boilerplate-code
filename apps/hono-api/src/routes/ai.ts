@@ -1,4 +1,4 @@
-import { chatCompletion } from "@repo/ai/openai/chatCompletion";
+import { chatCompletion } from "@repo/ai/openai/base";
 import { Hono } from "hono";
 
 

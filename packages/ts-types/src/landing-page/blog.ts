@@ -39,4 +39,5 @@ export interface blogProps {
     author: authorProps;
     cover: coverProps;
     blocks: blockProps[];
+    coverUrl: string;
 }

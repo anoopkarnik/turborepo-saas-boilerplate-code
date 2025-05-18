@@ -3,39 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "main": "main.js",
-  "build": {
-    "appId": "com.bayesian.boilerplate",
-    "productName": "Bayesian Boilerplate",
-    "copyright": "Copyright © 2025 Anoop",
-    "linux": {
-      "target": [
-        "snap",
-        "AppImage"
-      ],
-      "category": "Utility",
-      "icon": "public/logo.png"
-    },
-    "win": {
-      "target": [
-        "nsis"
-      ],
-      "icon": "public/logo.png"
-    },
-    "snap": {
-      "grade": "stable",
-      "confinement": "strict"
-    }
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build ",
     "start": "next start",
     "lint": "next lint --max-warnings 20",
     "test": "vitest",
-    "static": "next build && next export",
-    "desktop-app:start": "electron .",
-    "desktop-app:build": "electron-builder",
-    "desktop-app:deploy-snapstore": "snapcraft login && snapcraft upload dist/*.snap --release stable"
+    "static": "next build && next export"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.3.16",

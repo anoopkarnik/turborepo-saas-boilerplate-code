@@ -1,11 +1,11 @@
 {
-  "name": "saas-boilerplate-launcher",
+  "name": "saas-forge",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "build": {
     "appId": "com.bayesian.boilerplate",
-    "productName": "Bayesian Boilerplate",
+    "productName": "SaaS-Forge",
     "copyright": "Copyright © 2025 Anoop",
     "linux": {
       "target": ["snap", "AppImage"],
@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder",
+    "build": "electron-builder --linux snap",
     "install-locally": "sudo snap install --dangerous dist/*.snap",
     "deploy-snapstore": "snapcraft login && snapcraft upload dist/*.snap --release stable"
 

@@ -1,4 +1,4 @@
-import { BaseModel } from "./BaseModel";
+import { BaseModel } from "./BaseModel.js";
 import { fal} from "@fal-ai/client"
 
 import dotenv from "dotenv";
