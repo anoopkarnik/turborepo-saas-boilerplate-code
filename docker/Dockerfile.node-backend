@@ -16,7 +16,7 @@ COPY . .
 
 # Build the backend app only
 RUN npm run db:generate
-RUN cd apps/node-backend && npm run build
+RUN npm run build --workspaces
 
 # Stage 2: Runner
 FROM node:18 AS runner
@@ -28,6 +28,7 @@ COPY --from=builder /app/apps/node-backend/dist ./apps/node-backend/dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/apps/node-backend/node_modules ./apps/node-backend/node_modules
 COPY --from=builder /app/apps/node-backend/package.json ./apps/node-backend/package.json
+COPY --from=builder /app/packages/ /app/packages/
 
 EXPOSE 8020
 
