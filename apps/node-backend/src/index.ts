@@ -1,9 +1,9 @@
 // apps/backend/index.ts
 import express from "express";
-import db from '@repo/prisma-db/client'
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import cors from "cors";
+import db from "./prisma/index.js";
 
 import dotenv from "dotenv";
 import { FalAIModel } from "./models/FalAIModel.js";
@@ -55,7 +55,6 @@ app.post("/ai/training", authMiddleware , async (req, res) => {
 
   const {request_id, response_url} = await falAiModel.trainModel(parsedBody.data.zippedImages,
     parsedBody.data.name)
-  //@ts-expect-error modelForPrisma
   const data = await db.photoModel.create({
     data: {
       name: parsedBody.data.name,
@@ -85,7 +84,6 @@ app.post("/ai/generate", authMiddleware, async (req, res) => {
     res.status(411).json({ message: "Input Incorrent" });
     return;
   }
-  //@ts-expect-error modelForPrisma
   const model = await db.photoModel.findUnique({
     where: {
       id: parsedBody.data.modelId
@@ -106,7 +104,6 @@ app.post("/ai/generate", authMiddleware, async (req, res) => {
   
 
   // Call the image generation API here with the parsed data
-    //@ts-expect-error modelForPrisma
   const data = await db.outputImages.create({
     data: {
       prompt: parsedBody.data.prompt,
@@ -130,7 +127,6 @@ app.post("/pack/generate", authMiddleware, async(req, res) => {
     return;
   }
 
-      //@ts-expect-error modelForPrisma
   const prompts = await db.packPrompts.findMany({
     where: {
       packId: parsedBody.data.packId
@@ -144,7 +140,6 @@ app.post("/pack/generate", authMiddleware, async(req, res) => {
   ));
 
   // Call the image generation API here with the parsed data
-    //@ts-expect-error modelForPrisma
   const images = await db.outputImages.createManyAndReturn({
     data: prompts.map((prompt:any,index:number) => ({
       prompt: prompt.prompt,
@@ -162,7 +157,6 @@ app.post("/pack/generate", authMiddleware, async(req, res) => {
 })
 
 app.get("/pack/bulk", authMiddleware, async (req, res) => {
-      //@ts-expect-error modelForPrisma
     const packs = await db.packs.findMany({})
     res.json({packs})
   
@@ -172,7 +166,6 @@ app.get("/image/bulk", authMiddleware, async (req, res) => {
   const ids = req.query.images as string[];
   const limit = req.query.limit as string ?? "10";
   const offset = req.query.offset as string ?? "0";
-    //@ts-expect-error modelForPrisma
   const imagesData = await db.outputImages.findMany({
     where: {
       id: { in: ids},
@@ -191,7 +184,6 @@ app.get("/image/bulk", authMiddleware, async (req, res) => {
 })
 
 app.get("/models", authMiddleware, async (req, res) => {
-   //@ts-expect-error modelForPrisma
   const models = await db.photoModel.findMany({
     where: {
       // @ts-ignore
@@ -210,7 +202,6 @@ app.post("/fal-ai/webhook/train", async (req, res) => {
   const requestId = req.body.request_id;
 
   const { imageUrl } = await falAiModel.generateImageSync(req.body.tensor_path);
-  //@ts-expect-error modelForPrisma
   await db.photoModel.updateMany({
     where: {
       falAiRequestId: requestId
@@ -231,7 +222,6 @@ app.post("/fal-ai/webhook/image", async (req, res) => {
   
   const requestId = req.body.request_id;
   console.log("Request ID:", requestId);
-  //@ts-expect-error modelForPrisma
   await db.outputImages.updateMany({
     where:{
       falAiRequestId: requestId
