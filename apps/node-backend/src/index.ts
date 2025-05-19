@@ -1,6 +1,5 @@
 // apps/backend/index.ts
 import express from "express";
-import  {TrainModel, GenerateImage, GenerateImagesFromPack} from "@repo/zod/photo-ai/index"
 import db from '@repo/prisma-db/client'
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
@@ -9,6 +8,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { FalAIModel } from "./models/FalAIModel.js";
 import { authMiddleware } from "./middleware.js";
+import { GenerateImage, GenerateImagesFromPack, TrainModel } from "./utils/zod.js";
 
 dotenv.config();
 
