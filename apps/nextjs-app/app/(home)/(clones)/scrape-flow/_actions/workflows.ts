@@ -189,7 +189,7 @@ export async function RunWorkflow(form: {workflowId:string, flowDefinition?:stri
     }
     // executeWorkflow(execution.id); //run this on background
     const triggerApiUrl = getAppUrl(`api/workflows/execute?executionId=${execution.id}`);
-
+    
     fetch(triggerApiUrl, {
         headers: {
             Authorization: `Bearer ${process.env.API_SECRET!  }`,
