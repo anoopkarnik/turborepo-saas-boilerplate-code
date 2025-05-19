@@ -8,10 +8,6 @@ COPY package.json package-lock.json ./
 
 # Copy the workspace package.jsons (so npm install works with monorepo deps)
 COPY apps/node-backend/package.json apps/node-backend/
-# Repeat this line for each dependency your backend needs!
-COPY packages/zod-validation/package.json packages/zod-validation/
-COPY packages/prisma-db/package.json packages/prisma-db/
-# ...repeat for any other local packages needed by node-backend...
 
 # Install dependencies (npm workspaces handles local packages)
 RUN npm install
@@ -31,14 +27,10 @@ WORKDIR /app
 COPY --from=builder /app/apps/node-backend/dist ./apps/node-backend/dist
 COPY --from=builder /app/node_modules ./node_modules
 
-# If your local packages (e.g., prisma-db, zod-validation) are needed at runtime, copy their built code too:
-COPY --from=builder /app/packages/zod-validation /app/packages/zod-validation
-COPY --from=builder /app/packages/prisma-db /app/packages/prisma-db
-# ...repeat for other needed packages...
 
 # Copy backend package.json if needed (optional for some setups)
 COPY --from=builder /app/apps/node-backend/package.json ./apps/node-backend/package.json
 
 EXPOSE 8020
 
-CMD ["node", "apps/node-backend/dist/index.cjs"]
+CMD ["node", "apps/node-backend/dist/index.js"]
