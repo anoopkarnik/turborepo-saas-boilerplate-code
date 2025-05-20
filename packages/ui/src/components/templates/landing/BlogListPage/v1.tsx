@@ -25,7 +25,7 @@ const BlogListPage = ({blogs}:{blogs:blogProps[]}) => {
             Blogs
         </h1>
         <Input placeholder='Search Blogs' className='w-1/2' onChange={(e)=>setSearch(e.target.value)}/>
-        <div className='flex flex-wrap items-center justify-around gap-4 w-full'>
+        <div className='flex flex-wrap items-center gap-4 w-full mx-auto justify-center'>
             {filteredBlogs.map(blog => (
                 <BlogCard key={blog.title} blog={blog}/>
             ))}

@@ -3,7 +3,7 @@ import express from "express";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import cors from "cors";
-import db from "./prisma/index.js";
+import {prismaClient as db} from "./utils/prisma.js";
 
 import dotenv from "dotenv";
 import { FalAIModel } from "./models/FalAIModel.js";

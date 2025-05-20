@@ -1,7 +1,7 @@
 {
   "name": "saas-forge",
   "version": "1.0.0",
-  "description": "",
+  "description": "A cross-platform Electron app for SaaS creation, packaged as a Snap.",
   "main": "main.js",
   "build": {
     "appId": "com.bayesian.boilerplate",
@@ -25,7 +25,8 @@
     "start": "electron .",
     "build": "electron-builder --linux snap",
     "install-locally": "sudo snap install --dangerous dist/*.snap",
-    "deploy-snapstore": "snapcraft login && snapcraft upload dist/*.snap --release stable"
+    "login-snapstore": "snapcraft logout && snapcraft login",
+    "deploy-snapstore": "snapcraft upload dist/*.snap --release stable"
 
   },
   "keywords": [],

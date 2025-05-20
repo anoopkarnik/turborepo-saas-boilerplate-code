@@ -11,10 +11,7 @@
     "db:migrate": "cd packages/prisma-db && npm run prisma:migrate --name init && npm run mongo:migrate --name init",
     "db:generate": "cd packages/prisma-db && npm run postgres:generate && npm run mongo:generate",
     "postinstall": "",
-    "db:seed": "cd packages/prisma-db && npx prisma db seed",
-    "desktop-app:start": "cd apps/nextjs-app && electron .",
-    "desktop-app:build": "electron-builder --projectDir apps/nextjs-app",
-    "desktop-app:deploy-snapstore": "snapcraft login && snapcraft upload dist/*.snap --release stable"
+    "db:seed": "cd packages/prisma-db && npx prisma db seed"
   },
   "devDependencies": {
     "@repo/auth": "*",
