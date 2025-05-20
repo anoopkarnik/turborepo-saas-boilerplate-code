@@ -16,7 +16,7 @@ RUN npm install
 COPY . .
 
 # Build everything (or just the backend and its deps)
-RUN npm run build --filter=node-backend...
+RUN cd apps/node-backend && npm run build
 RUN cd packages/prisma-db && npm run build
 RUN cd packages/prisma-db && npm run postgres:generate
 
