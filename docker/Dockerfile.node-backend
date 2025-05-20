@@ -17,7 +17,6 @@ COPY . .
 
 # Build everything (or just the backend and its deps)
 RUN cd apps/node-backend && npm run build
-RUN cd packages/prisma-db && npm run build
 RUN cd packages/prisma-db && npm run postgres:generate
 
 EXPOSE 8020
