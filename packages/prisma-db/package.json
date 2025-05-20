@@ -3,21 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "vitest",
+    "build": "tsc",
     "postgres:generate": "npx prisma generate --schema prisma/schema",
     "postgres:migrate": "npx prisma migrate dev --schema prisma/schema",
     "mongo:generate": "npx prisma generate --schema prisma-mongo/schema.prisma",
     "mongo:migrate": "npx prisma db push --schema prisma-mongo/schema.prisma"
   },
   "prisma": {
-    "seed": " ts-node --transpile-only prisma/seeds/seed.ts"
+    "seed": " ts-node --transpile-only src/seeds/seed.ts"
   },
   "keywords": [],
   "author": "",
   "exports": {
     "./client": "./src/index.ts",
     "./mongo-client": "./src/mongo.ts",
+    "./node-client": "./dist/node-index.js",
     "./repo/*": "./src/*.ts"
   },
   "license": "ISC",

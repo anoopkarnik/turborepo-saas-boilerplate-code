@@ -1,8 +1,15 @@
 {
-  "extends": "@repo/typescript-config/prisma-db.json",
   "compilerOptions": {
-
+    "outDir": "dist",
+    "rootDir": "src",
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "declaration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": false    // <--- Make sure this is here!
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["src"]
 }

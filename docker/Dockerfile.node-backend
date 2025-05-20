@@ -16,21 +16,10 @@ RUN npm install
 COPY . .
 
 # Build everything (or just the backend and its deps)
-RUN cd apps/node-backend && npm run build
-
-# --- Production Stage ---
-FROM node:18 AS runner
-
-WORKDIR /app
-
-# Copy only built backend app and node_modules from builder
-COPY --from=builder /app/apps/node-backend/dist ./apps/node-backend/dist
-COPY --from=builder /app/node_modules ./node_modules
-
-
-# Copy backend package.json if needed (optional for some setups)
-COPY --from=builder /app/apps/node-backend/package.json ./apps/node-backend/package.json
+RUN npm run build --filter=node-backend...
+RUN cd packages/prisma-db && npm run build
+RUN cd packages/prisma-db && npm run postgres:generate
 
 EXPOSE 8020
 
-CMD ["node", "apps/node-backend/dist/index.js"]
+CMD ["npm","run","start:nodejs-app"]

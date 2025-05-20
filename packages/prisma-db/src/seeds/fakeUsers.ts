@@ -1,4 +1,4 @@
-import db from '../../src/index';
+import db from '../index.js';
 
 
 export async function createGuestUser() {

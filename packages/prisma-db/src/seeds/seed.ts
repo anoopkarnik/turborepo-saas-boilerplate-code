@@ -1,6 +1,6 @@
-import db from '../../src/index'
-import { createCategories, createFTSIndex } from './aiCompanion'
-import { createAdminUser, createGuestUser } from './fakeUsers'
+import db from '../index.js'
+import { createCategories, createFTSIndex } from './aiCompanion.js'
+import { createAdminUser, createGuestUser } from './fakeUsers.js'
 
 
 async function main () {

@@ -3,12 +3,12 @@ import express from "express";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import cors from "cors";
-import {prismaClient as db} from "./utils/prisma.js";
+import {prismaClient as db} from "@repo/prisma-db/node-client";
 
 import dotenv from "dotenv";
-import { FalAIModel } from "./models/FalAIModel.js";
-import { authMiddleware } from "./middleware.js";
-import { GenerateImage, GenerateImagesFromPack, TrainModel } from "./utils/zod.js";
+import { FalAIModel } from "./src/models/FalAIModel.js";
+import { authMiddleware } from "./src/middleware.js";
+import { GenerateImage, GenerateImagesFromPack, TrainModel } from "./src/utils/zod.js";
 
 dotenv.config();
 
