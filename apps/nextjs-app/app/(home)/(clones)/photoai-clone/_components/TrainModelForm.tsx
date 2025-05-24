@@ -1,6 +1,6 @@
 "use client"
 
-import { TrainModel } from '@repo/zod/photo-ai/index'
+import { TrainModel } from '../_lib/zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'

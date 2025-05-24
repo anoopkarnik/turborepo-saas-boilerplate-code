@@ -12,6 +12,7 @@ const nextConfig = {
             {hostname: 'oaidalleapiprodscus.blob.core.windows.net', protocol:'https'},
             {hostname: 'photo.100xdevs.com', protocol:'https'},
             {hostname: 'r2-us-west.photoai.com', protocol:'https'},
+            {hostname: 'lh3.googleusercontent.com', protocol:'https'},
 
         ],
         unoptimized: true,

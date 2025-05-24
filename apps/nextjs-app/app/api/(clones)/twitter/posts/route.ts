@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import db from "@repo/prisma-db/mongo-client"
+import db from "@repo/prisma-db/client"
 
 export async function GET(req: Request) {
     try{
         const { searchParams } = new URL(req.url);
         const userId = searchParams.get("userId");
         let posts;
-        if(userId && typeof userId === 'string'){
+        if(userId){
 
             posts = await db.twitterPost.findMany({
                 where:{userId:userId},

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { MessengerUser } from "@prisma-mongo/prisma/client"
+import { MessengerUser } from "@prisma/client"
 import { useRouter } from 'next/navigation'
 import { createConversation } from '../../_actions/conversation'
 import Avatar from '../common/Avatar'

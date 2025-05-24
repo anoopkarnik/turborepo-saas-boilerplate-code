@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import db from "@repo/prisma-db/mongo-client"
+import db from "@repo/prisma-db/client"
 
 export async function POST(req: Request){
     try{

@@ -1,0 +1,47 @@
+model MessengerUser {
+  id               String   @id @default(cuid())
+  name             String
+  userId           String          @unique
+  profileImage     String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  messages         MessengerMessage[]
+  conversations    Conversation[]  @relation("Participants")
+  seenMessages     MessengerMessage[]       @relation("SeenBy")
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+
+  @@schema("messenger_schema")
+}
+
+model Conversation {
+  id             String   @id @default(cuid())
+  name           String?
+  isGroup        Boolean?
+  createdAt      DateTime          @default(now())
+  lastMessageAt  DateTime          @updatedAt
+
+  messages       MessengerMessage[]
+  users          MessengerUser[]   @relation("Participants")
+
+  @@schema("messenger_schema")
+}
+
+model MessengerMessage {
+  id        String   @id @default(cuid())
+  body           String
+  image          String?
+  createdAt      DateTime           @default(now())
+
+  conversationId String
+  conversation   Conversation       @relation(fields: [conversationId], references: [id])
+
+  senderId       String
+  sender         MessengerUser      @relation(fields: [senderId], references: [id])
+      
+  seen         MessengerUser[]    @relation("SeenBy")
+
+    @@schema("messenger_schema")
+}

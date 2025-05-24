@@ -7,6 +7,7 @@ const useUsers = () => {
     queryKey: ['users'], // Unique key for the query
     queryFn: async () => {
       const response = await axios.get('/api/twitter/users');
+      console.log('Fetched users:', response.data);
       return response.data;
     },
   });

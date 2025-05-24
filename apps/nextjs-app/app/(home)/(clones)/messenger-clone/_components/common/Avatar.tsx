@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { MessengerUser} from "@prisma-mongo/prisma/client"
+import { MessengerUser} from "@prisma/client"
 import Image from 'next/image'
 import useActiveList from '../../_hooks/useActiveList'
 

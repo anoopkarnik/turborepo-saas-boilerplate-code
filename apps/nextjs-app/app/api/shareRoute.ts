@@ -1,4 +1,4 @@
-import { increaseCredits} from "@repo/prisma-db/repo/user";
+import { increaseCredits} from "@repo/payments/billing";
 import { NextResponse } from "next/server";
 import { auth } from "@repo/auth/better-auth/auth";
 import { headers } from "next/headers";

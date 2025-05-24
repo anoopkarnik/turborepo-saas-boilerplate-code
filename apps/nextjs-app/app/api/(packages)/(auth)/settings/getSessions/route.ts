@@ -1,4 +1,4 @@
-import { getRecentSessions} from "@repo/prisma-db/repo/user";
+import { getRecentSessions} from "@repo/auth/utils/functions";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

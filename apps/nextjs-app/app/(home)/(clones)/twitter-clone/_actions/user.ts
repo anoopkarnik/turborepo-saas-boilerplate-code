@@ -1,7 +1,7 @@
 "use server"
 
 import { auth } from "@repo/auth/better-auth/auth";
-import db from "@repo/prisma-db/mongo-client";
+import db from "@repo/prisma-db/client";
 import { headers } from "next/headers";
 
 export async function GetTwitterUserDetails(){
@@ -15,8 +15,20 @@ export async function GetTwitterUserDetails(){
         where: {
             userId: session.user.id,
         },
+        include: {
+            following: true,
+        },
     });
-    return user;
+    if (!user) {
+        throw new Error("User not found");
+    }
+    const { following, ...userWithoutFollowing } = user;
+    const followingIds = Array.isArray(following) ? following.map(f => f.id) : [];
+    const userWithFollowing = {
+        ...userWithoutFollowing,
+        followingIds,
+    };
+    return userWithFollowing;
 }
 
 export async function GetAllUsers(){

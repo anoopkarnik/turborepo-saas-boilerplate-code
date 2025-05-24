@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import db from "@repo/prisma-db/mongo-client"
+import db from "@repo/prisma-db/client"
 
-export async function GET(req: Request, {params} : {params: {userId: string}}) {
+export async function GET(req: Request, {params} : {params: {userId: number}}) {
     try {
         const { userId } = params;
         if(!userId || typeof userId !== 'string'){

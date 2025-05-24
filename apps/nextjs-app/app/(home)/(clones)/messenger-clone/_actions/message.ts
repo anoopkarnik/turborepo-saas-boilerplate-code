@@ -1,12 +1,12 @@
 "use server"
 import { auth } from "@repo/auth/better-auth/auth";
-import db from "@repo/prisma-db/mongo-client";
+import db from "@repo/prisma-db/client"
 import { pusherServer } from "../../../../../lib/helper/pusher";
 import { headers } from "next/headers";
 
 export const getMessages = async (conversationId: string) => {
     try {
-        const messages = await db.message.findMany({
+        const messages = await db.messengerMessage.findMany({
             where: {
                 conversationId: conversationId
             },
@@ -48,7 +48,7 @@ export const createMessage = async ({conversationId,message,image}:{
             throw new Error("Messenger user not found");
         }
 
-        const newMessage = await db.message.create({
+        const newMessage = await db.messengerMessage.create({
             data: {
                 body: message as string,
                 conversation: {
@@ -97,11 +97,11 @@ export const createMessage = async ({conversationId,message,image}:{
             }
         })
 
-        await pusherServer.trigger(conversationId, "messages:new", newMessage);
+        await pusherServer.trigger(String(conversationId), "messages:new", newMessage);
 
         const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1];
         updatedConversation.users.forEach((user) => {
-            pusherServer.trigger(user.id, "conversation:update", {
+            pusherServer.trigger(String(user.id), "conversation:update", {
                 id: conversationId,
                 messages: [lastMessage],
             }

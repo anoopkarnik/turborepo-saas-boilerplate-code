@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { MessengerUser } from "@prisma-mongo/prisma/client"
+import { MessengerUser } from "@prisma/client"
 import UserBox from './UserBox'
 
 interface UserListProps {

@@ -1,0 +1,66 @@
+
+model TwitterUser {
+  id              String   @id @default(cuid())
+  userId          String                  @unique
+  name            String
+  username        String
+  bio             String?
+  coverImage      String?
+  profileImage    String?
+  hasNotification Boolean?                @default(false)
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+
+  notifications   TwitterNotification[] 
+  posts           TwitterPost[]
+  comments        TwitterComment[]
+
+  // Many-to-many self relation
+  following       TwitterUser[] @relation("UserFollows")
+  followers       TwitterUser[] @relation("UserFollows")
+
+    user   User @relation(fields: [userId], references: [id])
+
+
+  @@schema("twitter_schema")
+}
+
+model TwitterPost {
+  id         String   @id @default(cuid())
+  body       String
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  userId     String
+  likedIds   String[]             // For relations, use a join table instead
+
+  user       TwitterUser       @relation(fields: [userId], references: [id])
+  comments   TwitterComment[]
+
+@@schema("twitter_schema")
+}
+
+model TwitterComment {
+  id        String   @id @default(cuid())
+  body      String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  userId    String
+  postId    String
+
+  user      TwitterUser   @relation(fields: [userId], references: [id])
+  post      TwitterPost   @relation(fields: [postId], references: [id])
+
+    @@schema("twitter_schema")
+}
+
+model TwitterNotification {
+  id        String   @id @default(cuid())
+  body      String
+  userId    String
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  user      TwitterUser   @relation(fields: [userId], references: [id])
+
+    @@schema("twitter_schema")
+}

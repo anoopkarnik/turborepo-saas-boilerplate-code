@@ -1,7 +1,7 @@
 "use server"
 
 import { auth } from "@repo/auth/better-auth/auth";
-import db from "@repo/prisma-db/mongo-client";
+import db from "@repo/prisma-db/client";
 import { pusherServer } from "../../../../../lib/helper/pusher";
 import { headers } from "next/headers";
 

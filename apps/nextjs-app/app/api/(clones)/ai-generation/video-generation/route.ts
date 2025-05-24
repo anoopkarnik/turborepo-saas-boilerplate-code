@@ -1,7 +1,7 @@
 import { auth } from "@repo/auth/better-auth/auth";
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
-import { increaseCredits } from "@repo/prisma-db/repo/user";
+import { increaseCredits } from "@repo/payments/billing";
 import { headers } from "next/headers";
 
 const replicate = new Replicate({

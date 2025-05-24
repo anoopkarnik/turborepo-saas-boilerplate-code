@@ -21,6 +21,9 @@ model User {
   workflows     Workflow[]
   userToProjects UserToGithubProject[]
   questionsAsked    Question[]
+  messengerUser  MessengerUser?
+  twitterUser   TwitterUser?
+
   password      String?
 
   createdAt DateTime @default(now())

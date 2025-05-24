@@ -1,6 +1,6 @@
 "use server"
 import { auth } from "@repo/auth/better-auth/auth";
-import db from "@repo/prisma-db/mongo-client";
+import db from "@repo/prisma-db/client"
 import { pusherServer } from "../../../../../lib/helper/pusher";
 import { headers } from "next/headers";
 
@@ -57,12 +57,18 @@ export const createConversation = async (userId?: string, isGroup?: boolean,
         if(userId){
             const existingConversations = await db.conversation.findMany({
                 where: {
-                    OR: [
-                        {userIds: {equals: [messengerUser.id, userId]}},
-                        {userIds: {equals: [userId,messengerUser.id]}}
-                    ]
-                }
-            })
+                  isGroup: false,
+                  users: {
+                    some: { id: messengerUser.id }
+                  },
+                  AND: {
+                    users: {
+                      some: { id: userId }
+                    }
+                  }
+                },
+                include: { users: true }
+              });
     
             const singleConversation = existingConversations[0];
     
@@ -72,18 +78,14 @@ export const createConversation = async (userId?: string, isGroup?: boolean,
     
             const newConversation = await db.conversation.create({
                 data: {
-                    isGroup: false,
-                    users: {
-                        connect: [
-                            { id: messengerUser.id},
-                            { id: userId }
-                        ]
-                    }
+                  isGroup: false,
+                  users: {
+                    connect: [{ id: messengerUser.id }, { id: userId }]
+                  }
                 },
-                include: {
-                    users: true
-                }
-            })
+                include: { users: true }
+              });
+
             newConversation.users.forEach((user) =>{
                 if(user.userId){
                     pusherServer.trigger(user.userId,  'conversation:new', newConversation)
@@ -121,10 +123,16 @@ export const getConversations = async () => {
         }
 
         const conversations = await db.conversation.findMany({
-            orderBy:{lastMessageAt: "desc"},
-            where: {userIds: {has: messengerUser.id}},
-            include: {users: true,messages:{include: {sender:true,seen:true}}}
-        });
+            orderBy: { lastMessageAt: "desc" },
+            where: {
+              users: { some: { id: messengerUser.id } }
+            },
+            include: {
+              users: true,
+              messages: { include: { sender: true, seen: true } } // "messages" may now be MessengerMessage
+            }
+          });
+      
 
         return conversations;
     } catch (error) {
@@ -193,7 +201,7 @@ export const makeConversationSeen = async (conversationId: string) => {
             throw new Error("No messages found in conversation");
         }
 
-        const updatedMessage = await db.message.update({
+        const updatedMessage = await db.messengerMessage.update({
             where: {
                 id: lastMessage.id
             },
@@ -215,11 +223,12 @@ export const makeConversationSeen = async (conversationId: string) => {
             messages: [updatedMessage]
         })
 
-        if (lastMessage.seenIds.indexOf(messengerUser.id) === -1){
-            return conversation
-        }
-        await pusherServer.trigger( conversationId,'message:update', updatedMessage)
 
+    // If already seen, return conversation as is
+        if (lastMessage.seen.find((user: any) => user.id === messengerUser.id)) {
+            return conversation;
+        }
+        await pusherServer.trigger(String(conversationId), 'message:update', updatedMessage);
 
         return updatedMessage;
 
@@ -267,14 +276,13 @@ export const deleteConversation = async (conversationId: string) => {
             throw new Error("Conversation not found");
         }
 
+        // Now, only allow deletion if the user is part of the conversation
         const deletedConversation = await db.conversation.deleteMany({
             where: {
-                id: conversationId,
-                userIds: {
-                    hasSome: [messengerUser.id]
-                }
+            id: conversationId,
+            users: { some: { id: messengerUser.id } }
             }
-        })
+        });
 
         return deletedConversation;
     } catch (error) {

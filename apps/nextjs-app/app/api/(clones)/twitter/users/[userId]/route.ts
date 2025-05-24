@@ -1,26 +1,41 @@
-
-import db from "@repo/prisma-db/mongo-client"
+import db from "@repo/prisma-db/client";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request, {params} : {params: {userId: string}}) {
-    try{
-        const {userId} =  params;
-        if(!userId || typeof userId !== 'string'){
-            throw new Error('Invalid userId');
-        }
-        const existingUser = await db.twitterUser.findUnique(
-            {where:{id:userId}}
-        );
-        const followersCount = await db.twitterUser.count({
-            where:{
-                followingIds:{
-                    has:userId
-                }
-            }
-        })
-        return NextResponse.json({...existingUser, followersCount}, { status: 200 });
-    }catch(error){
-        console.log(error)
-        return NextResponse.json( { message: 'Failed to fetch follower details' }, { status: 400 });
+export async function GET(req: Request, { params }: { params: { userId: string } }) {
+  try {
+    const { userId } = params;
+
+    // Get the user
+    const existingUser = await db.twitterUser.findUnique({
+      where: { id: userId },
+      include: {following: true,},
+    });
+
+    if (!existingUser) {
+      throw new Error("User not found");
     }
+    const { following, ...userWithoutFollowing } = existingUser;
+    const followingIds = Array.isArray(following) ? following.map(f => f.id) : [];
+    const userWithFollowing = {
+        ...userWithoutFollowing, 
+        followingIds,
+    };
+
+
+    // Count followers (users whose 'following' includes this user)
+    const followersCount = await db.twitterUser.count({
+      where: {
+        following: {
+          some: {
+            id: userId
+          }
+        }
+      }
+    });
+
+    return NextResponse.json({ ...userWithFollowing, followersCount }, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ message: 'Failed to fetch follower details' }, { status: 400 });
+  }
 }

@@ -1,6 +1,6 @@
 "use client"
 import React, { useMemo } from 'react'
-import { Conversation, MessengerUser} from '@prisma-mongo/prisma/client'
+import { Conversation, MessengerUser} from '@prisma/client'
 import useOtherUser from '../../_hooks/useOtherUser'
 import { HiChevronLeft } from 'react-icons/hi'
 import { useRouter } from 'next/navigation'

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { MessengerUser } from '@prisma-mongo/prisma/client'
+import { MessengerUser } from '@prisma/client'
 import { useRouter } from 'next/navigation';
 
 import { useForm } from 'react-hook-form'

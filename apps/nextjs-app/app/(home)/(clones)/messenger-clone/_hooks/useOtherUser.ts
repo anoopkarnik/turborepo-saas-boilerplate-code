@@ -1,6 +1,6 @@
 import { useSession } from "@repo/auth/better-auth/auth-client";
 import { FullConversationType } from "../types";
-import { MessengerUser } from "@prisma-mongo/prisma/client";
+import { MessengerUser } from "@prisma/client";
 import { useMemo } from "react";
 
 

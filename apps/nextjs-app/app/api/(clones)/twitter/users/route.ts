@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import db from "@repo/prisma-db/mongo-client"
+import db from "@repo/prisma-db/client"
 import { auth } from "@repo/auth/better-auth/auth";
 import { headers } from "next/headers";
 

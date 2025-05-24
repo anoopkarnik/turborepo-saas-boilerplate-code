@@ -1,5 +1,5 @@
 "use client"
-import { Conversation, MessengerUser } from '@prisma-mongo/prisma/client'
+import { Conversation, MessengerUser } from '@prisma/client'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@repo/ui/molecules/shadcn/sheet'
 import React, { useMemo } from 'react'
 import { HiEllipsisHorizontal } from 'react-icons/hi2'

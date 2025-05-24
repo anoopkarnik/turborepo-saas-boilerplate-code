@@ -13,7 +13,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL_POSTGRES")
-  schemas = ["boilerplate_schema","scrapeflow_schema","aicompanion_schema","photoai_schema","github_schema"]
+  schemas = ["boilerplate_schema","scrapeflow_schema","aicompanion_schema","photoai_schema","github_schema","twitter_schema","messenger_schema"]
   extensions = [vector]
 }
 

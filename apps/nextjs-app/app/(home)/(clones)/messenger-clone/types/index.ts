@@ -1,6 +1,6 @@
-import {Conversation, Message, MessengerUser} from "@prisma-mongo/prisma/client"
+import {Conversation, MessengerMessage, MessengerUser} from "@prisma/client"
 
-export type FullMessageType = Message & {
+export type FullMessageType = MessengerMessage & {
     sender: MessengerUser,
     seen: MessengerUser[]
 }
