@@ -11,7 +11,7 @@ const BlogCard = ({blog}:{blog:blogProps}) => {
   const router = useRouter()
   return (
     <Card onClick={()=>router.push('blog/'+blog.slug)} className='flex flex-col gap-2 w-[300px] relative cursor-pointer opacity-80 hover:opacity-100'>
-        <Image src={process.env.NEXT_PUBLIC_STRAPI_URL+  blog.cover.formats.thumbnail.url} 
+        <Image src={blog.coverUrl} 
         alt={blog.title} width={300} height={300}/>
         <div className='flex items-center justify-start gap-4 mx-2 w-full '>
            {blog.categories.map(category => (

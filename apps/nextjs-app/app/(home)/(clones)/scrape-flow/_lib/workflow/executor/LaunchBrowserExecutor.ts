@@ -4,7 +4,6 @@ import { LaunchBrowserTask } from '../tasks/LaunchBrowserTask'
 // import { exec } from 'child_process';
 // import { waitFor } from '../../helper/waitFor';
 import chromium from "@sparticuz/chromium";
-import { waitFor } from '../../../../../../../lib/helper/waitFor';
 // import puppeteerCore from "puppeteer-core";
 chromium.setGraphicsMode =false
 
@@ -29,16 +28,16 @@ chromium.setGraphicsMode =false
 export async function LaunchBrowserExecutor(
     environment:ExecutionEnvironment<typeof LaunchBrowserTask>):Promise<boolean>{
     try{
+        environment.log.info('Launching browser...')
         const websiteUrl = environment.getInput('Website Url')
-        console.log('Website Url:', websiteUrl)
 
         const isLocal = process.env.NEXT_PUBLIC_URL?.includes('localhost')
 
         const browser = await puppeteer.launch({
-        // args: isLocal ? ['--no-sandbox', '--disable-setuid-sandbox'] : chromium.args,
-        // defaultViewport: chromium.defaultViewport,
-        // executablePath: isLocal ? undefined : await chromium.executablePath(),
-        headless: isLocal ? false : chromium.headless
+            args: isLocal ? ['--no-sandbox', '--disable-setuid-sandbox'] : chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            executablePath: isLocal ? undefined : await chromium.executablePath(),
+            headless: isLocal ? false : chromium.headless
         })
 
         environment.log.info('Browser launched successfully')
@@ -72,7 +71,6 @@ export async function LaunchBrowserExecutor(
         await page.goto(websiteUrl as string)
         environment.setPage(page as any)
         environment.log.info(`Opened page at ${websiteUrl}`)
-        await waitFor(5000)
         return true
     } catch(e:any){
         environment.log.error(e.message)

@@ -5,13 +5,13 @@ import { symmetricDecrypt } from "../utils/encryption";
 import { auth } from "@repo/auth/better-auth/auth";
 import { headers } from "next/headers"
 
-export async function getApiKeyFromType(connectionType: string) {
+export async function getApiKeyFromType(connectionType: string="OpenAI") {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
   const connection = await db.connection.findFirst({
     where: {
-      type: connectionType,
+      connection: connectionType,
       userId: session.user.id
     },
   });

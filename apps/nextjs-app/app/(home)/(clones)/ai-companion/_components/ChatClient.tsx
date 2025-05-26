@@ -50,6 +50,7 @@ const ChatClient = ({ companion }: ChatClientProps) => {
       }
 
       const data = await res.json();
+      console.log("Response data:", data);
 
       const systemMessage: ChatMessageProps = {
         role: "system",

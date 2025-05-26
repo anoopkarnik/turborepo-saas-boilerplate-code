@@ -188,16 +188,15 @@ export async function RunWorkflow(form: {workflowId:string, flowDefinition?:stri
         throw new Error("Failed to create execution");
     }
     // executeWorkflow(execution.id); //run this on background
-    const triggerApiUrl = getAppUrl(`api/workflows/execute?executionId=${execution.id}`);
-    
+    const triggerApiUrl = await getAppUrl(`api/workflows/execute?executionId=${execution.id}`);
     fetch(triggerApiUrl, {
         headers: {
             Authorization: `Bearer ${process.env.API_SECRET!  }`,
         },
         cache: "no-store"
-        }).catch((err) => {
+    }).catch((err) => {
         console.log("Error triggering workflow", workflowId, err);
-        });
+    });
     redirect(`/scrape-flow/workflow/runs/${workflowId}/${execution.id}`);
 }
 

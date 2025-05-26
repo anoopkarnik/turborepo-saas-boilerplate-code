@@ -13,8 +13,8 @@ export async function POST(req: Request, {params}: {params: {chatId: string}}){
     try{
         const {prompt} = await req.json();
         const session = await auth.api.getSession({
-        headers: await headers(),
-    });;
+            headers: await headers(),
+        });;
 
         if (!session.user) {
             return new NextResponse("User not authenticated", {status: 401});

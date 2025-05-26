@@ -1,5 +1,5 @@
 "use client"
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { getProjects } from '../_actions/project'
 import  {useLocalStorage} from "usehooks-ts"
 import { GithubProject} from "@prisma/prisma/client"
@@ -14,6 +14,13 @@ const useProject = () => {
       setProjects(projects)
       setProject(projects.find((project) => project.id === projectId))
     }, [projectId])
+
+    useEffect(()=>{
+        const fetchProjects = async () => {
+            await refreshProjects()
+        }
+        fetchProjects() 
+    }, [refreshProjects])
 
    return {projects,projectId, project,setProjectId,refreshProjects}
 }

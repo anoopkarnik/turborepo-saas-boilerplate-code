@@ -20,8 +20,8 @@ export async function GET(){
     return Response.json({workflowsToRun:workflows.length}, {status: 200});
 }
 
-function triggerWorkflow(workflowId: string){
-    const triggerApiUrl = getAppUrl(`api/workflows/execute?workflowId=${workflowId}`);
+async function triggerWorkflow(workflowId: string){
+    const triggerApiUrl = await getAppUrl(`api/workflows/execute?workflowId=${workflowId}`);
     console.log("Triggering workflow", workflowId, "at", triggerApiUrl);
 
     fetch(triggerApiUrl, {

@@ -61,7 +61,6 @@ export const useData = () => {
       setFooterSectionState(saasDetails.footerSection);
 
       const legalDetails = await getLegalDetails();
-      console.log("legalDetails", legalDetails);
       setPrivacyPolicyState(legalDetails.privacyPolicy);
       setTermsOfServiceState(legalDetails.termsOfService);
       setCancellationRefundPoliciesState(legalDetails.cancellationRefundPolicies);

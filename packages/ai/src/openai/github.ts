@@ -3,7 +3,7 @@ import { chatCompletion } from './base';
 import { getApiKeyFromType } from './baseServer';
 
 
-export const aiSummariseCommit = async (diff: string,type:string="openai") => {
+export const aiSummariseCommit = async (diff: string,type:string="OpenAI") => {
   const systemPrompt = `
 You are an expert programmer, and you are trying to summarize a git diff. Reminders about the 
 git diff format: 
@@ -42,7 +42,7 @@ Summarize the following git diff into a concise list of meaningful commit commen
   return response.choices[0]?.message?.content?.trim() || '';
 };
 
-export async function summariseCode(doc: Document,type:string="openai") {
+export async function summariseCode(doc: Document,type:string="OpenAI") {
   console.log('getting summary for', doc.metadata.source);
   try {
     const code = doc.pageContent.slice(0, 10000);

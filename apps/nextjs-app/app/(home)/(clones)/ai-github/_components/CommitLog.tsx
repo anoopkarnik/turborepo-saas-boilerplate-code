@@ -16,6 +16,7 @@ const CommitLog = () => {
     useEffect(() => {
         const fetchCommits = async () => {
             const commits = await getCommits(projectId)
+            console.log(commits)
             setCommits(commits)
         }
         fetchCommits()

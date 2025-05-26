@@ -96,20 +96,22 @@ const MessageForm = () => {
     <div className='sticky bottom-0 z-10 bg-background '>
         {previewImage && (
             <div className="px-4 pt-4">
-                <div className="relative w-full rounded-lg overflow-hidden opacity-80 shadow-sm">
-                <Image
-                    src={previewImage}
-                    alt="Selected"
-                    className="object-cover w-full h-full rounded-lg"
-                />
-                {/* ✖️ Remove image button */}
-                <button
-                    type="button"
-                    onClick={() => form.setValue("image", undefined)}
-                    className="absolute top-1 right-1 bg-background/80 text-sm text-red-500 rounded-full px-2 py-0.5 hover:bg-background/90"
-                >
-                    ✕
-                </button>
+               <div className="relative w-32 h-32 mx-auto rounded-lg overflow-hidden opacity-80 shadow-sm">
+                    <Image
+                        src={previewImage}
+                        alt="Selected"
+                        className="object-cover w-full h-full rounded-lg"
+                        width={128}
+                        height={128}
+                    />
+                    {/* ✖️ Remove image button */}
+                    <button
+                        type="button"
+                        onClick={() => form.setValue("image", undefined)}
+                        className="absolute top-1 right-1 bg-background/80 text-sm text-red-500 rounded-full px-2 py-0.5 hover:bg-background/90"
+                    >
+                        ✕
+                    </button>
                 </div>
             </div>
             )}

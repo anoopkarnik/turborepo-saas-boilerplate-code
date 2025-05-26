@@ -10,7 +10,7 @@
     "postgres:migrate": "npx prisma migrate dev --schema prisma/schema"
   },
   "prisma": {
-    "seed": " ts-node --transpile-only src/seeds/seed.ts"
+    "seed": "node dist/seeds/seed.js"
   },
   "keywords": [],
   "author": "",

@@ -20,7 +20,7 @@ const LoginContent = () => {
 
   const loginWithSocials = async (type: string) => {
     const {error} = await authClient.signIn.social({provider: type})
-    await waitFor(2000)
+    await waitFor(3000)
     if (error) {
       setError(error.message)
     } else {

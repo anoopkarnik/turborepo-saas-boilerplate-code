@@ -9,6 +9,7 @@ export async function ClickElementExecutor(environment:ExecutionEnvironment<type
             return false
         }
 
+
         await environment.getPage()!.click(selector)
         return true
     } catch(e:any){

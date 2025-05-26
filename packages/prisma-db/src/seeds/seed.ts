@@ -5,7 +5,7 @@ import { createAdminUser, createGuestUser } from './fakeUsers.js'
 
 async function main () {
     // await createGuestUser()
-    await createAdminUser()
+    // await createAdminUser()
     await createCategories()
     await createFTSIndex()
 }
