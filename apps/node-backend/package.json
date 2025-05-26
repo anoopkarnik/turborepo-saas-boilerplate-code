@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --watch src --exec \"node --loader ts-node/esm index.ts\"",
-    "build": "tsup index.ts --out-dir dist --format esm",
-    "start": "node dist/index.js"
+    "build": "tsc",
+    "start": "node --loader ts-node/esm index.ts"
   },
   "keywords": [],
   "author": "",
