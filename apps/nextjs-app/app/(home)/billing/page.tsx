@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { Skeleton } from '@repo/ui/molecules/shadcn/skeleton'
 
-import CreditsPurchase from '@repo/payments/components/organisms/CreditsPurchase/v1'
+import CreditsPurchase from '@repo/payments/components/organisms/CreditsPurchase/v2'
 import { Period } from '@repo/ts-types/scrape-flow/analytics'
 import { GetCreditsUsageInPeriod } from '../_actions/analytics'
 import CreditUsageChart from '@repo/payments/components/organisms/CreditUsageChart/v1'
