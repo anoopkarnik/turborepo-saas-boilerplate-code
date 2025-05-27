@@ -1,6 +1,6 @@
 
 import { atom, useRecoilState, useSetRecoilState } from "recoil";
-import { AccountAccess, User, UserRole } from "@prisma/prisma/client";
+import { AccountAccess, User, UserRole } from "@prisma/client";
 
 export const userDetailsState = atom<User>({
     key: "userDetailsState", // Unique key for this atom

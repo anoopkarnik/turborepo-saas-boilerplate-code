@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect } from "react";
-import { Workflow } from "@prisma/prisma/client";
+import { Workflow } from "@prisma/client";
 import {
   addEdge,
   Background,

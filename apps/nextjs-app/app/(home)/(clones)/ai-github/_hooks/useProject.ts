@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { getProjects } from '../_actions/project'
 import  {useLocalStorage} from "usehooks-ts"
-import { GithubProject} from "@prisma/prisma/client"
+import { GithubProject} from "@prisma/client"
 
 const useProject = () => {
     const [projects, setProjects] = useState<GithubProject[]>([])

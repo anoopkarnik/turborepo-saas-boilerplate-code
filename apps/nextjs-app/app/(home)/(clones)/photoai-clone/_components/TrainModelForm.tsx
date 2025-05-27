@@ -10,7 +10,7 @@ import { Form, FormControl,  FormField, FormItem, FormLabel, FormMessage } from 
 import { Separator } from '@repo/ui/atoms/shadcn/separator'
 import { Input } from '@repo/ui/atoms/shadcn/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/select'
-import { ModelyTypeEnum, EthnicityEnum, EyeColorEnum, PhotoModel} from "@prisma/prisma/client"
+import { ModelyTypeEnum, EthnicityEnum, EyeColorEnum, PhotoModel} from "@prisma/client"
 import { Button } from '@repo/ui/atoms/shadcn/button'
 import { Wand2Icon } from 'lucide-react'
 import { Switch } from '@repo/ui/molecules/shadcn/switch'

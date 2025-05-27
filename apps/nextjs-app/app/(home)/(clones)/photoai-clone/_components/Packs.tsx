@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import PackCard from './PackCard';
 import { getModels, getPacks } from '../_actions/server';
-import { PhotoModel } from '@prisma/prisma/client';
+import { PhotoModel } from '@prisma/client';
 import { cn } from '@repo/ui/lib/utils';
 import Image from 'next/image';
 import { Skeleton } from '@repo/ui/molecules/shadcn/skeleton';
-import type { Packs } from '@prisma/prisma/client';
+import type { Packs } from '@prisma/client';
 
 export interface TPack {
     name: string;

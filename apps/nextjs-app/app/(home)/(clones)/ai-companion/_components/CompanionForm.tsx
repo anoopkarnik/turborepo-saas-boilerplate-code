@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import {Category, Companion} from '@prisma/prisma/client'
+import {Category, Companion} from '@prisma/client'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

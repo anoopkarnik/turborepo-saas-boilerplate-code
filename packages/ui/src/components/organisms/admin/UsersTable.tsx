@@ -1,6 +1,6 @@
 "use client"
 import { authClient } from '@repo/auth/better-auth/auth-client'
-import { User } from '@prisma/prisma/client'
+import { User } from '@prisma/client'
 import React, { useEffect, useState } from 'react'
 import ImpersonateUser from './ImpersonateUser'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@repo/ui/molecules/shadcn/table'

@@ -3,7 +3,7 @@ import { Button } from '@repo/ui/atoms/shadcn/button'
 import { Textarea } from '@repo/ui/atoms/shadcn/textarea'
 import React, { useEffect, useState } from 'react'
 import { generateImage, getModels } from '../_actions/server';
-import { PhotoModel} from "@prisma/prisma/client"
+import { PhotoModel} from "@prisma/client"
 import Image from 'next/image';
 import { cn } from '@repo/ui/lib/utils';
 import { Skeleton } from '@repo/ui/molecules/shadcn/skeleton';

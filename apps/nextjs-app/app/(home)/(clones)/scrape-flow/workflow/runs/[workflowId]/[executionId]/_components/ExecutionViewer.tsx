@@ -13,7 +13,7 @@ import { DatesToDurationString } from '../../../../../../../../../lib/helper/dat
 import { GetPhasesTotalCost } from '../../../../../_lib/helper/phases';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/card';
 import { Input } from '@repo/ui/atoms/shadcn/input';
-import {ExecutionLog} from '@prisma/prisma/client'
+import {ExecutionLog} from '@prisma/client'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@repo/ui/molecules/shadcn/table';
 import { cn } from '@repo/ui/lib/utils';
 import { LogLevel } from '@repo/ts-types/scrape-flow/log';

@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 
-import { Companion, Message } from '@prisma/prisma/client'
+import { Companion, Message } from '@prisma/client'
 import { Button } from '@repo/ui/atoms/shadcn/button';
 import { ChevronLeft, Edit, MessageSquare, MoreVertical, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';

@@ -1,6 +1,6 @@
 "use client"
 
-import { Category } from "@prisma/prisma/client";
+import { Category } from "@prisma/client";
 import { Button } from "@repo/ui/atoms/shadcn/button";
 import { cn } from "@repo/ui/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";

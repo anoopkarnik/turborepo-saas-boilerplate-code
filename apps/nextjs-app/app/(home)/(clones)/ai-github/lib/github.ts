@@ -1,5 +1,5 @@
 import { Octokit } from "octokit";
-import {GithubCommit} from "@prisma/prisma/client"
+import {GithubCommit} from "@prisma/client"
 import db from "@repo/prisma-db/client";
 import axios from "axios";
 import { aiSummariseCommit } from "@repo/ai/openai/github";

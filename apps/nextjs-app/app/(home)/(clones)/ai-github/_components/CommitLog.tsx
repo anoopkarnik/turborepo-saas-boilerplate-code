@@ -2,7 +2,7 @@
 
 import React, {  useEffect, useState } from 'react'
 import useProject from '../_hooks/useProject'
-import { GithubCommit } from "@prisma/prisma/client"
+import { GithubCommit } from "@prisma/client"
 import { getCommits } from '../_actions/project'
 import { cn } from '@repo/ui/lib/utils'
 import Image from 'next/image'

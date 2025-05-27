@@ -1,7 +1,7 @@
 "use client";
 
 import React, { FormEvent, useState } from "react";
-import { Companion, Message } from "@prisma/prisma/client";
+import { Companion, Message } from "@prisma/client";
 import ChatHeader from "./ChatHeader";
 import { useRouter } from "next/navigation";
 import ChatForm from "./ChatForm";

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Companion } from '@prisma/prisma/client'
+import { Companion } from '@prisma/client'
 import Image from 'next/image';
 import { Card, CardFooter, CardHeader } from '@repo/ui/molecules/shadcn/card';
 import { MessagesSquare } from 'lucide-react';

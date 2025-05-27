@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, ElementRef } from 'react'
 
-import { Companion } from '@prisma/prisma/client'
+import { Companion } from '@prisma/client'
 import ChatMessage, { ChatMessageProps } from './ChatMessage';
 
 interface ChatMessagesProps {
