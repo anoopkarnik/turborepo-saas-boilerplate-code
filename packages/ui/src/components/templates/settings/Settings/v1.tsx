@@ -27,7 +27,7 @@ import { SettingsDialogProps } from "@repo/ts-types/home/v1"
 import { Avatar, AvatarFallback, AvatarImage } from "../../../atoms/shadcn/avatar"
 import MyConnectionsSettings from "../../../organisms/connections/MyConnectionSettings/v1"
 import SessionSettings from "@repo/auth/components/authmanagement/organisms/v1/SessionSettings"
-import PlansBilling from "../../../../../../payments/src/components/organisms/v1/PlansBilling"
+import PlansBilling from "@repo/payments/components/organisms/PlansBilling/v1"
 import { useSession } from "@repo/auth/better-auth/auth-client"
 import { Button } from "../../../atoms/shadcn/button"
 

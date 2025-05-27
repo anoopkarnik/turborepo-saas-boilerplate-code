@@ -2,7 +2,8 @@ import { NextResponse, type NextRequest } from "next/server"
 import { betterFetch } from "@better-fetch/fetch";
 import { Session } from "@repo/auth/better-auth/auth";
 
-const publicRoutes = ["/landing","/api/workflows"]
+const publicRoutes = ["/landing","/api/workflows","/public","/api/payments/dodo/webhook",
+    "/api/payments/stripe/webhook"]
 
 const authRoutes =["/sign-in","/sign-up","/error","/forgot-password","/reset-password",'/email-verified']
 

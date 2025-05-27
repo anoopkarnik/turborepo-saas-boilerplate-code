@@ -1,5 +1,5 @@
-import { Badge } from "../../../../../ui/src/components/atoms/shadcn/badge";
-import { Button } from "../../../../../ui/src/components/atoms/shadcn/button";
+import { Badge } from "@repo/ui/atoms/shadcn/badge";
+import { Button } from "@repo/ui/atoms/shadcn/button";
 import {
   Card,
   CardContent,
@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../../../../ui/src/components/molecules/shadcn/card";
+} from "@repo/ui/molecules/shadcn/card";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";

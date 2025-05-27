@@ -6,10 +6,11 @@ import { useDropzone } from 'react-dropzone'
 import { Presentation, Upload } from 'lucide-react'
 import { Button } from '@repo/ui/atoms/shadcn/button'
 import {uploadToCloudflare} from '@repo/storage/cloudflare'
-import { uploadMeeting } from '../_actions/project'
+import { uploadMeeting } from '../_actions/meeting'
 import useProject from '../_hooks/useProject'
 import { useToast } from '@repo/ui/hooks/use-toast'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 const MeetingCard = () => {
     const [isUploading, setIsUploading] = React.useState(false)
@@ -40,19 +41,24 @@ const MeetingCard = () => {
                 })
 
             }
-            await uploadMeeting({projectId,meetingUrl: result.url as string, name: file.name})
-
+            const meeting = await uploadMeeting({projectId,meetingUrl: result.url as string, name: file.name})
+            console.log(meeting)
             toast({
                 title: 'Success',
                 description: 'Meeting uploaded successfully',
                 variant: 'default'
             }) 
             router.push('/ai-github/meetings')
+            axios.post('/api/ai-github/process-meeting', {
+                meetingUrl: result.url,
+                projectId,
+                meetingId: meeting.id,
+            })
             setIsUploading(false)
         },
     })
   return (
-    <Card className='col-span-2 flex flex-col items-center justify-center bg-sidebar' {...getRootProps()}>
+    <Card className='col-span-2 flex flex-col items-center justify-center bg-sidebar p-4' {...getRootProps()}>
         {!isUploading && (
             <>
                 <Presentation className='h-10 w-10 animate-bounce'/>

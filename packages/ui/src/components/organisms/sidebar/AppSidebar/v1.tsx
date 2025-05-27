@@ -10,7 +10,7 @@ import { sidebarProps } from "@repo/ts-types/home/v1";
 import { CompanyLogoName } from "../../../molecules/home/CompanyLogoName/v1";
 import SidebarItems from "../../../molecules/sidebar/SidebarItems/v1";
 import SidebarUser  from "../../../molecules/sidebar/SidebarUser/v1";
-import ProgressWithCredits from "../../../../../../payments/src/components/molecules/v1/ProgressWithCredits";
+import ProgressWithCredits from "@repo/payments/components/molecules/ProgressWithCredits/v1";
 import NotificationSheet from "../../home/NotificationSheet/v1";
 
 export function AppSidebar({name,logo,darkLogo,items,footerItems,pricingList,documentationLink,

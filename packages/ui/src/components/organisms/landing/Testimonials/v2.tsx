@@ -85,7 +85,7 @@ const Testimonials = ({testimonialSection}:{testimonialSection:TestimonialSectio
         </div>
       </div>
                   {/* Shadow effect */}
-                  <div className="shadow"></div>
+                  <div className="shadow "></div>
     </section>
   );
 };

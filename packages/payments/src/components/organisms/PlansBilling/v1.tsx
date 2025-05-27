@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SettingsHeading from '@repo/ui/molecules/settings/SettingsHeader/v1';
 import { useSession } from '@repo/auth/better-auth/auth-client';
-import PricingItem from '../../molecules/v1/PricingItem';
+import PricingItem from '../../molecules/PricingItem/v1';
 import { PricingProps } from '@repo/ts-types/landing-page/pricing';
 
 const PlansBilling = ({pricingList,supportEmailAddress}:{pricingList:PricingProps[], supportEmailAddress:string}) => {

@@ -8,7 +8,7 @@ import { RadioGroup, RadioGroupItem } from '@repo/ui/atoms/shadcn/radio'
 import { Label } from '@repo/ui/atoms/shadcn/label'
 import { Button } from '@repo/ui/atoms/shadcn/button'
 import { useMutation } from '@tanstack/react-query'
-import AddAddressDialog from './AddAddressDialog'
+import AddAddressDialog from '../AddAddressDialog/v1'
 import { useToast } from '@repo/ui/hooks/use-toast'
 import { PurchaseCreditsWithDodo } from '../../../dodo/server-actions'
 

@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 import db from "@repo/prisma-db/client";
 import { revalidatePath } from "next/cache";
 import { pollCommits } from "../lib/github";
-import { indexGithubRepo } from "../lib/github-loader";
+import { checkCredits, indexGithubRepo } from "../lib/github-loader";
 
 export const getProjects = async () => {
     const session = await auth.api.getSession({
@@ -35,6 +35,11 @@ export const createProject = async ({githubUrl, name, githubToken}:{githubUrl:st
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
+    const fileCount = await checkCredits(githubUrl, githubToken);
+
+    if (session.user.creditsTotal - session.user.creditsUsed < fileCount) {
+        throw new Error("Insufficient credits to create project");
+    }
     const project = await db.githubProject.create({
         data: {
             githubUrl,
@@ -48,6 +53,16 @@ export const createProject = async ({githubUrl, name, githubToken}:{githubUrl:st
     });
     await indexGithubRepo(project.id, githubUrl, githubToken);
     await pollCommits(project.id)
+    await db.user.update({
+        where: {
+            id: session.user.id,
+        },
+        data: {
+            creditsUsed: {
+                increment: fileCount, // Assuming each project creation costs 1 credit
+            },
+        },
+    })
     revalidatePath('/ai-github/projects');
     return project;
 }
@@ -116,33 +131,52 @@ export const getQuestions = async(projectId: string) => {
     return questions
 }
 
-export const uploadMeeting = async ({projectId,meetingUrl,name}:{
-    projectId: string, meetingUrl: string, name: string}) => {
+
+export const archiveProject = async (projectId: string) => {
     const session = await auth.api.getSession({
         headers: await headers(),
     });
     if (!session?.user?.id) {
         throw new Error("User not authenticated");
     }
-    const meeting = await db.meeting.create({
+    const project = await db.githubProject.update({
+        where: {
+            id: projectId,
+        },
         data: {
-            projectId,
-            meetingUrl,
-            name,
-            status: "PROCESSING"
-        }
-    })
-    return meeting
+            deletedAt: new Date(),
+        },
+    });
+    revalidatePath('/ai-github/projects');
+    return project;
 }
 
-export const getMeetings = async (projectId: string) => {
-    const meetings = await db.meeting.findMany({
+export const getTeamMembers = async (projectId: string) => {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    if (!session?.user?.id) {
+        throw new Error("User not authenticated");
+    }
+    const teamMembers = await db.userToGithubProject.findMany({
         where: {
-            projectId,
+            githubProjectId: projectId,
         },
-        orderBy: {
-            createdAt: "desc"
-        }
-    })
-    return meetings
+        include: {
+            user: true,
+        },
+    });
+    return teamMembers;
+}
+
+export const checkCreditsAction = async (githubUrl:string, githubToken?: string) => {
+
+    const fileCount = await checkCredits(githubUrl, githubToken);
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    if (!session?.user?.id) {
+        throw new Error("User not authenticated");
+    }
+    return {fileCount, userCredits: session.user.creditsTotal - session.user.creditsUsed || 0};
 }

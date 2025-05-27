@@ -12,7 +12,7 @@ import { LightbulbIcon } from "lucide-react";
 import { TeamProps } from "@repo/ts-types/landing-page/team";
 import { FeatureWithDescriptionProps } from "@repo/ts-types/landing-page/features";
 import { PricingProps } from "@repo/ts-types/landing-page/pricing";
-import PricingItem from "../../../../../../payments/src/components/molecules/v1/PricingItem";
+import PricingItem from "@repo/payments/components/molecules/PricingItem/v1";
 
 const HeroCards = ({testimonials,teamList,features,pricingList}:{testimonials:TestimonialProps[] | undefined,
   teamList:TeamProps[] | undefined, features:FeatureWithDescriptionProps[] | undefined,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import PricingItem from "../../../../../../payments/src/components/molecules/v1/PricingItem";
+import PricingItem from "@repo/payments/components/molecules/PricingItem/v1";
 import { PricingSectionProps } from "@repo/ts-types/landing-page/pricing";
 
 

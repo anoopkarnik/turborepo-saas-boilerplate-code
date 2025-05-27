@@ -10,6 +10,9 @@
     "./*": "./src/*.ts",
     "./components/*": "./src/components/*.tsx"
   },
+  "dependencies": {
+    "@repo/auth":"*"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -7,6 +7,9 @@ import Link from 'next/link'
 import CommitLog from './_components/CommitLog'
 import AskQuestionCard from './_components/AskQuestionCard'
 import MeetingCard from './_components/MeetingCard'
+import ArchiveButton from './_components/ArchiveButton'
+import InviteButton from './_components/InviteButton'
+import TeamMembers from './_components/TeamMembers'
 
 const Dashboard = () => {
     const {project} = useProject()
@@ -29,7 +32,9 @@ const Dashboard = () => {
                     </div>
                     <div className='h-4'></div>
                     <div className='flex items-center gap-4'>
-                        Team Members
+                        <TeamMembers/>
+                        <InviteButton/>
+                        <ArchiveButton/>
                     </div>                
                 </div>
                 <div className='grid grid-cols-5 w-full mx-2 my-10 gap-2s'>

@@ -100,7 +100,7 @@ model Issue {
 
     start         String
     end           String
-    gistId       String
+    gist          String
     headline      String
     summary       String
 

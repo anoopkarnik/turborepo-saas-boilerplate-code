@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { Progress } from "../../../../../ui/src/components/atoms/shadcn/progress";
+import { Progress } from "@repo/ui/atoms/shadcn/progress";
 import { CreditsProps } from "@repo/ts-types/home/v1";
 import { Loader2Icon } from "lucide-react";
 

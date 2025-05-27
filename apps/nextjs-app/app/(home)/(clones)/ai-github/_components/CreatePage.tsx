@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,8 +8,9 @@ import { Separator } from '@repo/ui/atoms/shadcn/separator';
 import { Input } from '@repo/ui/atoms/shadcn/input';
 import { Button } from '@repo/ui/atoms/shadcn/button';
 import { useToast } from '@repo/ui/hooks/use-toast';
-import { createProject } from '../_actions/project';
+import { checkCreditsAction, createProject } from '../_actions/project';
 import useProject from '../_hooks/useProject';
+import { Info } from 'lucide-react';
 
 
 
@@ -35,32 +36,40 @@ const CreatePage = () => {
 
     const {toast} = useToast()
 
+    const [checkCredits, setCheckCredits] = React.useState<any>(null)
+
+
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try{
 
-            const result = await createProject({
-                githubUrl: values.repoUrl,
-                name: values.projectName,
-                githubToken: values.githubToken as string
-            })
-            
-            if(!result){
-                toast({
-                    title: "Failed to add project",
-                    description : "An error occured while  adding your project",
-                    variant: "destructive"
+            if(!!checkCredits){
+
+                const result = await createProject({
+                    githubUrl: values.repoUrl,
+                    name: values.projectName,
+                    githubToken: values.githubToken as string
                 })
-                return
+                
+                if(!result){
+                    toast({
+                        title: "Failed to add project",
+                        description : "An error occured while  adding your project",
+                        variant: "destructive"
+                    })
+                    return
+                }
+                toast({
+                    title: "Project added successfully",
+                    description : "Your project has been added successfully",
+                    variant: "success"
+                })
+                await refreshProjects()
+                setProjectId(result.id)
+                form.reset()
             }
-            toast({
-                title: "Project added successfully",
-                description : "Your project has been added successfully",
-                variant: "success"
-            })
-            await refreshProjects()
-            setProjectId(result.id)
-            form.reset()
+            const creditsDetails = await checkCreditsAction(values.repoUrl,values.githubToken as string)
+            setCheckCredits(creditsDetails)
         } catch(error){
             console.log(error)
             toast({
@@ -123,10 +132,39 @@ const CreatePage = () => {
                         )}
                     />
                 </div>
-                <div className='w-full flex justify-center'>
-                    <Button size='lg' disabled={isLoading} >
+                {!!checkCredits && (
+                    <>
+                        <div className='mt-4 bg-destructive/40 px-4 py-2 rounded-md border border-destructive '>
+                            <div className='flex items-center gap-2'>
+                                <Info className='size-4'/>
+                                <p className='text-sm'>You will be charged <strong>{checkCredits?.fileCount}</strong> credits for this repository.
+                                </p>
+                            </div>
+                            <p className='text-sm text-primary ml-6'>
+                                You have <strong>{checkCredits?.userCredits}</strong> credits remaining.
+                            </p>
+                        </div>
+                    </>
+                )}
+                {!checkCredits && (
+                    <>
+                        <div className='mt-4 bg-destructive/40 px-4 py-2 rounded-md border border-destructive'>
+                            <div className='flex items-center gap-2'>
+                                <Info className='size-4'/>
+                                <p className='text-sm'>
+                                    Check the credits cost before connecting your Github repository.
+                                </p>
+                            </div>
+                        </div>
+                    </>
+                )}
+                <div className='w-full flex justify-center gap-4'>
+                    {!checkCredits && <Button size='lg'  disabled={isLoading} >
+                        Check Credits Cost
+                    </Button>}
+                    {!!checkCredits && <Button size='lg' disabled={isLoading || !checkCredits || (checkCredits?.userCredits < checkCredits?.fileCount)} >
                         Connect Your Github Repository
-                    </Button>
+                    </Button>}
                 </div>
             </form>
         </Form>
