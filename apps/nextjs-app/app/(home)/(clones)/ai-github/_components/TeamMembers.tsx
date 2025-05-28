@@ -22,7 +22,7 @@ const TeamMembers = () => {
   return (
     <div className='flex items-center gap-2'>
         {teamMembers.map((member)=>(
-           <Image key={member.id} 
+           <img key={member.id} 
                 src={member.user.image || '/buddha.jpeg'} 
                 alt={member.user.name} 
                 width={32} 

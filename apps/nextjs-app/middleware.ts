@@ -9,13 +9,14 @@ const authRoutes =["/sign-in","/sign-up","/error","/forgot-password","/reset-pas
 
 const apiAuthPrefix = "/api/auth"
 
-const allowedOrigins = ['http://localhost:3000', 'https://bsamaritan.com','https://bayesian-labs.com']
+const allowedOrigins = ['http://localhost:3000', 'https://bsamaritan.com','https://bayesian-labs.com',
+    'https://dev.boilerplate.bayesian-labs.com','https://boilerplate.bayesian-labs.com'
+]
 
 const corsOptions = {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   }
-
 export default async function middleware(req:NextRequest){
 
       // Check the origin from the request
