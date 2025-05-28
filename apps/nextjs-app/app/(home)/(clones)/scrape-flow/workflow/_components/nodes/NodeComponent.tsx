@@ -10,7 +10,7 @@ import NodeOutput from './NodeOutput';
 import { TaskRegistry } from '../../../_lib/workflow/tasks/registry';
 import { Badge } from '@repo/ui/atoms/shadcn/badge';
 
-const DEV_MODE = process.env.NEXT_PUBLIC_DEV_MODE === 'true';
+const DEV_MODE = process.env.NEXT_PUBLIC_ENV === 'development';
 
 const NodeComponent = memo((props: NodeProps) => {
     const nodeData = props.data as AppNodeData;

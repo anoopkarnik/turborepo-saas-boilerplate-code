@@ -4,7 +4,6 @@ export interface RouteProps {
   }
 
 export interface NavbarSectionProps {
-    donateNowLink?: string;
     routeList: RouteProps[];
     githubLink: string;
     githubUsername: string;

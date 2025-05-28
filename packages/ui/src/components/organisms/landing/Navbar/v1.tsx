@@ -98,7 +98,7 @@ const Navbar = ({navbarSection,showLandingRoutes=true}: {
                       <GitHubLogoIcon className="mr-2 w-5 h-5" />
                     {starCount}
                   </a>
-                  <a rel="noreferrer noopener" href={navbarSection?.donateNowLink}>    
+                  <a rel="noreferrer noopener" href={process.env.NEXT_PUBLIC_DODO_PAYMENTS_DONATIONS_URL}>    
                     <Button size="sm" className="rounded-sm">
                       Donate Now
                     </Button>
@@ -134,7 +134,7 @@ const Navbar = ({navbarSection,showLandingRoutes=true}: {
               <GitHubLogoIcon className="mr-2 w-5 h-5" />
               {starCount}
             </a>
-            <a rel="noreferrer noopener" href={navbarSection?.donateNowLink}>    
+            <a rel="noreferrer noopener" href={process.env.NEXT_PUBLIC_DODO_PAYMENTS_DONATIONS_URL}>    
               <Button size="sm" className="rounded-sm" >
                 Donate Now
               </Button>

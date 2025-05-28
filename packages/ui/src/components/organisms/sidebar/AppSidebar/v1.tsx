@@ -13,8 +13,8 @@ import SidebarUser  from "../../../molecules/sidebar/SidebarUser/v1";
 import ProgressWithCredits from "@repo/payments/components/molecules/ProgressWithCredits/v1";
 import NotificationSheet from "../../home/NotificationSheet/v1";
 
-export function AppSidebar({name,logo,darkLogo,items,footerItems,pricingList,documentationLink,
-    supportEmailAddress,githubUsername,githubRepositoryName,showCredits,userDetails}:sidebarProps) {
+export function AppSidebar({name,logo,darkLogo,items,footerItems,pricingList,supportEmailAddress,showCredits,
+    userDetails}:sidebarProps) {
         
     return (
         <Sidebar>
@@ -37,9 +37,7 @@ export function AppSidebar({name,logo,darkLogo,items,footerItems,pricingList,doc
                 {/* {userDetails?.access === "TRIAL" ? <UpgradeToProButton />:null} */}
                 {showCredits && 
                 <ProgressWithCredits creditsUsed={userDetails?.creditsUsed } creditsTotal={userDetails?.creditsTotal}/>}
-                <SidebarUser  pricingList={pricingList}
-                      documentationLink={documentationLink} supportEmailAddress={supportEmailAddress} githubUsername={githubUsername} 
-                      githubRepositoryName={githubRepositoryName} />
+                <SidebarUser  pricingList={pricingList} supportEmailAddress={supportEmailAddress}   />
             </SidebarFooter>
         </Sidebar>
     );

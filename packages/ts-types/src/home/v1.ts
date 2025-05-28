@@ -36,10 +36,7 @@ export interface sidebarProps extends CompanyLogoNameProps,UserProps {
 
 
 export interface UserProps {
-    documentationLink?: string;
     supportEmailAddress?: string;
-    githubUsername?: string;
-    githubRepositoryName?: string;
     pricingList: PricingProps[];
 }
 

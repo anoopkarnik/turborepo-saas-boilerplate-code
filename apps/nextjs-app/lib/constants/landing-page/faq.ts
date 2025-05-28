@@ -10,7 +10,7 @@ export const faqList: faqProps[] = [
       {
         question: "What are the tools and languages used in this boilerplate code?",
         answer:
-          "Nexjs, React, Typescript, Tailwind CSS, Turborepo, Docusaurus, Prisma, Vercel, Razorpay, NextAuth, Shadcn Atomic Design Components, Shadcn Themes, Shadcn Templates, and many more.",
+          "Nexjs, React, Typescript, Tailwind CSS, Turborepo, Docusaurus, Prisma, Vercel,  NextAuth, Shadcn Atomic Design Components, Shadcn Themes, Shadcn Templates, and many more.",
         value: "item-2",
       },
       {

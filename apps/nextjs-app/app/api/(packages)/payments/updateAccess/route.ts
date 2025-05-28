@@ -7,8 +7,8 @@ export async function GET() {
     try {
         // Get the current session
         const session = await auth.api.getSession({
-        headers: await headers(),
-    });;
+          headers: await headers(),
+      });;
     
         // Ensure the user is authenticated
         if (!session?.user?.id) {

@@ -8,8 +8,7 @@ export const darkLogo = "https://strapi.bayesian-labs.com/uploads/logo_7f3a44668
 export const creator = "Anoop Karnik"
 export const creatorLink = "https://www.linkedin.com/in/anoopkarnik/"
 export const supportEmailAddress = "support@bayesian-labs.com"
-// export const donateNowLink = "https://razorpay.me/@bayesianlabs"
-export const donateNowLink = "https://checkout.dodopayments.com/buy/pdt_rU5SMAMbi7zEpRXWX8mJa?quantity=1&redirect_url=https://bayesian-labs.com"
+
 export const companyName = "Bayesian Labs"
 export const country = "India"
 export const websiteUrl = "https://boilerplate.bayesian-labs.com"

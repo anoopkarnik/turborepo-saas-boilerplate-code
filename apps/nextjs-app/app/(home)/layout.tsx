@@ -17,7 +17,6 @@ import { redirect } from "next/navigation";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 
-    const documentationLink = process.env.NEXT_PUBLIC_DOCUMENTATION_URL as string;
       const data = useGlobalData(); 
 
     const { isPending,data:session } = useSession();
@@ -43,10 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             logo={logo}
             darkLogo={darkLogo}
             pricingList={pricingList}
-            documentationLink={documentationLink}
             supportEmailAddress={supportEmailAddress}
-            githubUsername={githubUsername}
-            githubRepositoryName={githubRepositoryName}
             userDetails={session?.user}
             showCredits={showCredits}
           />

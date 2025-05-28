@@ -46,21 +46,21 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
     
   }
 
-  async function loginAsGuest(){
-    setPending(true)
-    let data = {email: process.env.NEXT_PUBLIC_GUEST_MAIL, password: process.env.NEXT_PUBLIC_GUEST_PASSWORD}
-    await onEmailSubmit(data)
-    setPending(false)
+  // async function loginAsGuest(){
+  //   setPending(true)
+  //   let data = {email: process.env.NEXT_PUBLIC_GUEST_MAIL, password: process.env.NEXT_PUBLIC_GUEST_PASSWORD}
+  //   await onEmailSubmit(data)
+  //   setPending(false)
       
-  }
+  // }
 
-  async function loginAsAdmin(){
-    setPending(true)
-    let data = {email: process.env.NEXT_PUBLIC_ADMIN_MAIL, password: process.env.NEXT_PUBLIC_ADMIN_PASSWORD}
+  // async function loginAsAdmin(){
+  //   setPending(true)
+  //   let data = {email: process.env.NEXT_PUBLIC_ADMIN_MAIL, password: process.env.NEXT_PUBLIC_ADMIN_PASSWORD}
     
-    await onEmailSubmit(data)
-    setPending(false)
-  }
+  //   await onEmailSubmit(data)
+  //   setPending(false)
+  // }
   
   return (
     <Card className='w-[400px] shadow-xl shadow-white/20'>

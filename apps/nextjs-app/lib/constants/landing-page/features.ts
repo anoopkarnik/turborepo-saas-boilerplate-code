@@ -26,12 +26,6 @@ export const featuresWithDescription: FeatureWithDescriptionProps[] = [
       href:"./features/authv5.png"
     },
     {
-      title: "Razorpay Payments",
-      description:
-        "Razorpay Payments are integrated into the landing page.",
-      href:"./features/razorpay.webp"
-    },
-    {
       title: "Vercel Blob Storage",
       description:
         "Vercel Blob Storage is used to store the profile images of the users and also modify them.",
@@ -68,12 +62,6 @@ export const featuresWithDescription: FeatureWithDescriptionProps[] = [
       href: "./features/notifications.png"
     },
     {
-      title: "Customized Pricing for API Credits using Cashfree Payments",
-      description:
-        "Customized Pricing for API Credits is used to show the pricing of the API Credits.",
-      href: "./features/cashfree.avif"
-    },
-    {
       title: "Notion Client Library",
       description:
         "Notion Client Library is used to fetch the data from the Notion API.",
@@ -92,7 +80,6 @@ export const featureList: FeatureListProps[]= [
     {title: "Landing Page"},
     {title: "Dark/Light theme"},
     {title: "Docusaurus Documentation"},
-    {title: "Razorpay Payments"},
     {title: "NextAuth Authentication"},
     {title: "Social Logins"},
     {title: "Shadcn Atomic Design Components"},

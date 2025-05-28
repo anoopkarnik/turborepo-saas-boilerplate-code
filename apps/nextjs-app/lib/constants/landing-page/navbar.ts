@@ -1,5 +1,5 @@
 import { NavbarSectionProps, RouteProps } from "@repo/ts-types/landing-page/navbar";
-import { githubLink, githubUsername, githubRepositoryName, title, logo, darkLogo, donateNowLink } from "../appDetails";
+import { githubLink, githubUsername, githubRepositoryName, title, logo, darkLogo, } from "../appDetails";
 
 export const routeList: RouteProps[] = [
   {href: "#features", label: "Features",},
@@ -16,5 +16,4 @@ export const navbarSection:NavbarSectionProps = {
     title,
     logo,
     darkLogo,
-    donateNowLink
 }
