@@ -33,12 +33,10 @@ import {
 import { UserProps } from "@repo/ts-types/home/v1"
 import { SettingsDialog } from "../../../templates/settings/Settings/v1"
 import { Theme } from "../../home/Theme/v1"
-import { authClient, signOut, useSession } from "@repo/auth/better-auth/auth-client"
-import { useTheme } from "next-themes"
+import { authClient, useSession } from "@repo/auth/better-auth/auth-client"
 import { useRouter } from "next/navigation"
 
-const SidebarUser = ({ documentationLink,supportEmailAddress, githubUsername,githubRepositoryName,
-    pricingList}:UserProps) => {
+const SidebarUser = ({ supportEmailAddress,    pricingList}:UserProps) => {
 
   const { data:session,status } = useSession();
 

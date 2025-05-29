@@ -3,7 +3,6 @@
 import React, { useEffect } from 'react'
 import useProject from '../_hooks/useProject'
 import { getTeamMembers } from '../_actions/project'
-import Image from 'next/image'
 
 const TeamMembers = () => {
     const {projectId } = useProject()

@@ -24,7 +24,7 @@ export async function POST(req: NextRequest){
 
     try {
         const body = await req.json();
-        const {meetingUrl, projectId, meetingId} = bodyParser.parse(body);
+        const {meetingUrl, meetingId} = bodyParser.parse(body);
 
         const {summaries} = await processMeeting(meetingUrl);
 

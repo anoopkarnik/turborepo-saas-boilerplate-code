@@ -8,7 +8,7 @@ import {Badge} from '@repo/ui/atoms/shadcn/badge'
 import ProjectsTab from '../_components/ProjectsTab'
 import { Button } from '@repo/ui/atoms/shadcn/button'
 
-const page = () => {
+const MeetingIdPage = () => {
   const {projectId} = useProject()
   const [meetings, setMeetings] = useState<any[]>([])
 
@@ -75,4 +75,4 @@ const page = () => {
   )
 }
 
-export default page
+export default MeetingIdPage

@@ -4,7 +4,7 @@ import { SidebarProvider, SidebarTrigger } from "@repo/ui/organisms/shadcn/sideb
 import { AppSidebar } from "@repo/ui/organisms/sidebar/AppSidebar/v1"
 import { sidebarFooterItems, sidebarItems } from "../../lib/constants/home"
 import { useSession} from "@repo/auth/better-auth/auth-client";
-import { darkLogo, githubRepositoryName, githubUsername, logo, showCredits, supportEmailAddress, title } from "../../lib/constants/appDetails";
+import { darkLogo, logo, showCredits, supportEmailAddress, title } from "../../lib/constants/appDetails";
 import { RecoilRoot } from "recoil";
 import { Separator } from "@repo/ui/atoms/shadcn/separator";
 import {BreadcrumbsHeader} from "@repo/ui/molecules/home/BreadcrumbsHeader/v1"
