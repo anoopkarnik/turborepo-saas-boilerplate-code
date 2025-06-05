@@ -18,7 +18,7 @@ const ChatForm = ({input,isLoading,handleInputChange,onSubmit}:ChatFormProps) =>
     <form onSubmit={onSubmit} className="border-t border-border py-4 flex items-center gap-x-2">
         <Input disabled={isLoading} value={input} onChange={handleInputChange} placeholder='Type a message' 
         className='rounded-lg' />
-        <Button disabled={isLoading} variant='blank' size='icon'>
+        <Button disabled={isLoading} variant='blank' size='icon' >
             <SendHorizonal className='h-6 w-6' />
         </Button>
     </form>

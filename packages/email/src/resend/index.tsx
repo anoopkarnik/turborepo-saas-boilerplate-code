@@ -5,7 +5,7 @@ import ResetPassword from '../templates/ResetPassword';
 
 export const sendVerificationEmail = async (email: string, verificationUrl: string) => {
     const resend = new Resend(process.env.RESEND_API_KEY)
-    let from = process.env.NEXT_PUBLIC_SUPPORT_MAIL || "support@bayesian-labs.com";
+    let from = process.env.NEXT_PUBLIC_SUPPORT_MAIL!;
     let subject = "Verify Your Email Address";
     const response = await resend.emails.send({
         from: from,
@@ -20,7 +20,7 @@ export const sendVerificationEmail = async (email: string, verificationUrl: stri
 export const sendResetEmail = async (email: string, resetUrl: string) => {
   const resend = new Resend(process.env.RESEND_API_KEY)
 
-  let from = process.env.NEXT_PUBLIC_SUPPORT_MAIL || "support@bayesian-labs.com";
+  let from = process.env.NEXT_PUBLIC_SUPPORT_MAIL!;
   let subject = "Reset your password";
   const response = await resend.emails.send({
       from: from,

@@ -40,7 +40,7 @@ const  ConversationId= ({params}: {params: Params}) => {
         const fetchConversation = async () => {
             const conversation  = await getConversationById(conversationId)
             setConversation(conversation)
-            const messages = await getMessages(conversationId)
+            const messages = await getMessages(conversationId )
             setMessages(messages || [])
         }
         fetchConversation()

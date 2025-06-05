@@ -6,7 +6,7 @@ export const getSaaSDetails = async () => {
     try{
         const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL + "/api/" || "http://localhost:1337/api/";
         const database = "saas-landing-pages";
-        const filter = "filter[slug][$eq]=saas-landing-page-1"
+        const filter = "filters[slug][$eq]=saas-landing-page-1"
         const populateNavbarSection = "populate[navbarSection][populate][0]=routeList"
         const populateHeroSection = "populate[heroSection][populate][0]=images"
         const populatePricingSection = "populate[pricingSection][populate][pricingList][populate][0]=benefitList"
