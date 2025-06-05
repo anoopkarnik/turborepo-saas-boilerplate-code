@@ -9,9 +9,6 @@
     "postgres:generate": "npx prisma generate --schema prisma/schema",
     "postgres:migrate": "npx prisma migrate dev --schema prisma/schema"
   },
-  "prisma": {
-    "seed": "node dist/seeds/seed.js"
-  },
   "keywords": [],
   "author": "",
   "exports": {

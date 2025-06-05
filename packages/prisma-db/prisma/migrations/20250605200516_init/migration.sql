@@ -296,7 +296,7 @@ CREATE TABLE "github_schema"."Issue" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "start" TEXT NOT NULL,
     "end" TEXT NOT NULL,
-    "gistId" TEXT NOT NULL,
+    "gist" TEXT NOT NULL,
     "headline" TEXT NOT NULL,
     "summary" TEXT NOT NULL,
     "meetingId" TEXT NOT NULL,
