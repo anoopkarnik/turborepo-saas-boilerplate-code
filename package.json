@@ -9,7 +9,7 @@
     "test": "turbo test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "start:nodejs-app": "cd apps/node-backend && npm run start",
-    "db:migrate": "cd packages/prisma-db && npm run prisma:migrate --name init",
+    "db:migrate": "cd packages/prisma-db && npm run postgres:migrate --name init",
     "db:generate": "cd packages/prisma-db && npm run postgres:generate",
     "postinstall": "",
     "db:seed": "cd packages/prisma-db && npx prisma db seed"
