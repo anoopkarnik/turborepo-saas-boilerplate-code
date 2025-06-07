@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "TimeTracker",
+    "version": "1.0",
+    "permissions": ["tabs", "storage", "activeTab", "scripting", "alarms","idle"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "stop-watch.jpg"
+    },
+  "host_permissions": ["<all_urls>"]
+}
