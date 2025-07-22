@@ -50,7 +50,7 @@ const Navbar = ({navbarSection,showLandingRoutes=true}: {
   
 
   return (
-    <header className="sticky border-b-[1px] top-0 z-40 w-full bg-background font-geistMono">
+    <header className="fixed top-0 z-40 w-full bg-black bg-opacity-10 font-geistMono">
       <NavigationMenu className="mx-auto">
         <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between ">
           <NavigationMenuItem className="font-bold flex">
@@ -82,7 +82,7 @@ const Navbar = ({navbarSection,showLandingRoutes=true}: {
                       key={label}
                       href={href}
                       onClick={() => setIsOpen(false)}
-                      className={`rounded-sm ${buttonVariants({ variant: "ghost" })}`}
+                      className={`rounded-sm shadow-none border-none bg-inherit ${buttonVariants({ variant: "blank" })}`}
                     >
                       {label}
                     </a>
@@ -129,7 +129,7 @@ const Navbar = ({navbarSection,showLandingRoutes=true}: {
               rel="noreferrer noopener"
               href={navbarSection?.githubLink}
               target="_blank"
-              className={`border flex items-center rounded-sm ${buttonVariants({ variant: "secondary" ,size:"sm"})}`}
+              className={`border flex items-center rounded-sm  shadow-none border-none bg-inherit ${buttonVariants({ variant: "secondary" ,size:"sm"})}`}
             >
               <GitHubLogoIcon className="mr-2 w-5 h-5" />
               {starCount}
