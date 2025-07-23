@@ -1,9 +1,8 @@
-import React from 'react'
 
-const page = () => {
+const AgentPage = () => {
   return (
     <div>page</div>
   )
 }
 
-export default page
+export default AgentPage
