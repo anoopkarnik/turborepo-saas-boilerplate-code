@@ -41,6 +41,9 @@ export const sidebarItems:sidebarHeaderProps =
               {title: "Q&A", url: "/ai-github/qa", icon: ShieldQuestionIcon},
               {title: "Meetings", url: "/ai-github/meetings", icon: PresentationIcon},
           ]},
+          {title: "Meet AI", url: "/meet-ai", icon: VideoIcon, isActive:false, items:[
+              {title: "Agents", url: "/meet-ai/agents", icon: BotIcon},
+          ]},
     ]
 }
 
