@@ -2,8 +2,8 @@
 
 import React from 'react'
 import { quote } from '../../../lib/constants/auth'
-import VerificationCard from '@repo/auth/components/authflow/organisms/v1/VerificationCard'
-import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
+import VerificationCard from '@repo/ui/organisms/auth/authflow/VerificationCard'
+import Quote from '@repo/ui/organisms/auth/authflow/Quote'
 
 
 const Verification = () => {

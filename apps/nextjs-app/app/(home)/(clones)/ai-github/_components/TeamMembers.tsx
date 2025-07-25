@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react'
 import useProject from '../_hooks/useProject'
 import { getTeamMembers } from '../_actions/project'
+import Image from 'next/image'
 
 const TeamMembers = () => {
     const {projectId } = useProject()
@@ -21,7 +22,7 @@ const TeamMembers = () => {
   return (
     <div className='flex items-center gap-2'>
         {teamMembers.map((member)=>(
-           <img key={member.id} 
+           <Image key={member.id} 
                 src={member.user.image || '/buddha.jpeg'} 
                 alt={member.user.name} 
                 width={32} 
