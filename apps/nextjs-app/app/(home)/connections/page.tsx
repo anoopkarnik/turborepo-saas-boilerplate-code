@@ -8,7 +8,7 @@ import { formatDistanceToNow } from 'date-fns'
 import DeleteConnectionDialog from '@repo/ui/organisms/connections/DeleteConnectionDialog'
 import { GetConnectionsForUser } from '@repo/connections/connections'
 
-const page = () => {
+const ConnectionsPage = () => {
   return (
     <div className='flex flex-1 flex-col h-full p-4'>
       <div className='flex justify-between'>
@@ -78,4 +78,4 @@ async function UserConnections(){
   )
 }
 
-export default page
+export default ConnectionsPage

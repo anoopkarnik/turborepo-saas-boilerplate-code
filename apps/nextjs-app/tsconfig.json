@@ -20,7 +20,11 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "middleware.ts", "tests/unit/app/hooks/useNotificationPoling", "../../packages/ai/src/gemini/gemini.ts", "../../packages/payments/src/dodo/server-actions.ts", "../../packages/payments/src/billing.ts", "../../packages/payments/src/components/organisms/AddAddressDialog/v1.tsx", "../../packages/payments/src/components/organisms/CreditsPurchase/CreditsPur../../packages/payments/src/components/organisms/CreditUsageChart/CreditUsageChart.tsxsageChart.tsx", "../../packages/payments/src/components/molecules/InvoiceButton/v1.tsx", "../../packages/connections/src/connections.ts", "../../packages/connections/src/components/AddApiKeyConnectionsDialog.tsx", "../../packages/connections/src/components/AddConnectionsList.tsx", "../../packages/connections/src/components/AddOAuthConnectionsDialog.tsx", "../../packages/connections/src/components/ConnectionCard.tsx", "../../packages/connections/src/components/DeleteConnectionDialog.tsx" ],
+    "middleware.ts",
+    "tests/**/*.ts",
+    "../../packages/**/*.ts",
+    "../../packages/**/*.tsx"
+   ],
   "exclude": [
     "node_modules"
   ]

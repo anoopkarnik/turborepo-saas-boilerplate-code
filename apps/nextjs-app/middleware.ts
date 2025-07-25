@@ -37,15 +37,6 @@ export default async function middleware(req:NextRequest){
 
     const session = await getCookieCache(req);
     
-    // const { data: session} = await betterFetch<Session>(
-    //     "/api/auth/get-session",
-    //     {
-    //         baseURL: process.env.NEXT_PUBLIC_URL,
-    //         headers: {
-    //             cookie: req.headers.get("cookie") ?? "",
-    //         }
-    //     }
-    // )
     const isLoggedIn = !!session;
 
 
