@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server"
 import { betterFetch } from "@better-fetch/fetch";
 import { Session } from "@repo/auth/better-auth/auth";
+import { getCookieCache } from "better-auth/cookies";
 
 const publicRoutes = ["/landing","/api/workflows","/public","/api/payments/dodo/webhook",
     "/api/payments/stripe/webhook"]
@@ -23,16 +24,28 @@ export default async function middleware(req:NextRequest){
     const origin = req.headers.get('origin') ?? ''
     const pathName = req.nextUrl.pathname;
     const isAllowedOrigin = allowedOrigins.includes(origin)
+
+    const isApiAuthRoute = pathName.startsWith(apiAuthPrefix);
+    const isPublicRoute =  publicRoutes.some((route) => pathName.startsWith(route));
+    const response = NextResponse.next()
+
+
+    // Avoid infinite recursion: don't fetch session for /api/auth routes
+    if (isApiAuthRoute || isPublicRoute) {
+        return response;
+    }
+
+    const session = await getCookieCache(req);
     
-    const { data: session} = await betterFetch<Session>(
-        "/api/auth/get-session",
-        {
-            baseURL: process.env.NEXT_PUBLIC_URL,
-            headers: {
-                cookie: req.headers.get("cookie") ?? "",
-            }
-        }
-    )
+    // const { data: session} = await betterFetch<Session>(
+    //     "/api/auth/get-session",
+    //     {
+    //         baseURL: process.env.NEXT_PUBLIC_URL,
+    //         headers: {
+    //             cookie: req.headers.get("cookie") ?? "",
+    //         }
+    //     }
+    // )
     const isLoggedIn = !!session;
 
 
@@ -47,7 +60,6 @@ export default async function middleware(req:NextRequest){
         return NextResponse.json({}, { headers: preflightHeaders })
     }
 
-    const response = NextResponse.next()
 
     if (isAllowedOrigin) {
         response.headers.set('Access-Control-Allow-Origin', origin)
@@ -58,18 +70,9 @@ export default async function middleware(req:NextRequest){
       })
 
 
-      const isApiAuthRoute = pathName.startsWith(apiAuthPrefix);
-      const isPublicRoute =  publicRoutes.some((route) => pathName.startsWith(route));
-      const isAuthRoute = authRoutes.includes(pathName);
+
+    const isAuthRoute = authRoutes.includes(pathName);
   
-
-    if (isApiAuthRoute ){
-        return response;
-    }
-
-    if (isPublicRoute){
-        return response;
-    }
 
     if (isAuthRoute){
         if (isLoggedIn){

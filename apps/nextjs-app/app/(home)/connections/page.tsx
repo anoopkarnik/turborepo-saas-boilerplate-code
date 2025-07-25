@@ -3,9 +3,9 @@ import { Skeleton } from '@repo/ui/molecules/shadcn/skeleton'
 import { ShieldIcon, ShieldOffIcon, LockKeyholeIcon } from 'lucide-react'
 import React, { Suspense } from 'react'
 import { Card } from '@repo/ui/molecules/shadcn/card'
-import AddConnectionsList from '@repo/connections/components/AddConnectionsList'
+import AddConnectionsList from '@repo/ui/organisms/connections/AddConnectionsList'
 import { formatDistanceToNow } from 'date-fns'
-import DeleteConnectionDialog from '@repo/connections/components/DeleteConnectionDialog'
+import DeleteConnectionDialog from '@repo/ui/organisms/connections/DeleteConnectionDialog'
 import { GetConnectionsForUser } from '@repo/connections/connections'
 
 const page = () => {

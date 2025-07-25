@@ -6,9 +6,9 @@ import React, { Suspense,  useState } from 'react'
 import { quote } from '../../../lib/constants/auth'
 
 import { authClient } from '@repo/auth/better-auth/auth-client'
-import ErrorCard from '@repo/auth/components/authflow/organisms/v1/ErrorCard'
-import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
-import ResetPasswordCard from '@repo/auth/components/authflow/organisms/v1/ResetPasswordCard'
+import ErrorCard from '@repo/ui/organisms/auth/authflow/ErrorCard'
+import Quote from '@repo/ui/organisms/auth/authflow/Quote'
+import ResetPasswordCard from '@repo/ui/organisms/auth/authflow/ResetPasswordCard'
 import LoadingCard from '@repo/ui/organisms/misc/LoadingCard/v1'
 
 const ResetPasswordContent = () => {

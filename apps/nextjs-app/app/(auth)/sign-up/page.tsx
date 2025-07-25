@@ -8,8 +8,8 @@ import { quote } from '../../../lib/constants/auth'
 import { authClient } from '@repo/auth/better-auth/auth-client'
 import { z } from 'zod'
 import { RegisterSchema } from '@repo/auth/utils/zod'
-import RegisterCard from '@repo/auth/components/authflow/organisms/v1/RegisterCard'
-import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
+import RegisterCard from '@repo/ui/organisms/auth/authflow/RegisterCard'
+import Quote from '@repo/ui/organisms/auth/authflow/Quote'
 import LoadingCard from '@repo/ui/organisms/misc/LoadingCard/v1'
 
 const RegisterContent = () => {

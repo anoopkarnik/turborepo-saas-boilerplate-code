@@ -8,7 +8,11 @@
     ],
     "strictNullChecks": true,
     "strict": true,
-    "types": ["vitest"]
+    "types": ["vitest"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "next-env.d.ts",

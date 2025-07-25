@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import { GetTwitterUserDetails } from "../../../../(home)/(clones)/twitter-clone/_actions/user";
 import { NextResponse } from "next/server";
 

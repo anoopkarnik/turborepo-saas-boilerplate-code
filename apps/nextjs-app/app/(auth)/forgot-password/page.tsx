@@ -3,8 +3,8 @@
 import React, {useState } from 'react'
 import {quote } from '../../../lib/constants/auth'
 import { authClient } from '@repo/auth/better-auth/auth-client'
-import ForgotPasswordCard from '@repo/auth/components/authflow/organisms/v1/ForgotPasswordCard'
-import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
+import ForgotPasswordCard from '@repo/ui/organisms/auth/authflow/ForgotPasswordCard'
+import Quote from '@repo/ui/organisms/auth/authflow/Quote'
 
 const ForgotPasswordClient = () => {
 

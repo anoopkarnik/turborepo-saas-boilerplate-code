@@ -13,7 +13,6 @@ export async function GET(){
         }
     });
 
-    console.log("Workflows to run", workflows.length);
     for (const workflow of workflows) {
         triggerWorkflow(workflow.id);
     }

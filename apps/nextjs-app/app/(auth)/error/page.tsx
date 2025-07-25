@@ -3,8 +3,8 @@
 
 import React from 'react'
 import { quote } from '../../../lib/constants/auth'
-import ErrorCard from '@repo/auth/components/authflow/organisms/v1/ErrorCard'
-import Quote from '@repo/auth/components/authflow/organisms/v1/Quote'
+import ErrorCard from '@repo/ui/organisms/auth/authflow/ErrorCard'
+import Quote from '@repo/ui/organisms/auth/authflow/Quote'
 
 const ErrorTemp = () => {
 
