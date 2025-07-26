@@ -15,7 +15,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useToast } from '@repo/ui/hooks/use-toast'
 import {Loader2} from 'lucide-react'
 import { ConnectionCardProps } from '@repo/connections/lib/ts-types'
-import { AddApiKeyConnection } from '../connections'
+import { AddApiKeyConnection } from '@repo/connections/connections'
 
 const AddApiKeyConnectionsDialog = ({connection}:{connection:ConnectionCardProps}) => {
     const [open, setOpen] = useState(false)

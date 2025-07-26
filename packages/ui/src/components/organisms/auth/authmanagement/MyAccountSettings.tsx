@@ -16,8 +16,8 @@ import SettingsHeading from "@repo/ui/molecules/settings/SettingsHeader/v1";
 import { authClient, useSession} from "@repo/auth/better-auth/auth-client";
 import { useToast } from "@repo/ui/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import { ResetPasswordSchema } from "../../../../utils/zod";
-import {FormResult} from '../../../authflow/organisms/v1/FormResult';
+import { ResetPasswordSchema } from "@repo/auth/utils/zod";
+import {FormResult} from '../authflow/FormResult';
 
   
   const MyAccountSettings = () => {

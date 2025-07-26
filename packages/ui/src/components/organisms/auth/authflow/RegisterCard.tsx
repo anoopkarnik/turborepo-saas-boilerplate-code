@@ -18,8 +18,8 @@ import { Input } from '@repo/ui/atoms/shadcn/input';
 import { FormResult } from './FormResult';
 import { useRouter } from 'next/navigation';
 import { useState } from "react";
-import { RegisterSchema } from "../../../../utils/zod";
-import { RegisterCardProps } from "../../../../utils/typescript";
+import { RegisterSchema } from "@repo/auth/utils/zod";
+import { RegisterCardProps } from "@repo/auth/utils/typescript";
 const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedinProvider,
   onEmailSubmit,onGoogleProviderSubmit,onGithubProviderSubmit,onLinkedinProviderSubmit, errorMessage}:RegisterCardProps
 ) => {
@@ -98,7 +98,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
         {showLinkedinProvider && <Button onClick={onLinkedinProviderSubmit} variant='secondary' className="w-full"><FaLinkedin/></Button>}
       </CardFooter>
       <CardFooter className='flex justify-center'>
-        <button onClick={()=>router.push('/sign-in')} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
+        <button onClick={()=>router.push('/sign-in')} className='text-sm text-center cursor-pointer hover:underline'>
           Already have an Account!
         </button>
       </CardFooter>

@@ -1,4 +1,4 @@
-import {QuoteProps} from "../../../../utils/typescript"
+import {QuoteProps} from "@repo/auth/utils/typescript"
 
 const Quote = ({quote}:{quote:QuoteProps}) => {
   return (

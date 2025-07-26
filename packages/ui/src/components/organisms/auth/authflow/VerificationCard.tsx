@@ -3,7 +3,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@repo/ui/molecules/sh
 
 import { BeatLoader } from 'react-spinners';
 import { useRouter } from 'next/navigation';
-import { VerificationCardProps } from '../../../../utils/typescript';
+import { VerificationCardProps } from '@repo/auth/utils/typescript';
 
 const VerificationCard = ({errorMessage,successMessage}:VerificationCardProps) => {
   const router = useRouter();

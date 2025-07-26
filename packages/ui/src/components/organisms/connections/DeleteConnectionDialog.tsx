@@ -18,7 +18,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useToast } from '@repo/ui/hooks/use-toast'
 import { Button } from '@repo/ui/atoms/shadcn/button'
 import { XIcon } from 'lucide-react'
-import { DeleteConnection } from '../connections'
+import { DeleteConnection } from '@repo/connections/connections'
 
 interface Props {
     name: string

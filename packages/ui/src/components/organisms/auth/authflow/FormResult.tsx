@@ -1,4 +1,4 @@
-import { FormResultProps } from '../../../../utils/typescript';
+import { FormResultProps } from '@repo/auth/utils/typescript';
 import { BsExclamationTriangle,BsExclamationCircle } from 'react-icons/bs';
 export const FormResult = ({type,message}:FormResultProps) => {
     if (!message) return null

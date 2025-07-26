@@ -2,7 +2,7 @@ import { Card,  CardFooter, CardHeader } from '@repo/ui/molecules/shadcn/card';
 import { BsExclamationTriangle } from 'react-icons/bs';
 import { Button } from '@repo/ui/atoms/shadcn/button';
 import { useRouter } from 'next/navigation';
-import { ErrorCardProps } from '../../../../utils/typescript';
+import { ErrorCardProps } from '@repo/auth/utils/typescript';
 
 const ErrorCard = ({errorMessage}:ErrorCardProps) => {
 

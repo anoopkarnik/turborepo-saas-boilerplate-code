@@ -21,12 +21,12 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from "../../../organisms/shadcn/sidebar"
-import MyAccountSettings from "@repo/auth/components/authmanagement/organisms/v1/MyAccountSettings"
+import MyAccountSettings from "../../../organisms/auth/authmanagement/MyAccountSettings"
 import { cn } from "../../../../lib/utils"
 import { SettingsDialogProps } from "@repo/ts-types/home/v1"
 import { Avatar, AvatarFallback, AvatarImage } from "../../../atoms/shadcn/avatar"
 import MyConnectionsSettings from "../../../organisms/connections/MyConnectionSettings/v1"
-import SessionSettings from "@repo/auth/components/authmanagement/organisms/v1/SessionSettings"
+import SessionSettings from "../../../organisms/auth/authmanagement/SessionSettings"
 import PlansBilling from "@repo/payments/components/organisms/PlansBilling/v1"
 import { useSession } from "@repo/auth/better-auth/auth-client"
 import { Button } from "../../../atoms/shadcn/button"

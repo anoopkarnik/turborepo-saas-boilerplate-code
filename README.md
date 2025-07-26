@@ -13,19 +13,18 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=anoopkarnik_turborepo-saas-boilerplate-code&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=anoopkarnik_turborepo-saas-boilerplate-code)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=anoopkarnik_turborepo-saas-boilerplate-code&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=anoopkarnik_turborepo-saas-boilerplate-code)
 
-# COMPLETE SAAS BOILERPLATE CODE
+# SAAS FORGE
 
 ## Overview
 
 MicroSaaS products are one of the most exciting ways to create impactful software with minimal resources. They allow solopreneurs and small teams to quickly launch, validate and iterate on ideas. To help developers hit the ground running, I built a boilerplate for MicroSaaS products using a **TurboRepo monorepo setup** and am excited to share it with the open-source community. For more details, got to these [overview docs](https://docs.boilerplate.bayesian-labs.com/docs/overview) in the documentation.
 
-![Apps](./apps/docs/static/img/design/apps.png)
-![Packages](./apps/docs/static/img/design/packages.png)
-![UI Packages](./apps/docs/static/img/design/ui.png)
+![Apps](./apps/nextjs-app/public/readme/apps.png)
+![Packages](./apps/nextjs-app/public/readme/packages.png)
 
 ## Starting Locally
 
-Use the documentation link, to start this boilerplate quickly locally - [development docs](https://docs.boilerplate.bayesian-labs.com/docs/category/getting-started)
+Use the documentation link, to start this boilerplate quickly locally - [development docs](https://boilerplate.bayesian-labs.com/landing/doc/doc-6)
 
 
 ## Deploy Your Own
@@ -36,7 +35,7 @@ Use the documentation link, to start this boilerplate quickly locally - [develop
     )
 
 2) Give a repository name which will clone this repo to your account but fail buidling.
-3) In the project built in vercel go to Settings and in Environment variables fill all the variables according to these [docs](https://docs.boilerplate.bayesian-labs.com/docs/getting-started/start-locally)
+3) In the project built in vercel go to Settings and in Environment variables fill all the variables according to these [docs](https://boilerplate.bayesian-labs.com/landing/doc/doc-6)
 
 ## License
 

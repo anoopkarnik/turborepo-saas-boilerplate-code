@@ -15,8 +15,8 @@ import {
 import { FormResult } from './FormResult';
 import { useRouter } from 'next/navigation';
 import LoadingButton from '@repo/ui/molecules/misc/LoadingButton/v1';
-import { ForgotPasswordSchema } from '../../../../utils/zod';
-import { ForgotPasswordCardProps } from '../../../../utils/typescript';
+import { ForgotPasswordSchema } from '@repo/auth/utils/zod';
+import { ForgotPasswordCardProps } from '@repo/auth/utils/typescript';
 import { Input } from '@repo/ui/atoms/shadcn/input';
 
 const ForgotPasswordCard = ({errorMessage,successMessage,resetFunction}

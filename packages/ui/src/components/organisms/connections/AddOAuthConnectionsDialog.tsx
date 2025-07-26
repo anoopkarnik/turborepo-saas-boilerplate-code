@@ -14,8 +14,8 @@ import { Textarea } from '@repo/ui/atoms/shadcn/textarea'
 import { useMutation } from '@tanstack/react-query'
 import { useToast } from '@repo/ui/hooks/use-toast'
 import {Loader2} from 'lucide-react'
-import { ConnectionCardProps } from '../lib/ts-types'
-import { AddOAuthConnection } from '../connections'
+import { ConnectionCardProps } from '@repo/connections/lib/ts-types'
+import { AddOAuthConnection } from '@repo/connections/connections'
 
 const AddOAuthConnectionsDialog = ({connection}:{connection:ConnectionCardProps}) => {
     const [open, setOpen] = useState(false)

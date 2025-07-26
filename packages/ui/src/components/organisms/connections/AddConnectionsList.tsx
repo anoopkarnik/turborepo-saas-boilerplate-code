@@ -1,5 +1,5 @@
 
-import { CONNECTIONS } from "../lib/constants";
+import { CONNECTIONS } from "@repo/connections/lib/constants";
 import ConnectionCard from "./ConnectionCard";
 
 const AddConnectionsList = () => {

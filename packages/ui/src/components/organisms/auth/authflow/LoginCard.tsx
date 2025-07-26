@@ -20,8 +20,8 @@ import { Input } from '@repo/ui/atoms/shadcn/input';
 import { FormResult } from './FormResult';
 import { useRouter } from 'next/navigation'
 import LoadingButton from '@repo/ui/molecules/misc/LoadingButton/v1';
-import { LoginSchema } from '../../../../utils/zod';
-import { LoginCardProps } from '../../../../utils/typescript';
+import { LoginSchema } from '@repo/auth/utils/zod';
+import { LoginCardProps } from '@repo/auth/utils/typescript';
 
 const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedinProvider,onEmailSubmit,
   onGoogleProviderSubmit,onGithubProviderSubmit,onLinkedinProviderSubmit,errorMessage}
@@ -115,7 +115,7 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
       </CardFooter> */}
       <CardFooter className='flex justify-center'>
         <button onClick={()=>router.push('/sign-up')} 
-        className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
+        className='text-sm text-center  cursor-pointer hover:underline'>
           Don't have an Account?
         </button>
       </CardFooter>

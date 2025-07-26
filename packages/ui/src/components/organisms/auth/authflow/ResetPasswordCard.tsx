@@ -15,8 +15,8 @@ import { Input } from '@repo/ui/atoms/shadcn/input';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import LoadingButton from '@repo/ui/molecules/misc/LoadingButton/v1';
-import { ResetPasswordSchema } from '../../../../utils/zod';
-import { ResetPasswordCardProps } from '../../../../utils/typescript';
+import { ResetPasswordSchema } from '@repo/auth/utils/zod';
+import { ResetPasswordCardProps } from '@repo/auth/utils/typescript';
 
 const ResetPasswordCard = ({errorMessage,successMessage,token,resetFunction}:ResetPasswordCardProps) => {
   const [pending, setPending] = useState(false)

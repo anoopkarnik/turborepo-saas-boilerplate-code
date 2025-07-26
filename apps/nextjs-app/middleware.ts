@@ -1,6 +1,4 @@
 import { NextResponse, type NextRequest } from "next/server"
-import { betterFetch } from "@better-fetch/fetch";
-import { Session } from "@repo/auth/better-auth/auth";
 import { getCookieCache } from "better-auth/cookies";
 
 const publicRoutes = ["/landing","/api/workflows","/public","/api/payments/dodo/webhook",

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 
 import Image from 'next/image'
-import { ConnectionCardProps, ConnectionType } from '../lib/ts-types';
+import { ConnectionCardProps, ConnectionType } from '@repo/connections/lib/ts-types';
 import { Card, CardDescription, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/card';
 import { Button } from '@repo/ui/atoms/shadcn/button';
 import AddApiKeyConnectionDialog from './AddApiKeyConnectionsDialog';
