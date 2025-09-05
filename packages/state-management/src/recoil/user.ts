@@ -1,6 +1,6 @@
 
 import { atom, useRecoilState, useSetRecoilState } from "recoil";
-import { AccountAccess, User, UserRole } from "@prisma/client";
+import { AccountAccess, User } from "@prisma/client";
 
 export const userDetailsState = atom<User>({
     key: "userDetailsState", // Unique key for this atom
@@ -10,13 +10,16 @@ export const userDetailsState = atom<User>({
         access: AccountAccess.TRIAL,
         name: "",
         email: "",
-        emailVerified: null,
-        role: UserRole.USER,
+        emailVerified: false,
+        role: "user",
         image: "",
         id: "",
         password: "",
         createdAt: new Date(),
         updatedAt: new Date(),
+        banned: false,
+        bannedReason: null,
+        banExpires: null,
     } // Initial empty array of notifications
 });
 

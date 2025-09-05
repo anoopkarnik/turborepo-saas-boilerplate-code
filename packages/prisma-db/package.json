@@ -7,7 +7,8 @@
   "scripts": {
     "test": "vitest",
     "postgres:generate": "npx prisma generate --schema prisma/schema",
-    "postgres:migrate": "npx prisma migrate dev --schema prisma/schema"
+    "postgres:migrate": "npx prisma migrate dev --schema prisma/schema",
+    "postgres:reset": "npx prisma migrate reset --force --schema prisma/schema"
   },
   "keywords": [],
   "author": "",

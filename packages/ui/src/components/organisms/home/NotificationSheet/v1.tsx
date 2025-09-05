@@ -1,10 +1,10 @@
 import React, { use, useEffect, useState } from 'react'
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '../../../molecules/shadcn/sheet'
 import { BellIcon } from 'lucide-react'
-import {  useNotifications,useSetNotifications } from '../../../../../../state-management/src/recoil/notification'
 import {updateAllNotificationsAction} from '@repo/server-utils/notification'
 import NotificationCard from '../../sidebar/NotificationCard/v1'
 import { Button } from '../../../atoms/shadcn/button'
+import { useNotifications, useSetNotifications } from '@repo/state-management/recoil/notification'
 
 const NotificationSheet = () => {
   const notifications = useNotifications();
@@ -41,7 +41,7 @@ const NotificationSheet = () => {
         </SheetDescription>
       </SheetHeader>
       <div className='mt-10'>
-        {notifications.map((notification) => (
+        {notifications?.map((notification) => (
           <NotificationCard key={notification.id} notification={notification}  />
         ))}
       </div>

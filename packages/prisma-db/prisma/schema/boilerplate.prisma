@@ -23,6 +23,7 @@ model User {
   questionsAsked    Question[]
   messengerUser  MessengerUser?
   twitterUser   TwitterUser?
+  agents       Agents[]
 
   password      String?
 

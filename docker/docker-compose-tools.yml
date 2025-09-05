@@ -12,30 +12,6 @@ services:
     networks:
       - turborepo-network
 
-  local-db-backup:
-    image: pgvector/pgvector:pg17  # or pg15, pg14 — whatever version you want
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
-    ports:
-      - 5434:5432
-    networks:
-      - turborepo-network
-
-  cloud-db-backup:
-    image: pgvector/pgvector:pg17
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
-    ports:
-      - 5433:5432
-    networks:
-      - turborepo-network
-
 networks:
   turborepo-network:
     external: true

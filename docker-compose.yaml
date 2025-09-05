@@ -10,13 +10,13 @@ services:
     image: anoopkarnik/turborepo-saas-boilerplate-code-nextjs-app:latest
     restart: always
   
-  docs:
+  node-backend:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile.docs
+      dockerfile: ./docker/Dockerfile.node-backend
     ports:
-      - "3010:3010"
-    image: anoopkarnik/turborepo-saas-boilerplate-code-docs:latest
+      - "8020:8020"
+    image: anoopkarnik/turborepo-saas-boilerplate-code-node-backend:latest
     restart: always
 
 

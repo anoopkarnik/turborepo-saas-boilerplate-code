@@ -8,6 +8,9 @@ CREATE SCHEMA IF NOT EXISTS "boilerplate_schema";
 CREATE SCHEMA IF NOT EXISTS "github_schema";
 
 -- CreateSchema
+CREATE SCHEMA IF NOT EXISTS "meetai_schema";
+
+-- CreateSchema
 CREATE SCHEMA IF NOT EXISTS "messenger_schema";
 
 -- CreateSchema
@@ -316,6 +319,18 @@ CREATE TABLE "github_schema"."SourceCodeEmbedding" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "SourceCodeEmbedding_pkey" PRIMARY KEY ("_id")
+);
+
+-- CreateTable
+CREATE TABLE "meetai_schema"."Agents" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "instructions" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" TEXT NOT NULL,
+
+    CONSTRAINT "Agents_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -640,6 +655,9 @@ ALTER TABLE "github_schema"."Issue" ADD CONSTRAINT "Issue_meetingId_fkey" FOREIG
 
 -- AddForeignKey
 ALTER TABLE "github_schema"."SourceCodeEmbedding" ADD CONSTRAINT "SourceCodeEmbedding_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "github_schema"."GithubProject"("_id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "meetai_schema"."Agents" ADD CONSTRAINT "Agents_userId_fkey" FOREIGN KEY ("userId") REFERENCES "boilerplate_schema"."User"("_id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "messenger_schema"."MessengerUser" ADD CONSTRAINT "MessengerUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "boilerplate_schema"."User"("_id") ON DELETE CASCADE ON UPDATE CASCADE;
