@@ -14,7 +14,7 @@ import { VercelAnalytics,VercelSpeedInsights } from "@repo/analytics/vercel.ts";
 import { GoogleAnalytics } from "@repo/analytics/google.ts";
 import { DataProvider } from "../context/DataContext";
 import ActiveStatus from "./(home)/(clones)/messenger-clone/_components/common/ActiveStatus";
-
+import { TRPCReactProvider } from "@/trpc/client";
 
 
 export const metadata: Metadata = {
@@ -30,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={` ${geistSans.className} ${geistMono.variable} ${cyberdyne.variable} antialiased`} >
+        <TRPCReactProvider>
           <TanstackProvider>
             <NextTopLoader color="#10b981" showSpinner={false} />
             <ThemeProvider defaultTheme="dark"   >
@@ -42,6 +43,7 @@ export default function RootLayout({
               <Toaster />
             </ThemeProvider>
           </TanstackProvider>
+        </TRPCReactProvider>
         <GoogleAnalytics
           gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID as string}
         />
