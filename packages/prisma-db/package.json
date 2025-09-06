@@ -10,6 +10,7 @@
     "postgres:migrate": "npx prisma migrate dev --schema prisma/schema",
     "postgres:reset": "npx prisma migrate reset --force --schema prisma/schema"
   },
+  "prisma": { "seed": "node --loader ts-node/esm src/seeds/seed.ts" },
   "keywords": [],
   "author": "",
   "exports": {

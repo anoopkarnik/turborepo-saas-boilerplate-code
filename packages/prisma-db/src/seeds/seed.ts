@@ -1,6 +1,7 @@
 import db from '../index.js'
 import { createCategories, createFTSIndex } from './aiCompanion.js'
 import { createAdminUser, createGuestUser } from './fakeUsers.js'
+import { createAgents } from './meet.js'
 
 
 async function main () {
@@ -8,6 +9,7 @@ async function main () {
     // await createAdminUser()
     await createCategories()
     await createFTSIndex()
+    await createAgents()
 }
 
 main()

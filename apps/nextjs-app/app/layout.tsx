@@ -15,6 +15,7 @@ import { GoogleAnalytics } from "@repo/analytics/google.ts";
 import { DataProvider } from "../context/DataContext";
 import ActiveStatus from "./(home)/(clones)/messenger-clone/_components/common/ActiveStatus";
 import { TRPCReactProvider } from "@/trpc/client";
+import { NuqsAdapter } from "nuqs/adapters/next";
 
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={` ${geistSans.className} ${geistMono.variable} ${cyberdyne.variable} antialiased`} >
+        <NuqsAdapter>
         <TRPCReactProvider>
           <TanstackProvider>
             <NextTopLoader color="#10b981" showSpinner={false} />
@@ -44,6 +46,7 @@ export default function RootLayout({
             </ThemeProvider>
           </TanstackProvider>
         </TRPCReactProvider>
+        </NuqsAdapter>
         <GoogleAnalytics
           gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID as string}
         />

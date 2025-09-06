@@ -1,25 +1,24 @@
 import db from '../index.js';
 
-export async function createCategories(){
-    try{
-        await db.category.createMany({
-            data: [
-                {name: "Famous People"},
-                {name: "Movies & TV"},
-                {name: "Musicians"},
-                {name: "Games"},
-                {name: "Animals"},
-                {name: "Philosophy"},
-                {name: "Scientists"}
-            ]
-        })
-    } catch(error){
-        console.log('Error creating default categories:', error);
-    } finally{
-        await db.$disconnect();
-    }
+export async function createCategories() {
+  try {
+    await db.category.createMany({
+      data: [
+        { name: "Famous People" },
+        { name: "Movies & TV" },
+        { name: "Musicians" },
+        { name: "Philosophy" },
+        { name: "Scientists" }
+      ],
+      skipDuplicates: true // <- safe to re-run
+    });
+    console.log('🔥 Default Companion categories created successfully!');
+  } catch (error) {
+    console.error('Error creating default categories:', error);
+    throw error;
+  }
+  // <-- no disconnect here
 }
-
 
 export async function createFTSIndex() {
   try {
@@ -34,7 +33,5 @@ export async function createFTSIndex() {
     console.log('🔥 Full-text index created successfully!');
   } catch (err) {
     console.error('🚨 Error creating full-text index:', err);
-  } finally {
-    await db.$disconnect();
-  }
+  } 
 }
