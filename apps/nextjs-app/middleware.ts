@@ -8,7 +8,9 @@ const authRoutes =["/sign-in","/sign-up","/error","/forgot-password","/reset-pas
 
 const apiAuthPrefix = "/api/auth"
 
-const allowedOrigins = ['http://localhost:3000', 'https://bsamaritan.com','https://bayesian-labs.com']
+const allowedOrigins = ['http://localhost:3000', 'https://dev.boilerplate.bayesian-labs.com',
+    'https://boilerplate.bayesian-labs.com','http://localhost:3001',
+    'http://127.0.0.1:3000','http://127.0.0.1:3001']
 
 const corsOptions = {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -18,13 +20,17 @@ const secret = process.env.AUTH_SECRET!;
 
 export default async function middleware(req:NextRequest){
 
-      // Check the origin from the request
     const origin = req.headers.get('origin') ?? ''
     const pathName = req.nextUrl.pathname;
-    const isAllowedOrigin = allowedOrigins.includes(origin)
+    const sameHost = origin && new URL(origin).host === req.nextUrl.host;
+    const isAllowedOrigin = sameHost || allowedOrigins.includes(origin)
+
 
     const isApiAuthRoute = pathName.startsWith(apiAuthPrefix);
     const isPublicRoute =  publicRoutes.some((route) => pathName.startsWith(route));
+    const isAuthRoute = authRoutes.includes(pathName);
+    
+  
     const response = NextResponse.next()
 
 
@@ -60,8 +66,7 @@ export default async function middleware(req:NextRequest){
 
 
 
-    const isAuthRoute = authRoutes.includes(pathName);
-  
+
 
     if (isAuthRoute){
         if (isLoggedIn){
@@ -70,9 +75,9 @@ export default async function middleware(req:NextRequest){
         return response;
     }
 
-    if (!isLoggedIn && !isPublicRoute){
-        return Response.redirect(new URL('/landing',req.nextUrl));
-    }
+    // if (!isLoggedIn && !isPublicRoute){
+    //     return Response.redirect(new URL('/landing',req.nextUrl));
+    // }
 
 
     return response

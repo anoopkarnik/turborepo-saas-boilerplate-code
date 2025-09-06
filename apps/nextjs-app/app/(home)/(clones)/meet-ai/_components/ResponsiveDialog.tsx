@@ -17,15 +17,15 @@ const ResponsiveDialog= ({ title, description, children, open, onOpenChange }:Pr
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
-        <DrawerHeader>
-            <DrawerTitle >
-                {title}
-            </DrawerTitle>
-            <DrawerDescription >
-                {description}
-            </DrawerDescription>
-        </DrawerHeader>
         <DrawerContent className='p-4'>
+            <DrawerHeader>
+                <DrawerTitle >
+                    {title}
+                </DrawerTitle>
+                <DrawerDescription >
+                    {description}
+                </DrawerDescription>
+            </DrawerHeader>
             {children}
         </DrawerContent>
       </Drawer>
@@ -33,15 +33,15 @@ const ResponsiveDialog= ({ title, description, children, open, onOpenChange }:Pr
 }
    return (
      <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogHeader>
-            <DialogTitle>
-                {title}
-            </DialogTitle>
-            <DialogDescription>
-                {description}
-            </DialogDescription>
-        </DialogHeader>
         <DialogContent className='p-4'>
+            <DialogHeader>
+                <DialogTitle>
+                    {title}
+                </DialogTitle>
+                <DialogDescription>
+                    {description}
+                </DialogDescription>
+            </DialogHeader>
             {children}
         </DialogContent>
      </Dialog>

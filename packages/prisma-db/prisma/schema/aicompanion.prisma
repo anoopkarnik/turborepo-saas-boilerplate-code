@@ -1,6 +1,6 @@
 model Category {
   id            String          @id @default(cuid())
-  name          String
+  name          String          @unique
   companions   Companion[]
 
   createdAt DateTime @default(now())
