@@ -1,5 +1,5 @@
 import React from 'react'
-import ResponsiveDialog from './ResponsiveDialog';
+import ResponsiveDialog from '../ResponsiveDialog';
 import AgentForm from './AgentForm';
 
 interface NewAgentDialogProps {

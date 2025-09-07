@@ -2,13 +2,13 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 60; // equivalent: export const fetchCache = 'force-no-store';
 
 import { getQueryClient, trpc } from "@/trpc/server"
-import AgentsView from "../_components/AgentsView"
+import AgentsView from "../_components/Agents/AgentsView"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Suspense } from "react";
 import LoadingState from "../_components/LoadingState";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorState from "../_components/ErrorState";
-import AgentsListHeader from "../_components/AgentsListHeader";
+import AgentsListHeader from "../_components/Agents/AgentsListHeader";
 import { SearchParams } from "nuqs/server";
 import { loadSearchParams } from "../_utils/params";
 

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { useAgentsFilters } from '../_hooks/useAgentsFilters';
+import { useAgentsFilters } from '../../_hooks/useAgentsFilters';
 import { Input } from '@repo/ui/atoms/shadcn/input';
 import { SearchIcon } from 'lucide-react';
 

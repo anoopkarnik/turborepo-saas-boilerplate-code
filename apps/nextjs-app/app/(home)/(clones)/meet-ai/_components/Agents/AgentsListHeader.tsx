@@ -3,9 +3,9 @@ import { Button } from '@repo/ui/atoms/shadcn/button'
 import { PlusIcon, XCircleIcon } from 'lucide-react'
 import React, { useState } from 'react'
 import NewAgentDialog from './NewAgentDialog'
-import { useAgentsFilters } from '../_hooks/useAgentsFilters'
+import { useAgentsFilters } from '../../_hooks/useAgentsFilters'
 import AgentsSearchFilter from './AgentsSearchFilter'
-import { DEFAULT_PAGE } from '../_utils/constants'
+import { DEFAULT_PAGE } from '../../_utils/constants'
 
 const AgentsListHeader = () => {
     const [filters, setFilters] = useAgentsFilters();

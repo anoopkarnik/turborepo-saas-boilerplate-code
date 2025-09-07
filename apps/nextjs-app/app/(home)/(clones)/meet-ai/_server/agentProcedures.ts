@@ -1,18 +1,52 @@
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import db  from "@repo/prisma-db/client"
-import { agentsInsertSchema } from "../_utils/zod";
+import { agentsInsertSchema, agentsUpdateSchema } from "../_utils/zod";
 import {z } from 'zod'
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE, MIN_PAGE_SIZE } from "../_utils/constants";
+import { TRPCError } from "@trpc/server";
+import { update } from "lodash";
 
 export const agentsRouter = createTRPCRouter({
-    getOne: protectedProcedure
-    .input(z.object({id:z.string()}))
-    .query( async ({input}) =>{
-        const agent = await db.agents.findFirst({
+    update: protectedProcedure
+    .input(agentsUpdateSchema)
+    .mutation(async ({input, ctx}) =>{
+        const updatedAgent = await db.agents.update({
             where: {
-                id: input.id
+                id: input.id,
+                userId: ctx.auth.user.id
+            },
+            data: {
+               ...input
             }
         });
+        if (!updatedAgent) {
+            throw new TRPCError({ code: 'NOT_FOUND', message: 'Agent not found' });
+        }
+        return updatedAgent;
+    }),
+    remove: protectedProcedure
+    .input(z.object({id:z.string()}))
+    .mutation(async ({input, ctx}) =>{
+        await db.agents.delete({
+            where: {
+                id: input.id,
+                userId: ctx.auth.user.id
+            }
+        });
+        return { success: true };
+    }),
+    getOne: protectedProcedure
+    .input(z.object({id:z.string()}))
+    .query( async ({input, ctx}) =>{
+        const agent = await db.agents.findFirst({
+            where: {
+                id: input.id,
+                userId: ctx.auth.user.id
+            }
+        });
+        if (!agent) {
+            throw new TRPCError({ code: 'NOT_FOUND', message: 'Agent not found' });
+        }
          return {
         ...agent,
         meetingCount: 5, // static for now, replace with dynamic logic later
