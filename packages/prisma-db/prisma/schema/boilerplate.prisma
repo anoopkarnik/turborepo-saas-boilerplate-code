@@ -24,6 +24,7 @@ model User {
   messengerUser  MessengerUser?
   twitterUser   TwitterUser?
   agents       Agents[]
+  meetings     Meetings[]
 
   password      String?
 

@@ -43,6 +43,7 @@ export const sidebarItems:sidebarHeaderProps =
           ]},
           {title: "Meet AI", url: "/meet-ai", icon: VideoIcon, isActive:false, items:[
               {title: "Agents", url: "/meet-ai/agents", icon: BotIcon},
+              {title: "Meetings", url: "/meet-ai/meetings", icon: VideoIcon},
           ]},
     ]
 }

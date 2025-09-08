@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 60; // equivalent: export const fetchCache = 'force-no-store';
+
 import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Suspense } from "react";

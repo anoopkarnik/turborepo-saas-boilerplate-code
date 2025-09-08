@@ -4,7 +4,6 @@ import { agentsInsertSchema, agentsUpdateSchema } from "../_utils/zod";
 import {z } from 'zod'
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE, MIN_PAGE_SIZE } from "../_utils/constants";
 import { TRPCError } from "@trpc/server";
-import { update } from "lodash";
 
 export const agentsRouter = createTRPCRouter({
     update: protectedProcedure

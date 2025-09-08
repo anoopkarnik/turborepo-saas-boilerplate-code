@@ -10,7 +10,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { MoreVerticalIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import React from 'react'
 
-const AgentIdViewHeader = ({ agentId, agentname, onEdit, onRemove }: Props) => {
+const AgentIdViewHeader = ({  agentname, onEdit, onRemove }: Props) => {
   return (
     <div className='flex items-center justify-between'>
         <h2 className='font-medium text-xl text-foreground'>{agentname}</h2>

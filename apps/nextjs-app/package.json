@@ -63,6 +63,7 @@
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "firebase": "^11.6.0",
+    "humanize-duration": "^3.33.0",
     "ignore": "^5.3.2",
     "install": "^0.13.0",
     "ioredis": "^5.4.2",
@@ -106,6 +107,7 @@
   "devDependencies": {
     "@capacitor/cli": "^7.1.0",
     "@tanstack/react-query-devtools": "^5.64.1",
+    "@types/humanize-duration": "^3.27.4",
     "@types/jest": "^29.5.14",
     "@types/lodash": "^4.17.16",
     "@types/node": "^20.17.16",

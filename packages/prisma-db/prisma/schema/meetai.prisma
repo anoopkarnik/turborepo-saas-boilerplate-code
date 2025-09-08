@@ -3,6 +3,8 @@ model Agents {
     name        String
     instructions String
 
+    meetings   Meetings[]
+
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
     
@@ -11,3 +13,37 @@ model Agents {
 
     @@schema("meetai_schema")
 }   
+
+model Meetings {
+    id          String   @id @default(cuid())
+    name        String
+    status     AgentMeetingStatus @default(UPCOMING)
+
+    startedAt   DateTime?
+    endedAt     DateTime?
+
+    transcriptUrl String?
+    recordingUrl  String?
+    summary       String?
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    
+    userId      String
+    user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    agentId     String
+    agent       Agents   @relation(fields: [agentId], references: [id], onDelete: Cascade)
+
+    @@schema("meetai_schema")
+}   
+
+enum AgentMeetingStatus {
+    UPCOMING
+    ONGOING
+    COMPLETED
+    CANCELLED
+    PROCESSING
+
+    @@schema("meetai_schema")
+}
