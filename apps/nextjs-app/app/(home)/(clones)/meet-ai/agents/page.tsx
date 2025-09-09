@@ -10,7 +10,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorState from "../_components/ErrorState";
 import AgentsListHeader from "../_components/Agents/AgentsListHeader";
 import { SearchParams } from "nuqs/server";
-import { loadSearchParams } from "../_utils/params";
+import { loadSearchParams } from "../_components/Agents/params";
 
 interface Props {
   searchParams: Promise<SearchParams>

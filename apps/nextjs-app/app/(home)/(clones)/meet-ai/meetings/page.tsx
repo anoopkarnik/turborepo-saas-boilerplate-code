@@ -9,11 +9,21 @@ import { ErrorBoundary } from "react-error-boundary";
 import LoadingState from "../_components/LoadingState";
 import ErrorState from "../_components/ErrorState";
 import MeetingsListHeader from "../_components/Meetings/MeetingsListHeader";
+import { loadSearchParams } from "../_components/Meetings/params";
+import { SearchParams } from "nuqs/server";
 
-const MeetAIPage = async () => {
+interface Props { 
+   searchParams: Promise<SearchParams>;
+}
+
+const MeetAIPage = async ({ searchParams }:Props) => {
+
+    const filters = await loadSearchParams(searchParams);
 
     const queryClient = getQueryClient();
-    void queryClient.prefetchQuery(trpc.meetings.getMany.queryOptions({}))
+    void queryClient.prefetchQuery(trpc.meetings.getMany.queryOptions({
+        ...filters,
+    }))
 
   return (
     <>

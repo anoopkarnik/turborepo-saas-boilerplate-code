@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '@repo/ui/hooks/use-toast';
 import { useConfirm } from '../../_hooks/useConfirm';
 import UpdateAgentDialog from './UpdateAgentDialog';
+import GeneratedAvatar from '../GeneratedAvatar';
 
 const AgentIdView = ({ agentId }: Props) => {
     const trpc = useTRPC();
@@ -62,6 +63,7 @@ const AgentIdView = ({ agentId }: Props) => {
             <div className='bg-background rounded-lg border'>
                 <div className="px-4 py-5 gap-y-5 flex flex-col col-span-5">
                     <div className='flex items-center gap-x-3'>
+                        <GeneratedAvatar seed={data.name} variant="botttsNeutral" className="size-8"/>
                         <h2 className='text-2xl font-medium'>{data.name}</h2>
                         
                     </div>

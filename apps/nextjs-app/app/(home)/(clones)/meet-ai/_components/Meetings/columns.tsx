@@ -8,6 +8,7 @@ import { format} from "date-fns"
 import { cn } from "@repo/ui/lib/utils"
 import { formatDuration } from "../../_utils/functions"
 import {AgentMeetingStatus} from "@prisma/client"
+import GeneratedAvatar from "../GeneratedAvatar"
 
 const statusIconsMap: Record<AgentMeetingStatus, React.ElementType> = {
   [AgentMeetingStatus.UPCOMING]: ClockArrowUpIcon,
@@ -36,6 +37,7 @@ export const columns: ColumnDef<Meeting>[] = [
         <div className="flex items-center gap-x-2">
           <div className="flex items-center gap-x-1">
             <CornerDownRightIcon className="size-3 text-muted-foreground"/>
+            <GeneratedAvatar seed={row.original?.agent?.name} variant="botttsNeutral" className="size-4"/>
             <span className="text-sm text-muted-foreground max-w-[200px] truncate">
                 {row.original?.agent?.name || 'No Agent'}
             </span>

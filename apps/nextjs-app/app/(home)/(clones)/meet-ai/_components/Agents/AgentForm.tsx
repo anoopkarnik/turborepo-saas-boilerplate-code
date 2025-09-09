@@ -10,6 +10,7 @@ import { Input } from '@repo/ui/atoms/shadcn/input';
 import { Textarea } from '@repo/ui/atoms/shadcn/textarea';
 import { Button } from '@repo/ui/atoms/shadcn/button';
 import { useToast } from '@repo/ui/hooks/use-toast';
+import GeneratedAvatar from '../GeneratedAvatar';
 
 interface AgentFormProps {
     onSuccess?: () => void;
@@ -93,7 +94,11 @@ const AgentForm = ({onSuccess, onCancel, initialValues}: AgentFormProps) => {
                        <FormItem>
                            <FormLabel>Name</FormLabel>
                            <FormControl>
-                               <Input {...field} placeholder='e.g. Math Tutor' />
+                                <div className='flex items-center gap-2'>
+                                    <Input {...field} placeholder='e.g. Math Tutor' />
+                                    <GeneratedAvatar seed={form.watch("name")} variant="botttsNeutral"/>
+
+                                </div>
                            </FormControl>
                            <FormMessage />
                        </FormItem>

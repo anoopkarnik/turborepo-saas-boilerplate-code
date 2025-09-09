@@ -6,6 +6,7 @@ import NewAgentDialog from './NewAgentDialog'
 import { useAgentsFilters } from '../../_hooks/useAgentsFilters'
 import AgentsSearchFilter from './AgentsSearchFilter'
 import { DEFAULT_PAGE } from '../../_utils/constants'
+import { ScrollArea, ScrollBar } from '@repo/ui/molecules/shadcn/scroll-area'
 
 const AgentsListHeader = () => {
     const [filters, setFilters] = useAgentsFilters();
@@ -26,15 +27,18 @@ const AgentsListHeader = () => {
                     New Agent
                 </Button>
             </div>
-            <div className='flex items-center gap-x-2 p-1'>
-                <AgentsSearchFilter />
-                {isAnyFilterModified && (
-                    <Button variant="outline" size="sm" onClick={onClearFilters}>
-                        <XCircleIcon size={14} className='mr-2' />
-                        Clear 
-                    </Button>
-                )}
-            </div>
+            <ScrollArea>
+                <div className='flex items-center gap-x-2 p-1'>
+                    <AgentsSearchFilter />
+                    {isAnyFilterModified && (
+                        <Button variant="outline" size="sm" onClick={onClearFilters}>
+                            <XCircleIcon  className='mr-2 size-4' />
+                            Clear 
+                        </Button>
+                    )}
+                </div>
+                <ScrollBar orientation="horizontal" />
+            </ScrollArea>
         </div>
         <NewAgentDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </>

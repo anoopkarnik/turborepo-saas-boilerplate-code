@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { AgentsGetMany } from "../../_utils/types"
 import { CornerDownRightIcon, VideoIcon } from "lucide-react"
 import { Badge } from "@repo/ui/atoms/shadcn/badge"
+import GeneratedAvatar from "../GeneratedAvatar"
 
 type Agents = AgentsGetMany['items'][number]
 export const columns: ColumnDef<Agents>[] = [
@@ -13,6 +14,7 @@ export const columns: ColumnDef<Agents>[] = [
     cell: ({ row }) => (
       <div className="flex flex-col gap-y-1">
         <div className="flex items-center gap-x-2">
+          <GeneratedAvatar seed={row.original?.name} variant="botttsNeutral" className="size-6"/>
           <div className="font-semibold capitalize">{row.original?.name}</div>
         </div>
         <div className="flex items-center gap-x-2">
