@@ -75,9 +75,9 @@ export default async function middleware(req:NextRequest){
         return response;
     }
 
-    // if (!isLoggedIn && !isPublicRoute){
-    //     return Response.redirect(new URL('/landing',req.nextUrl));
-    // }
+    if (!isLoggedIn && !isPublicRoute){
+        return Response.redirect(new URL('/landing',req.nextUrl));
+    }
 
 
     return response
