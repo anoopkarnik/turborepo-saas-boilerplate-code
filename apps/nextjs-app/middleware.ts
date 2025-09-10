@@ -64,10 +64,6 @@ export default async function middleware(req:NextRequest){
         response.headers.set(key, value)
       })
 
-
-
-
-
     if (isAuthRoute){
         if (isLoggedIn){
             return Response.redirect(new URL('/',req.nextUrl));
