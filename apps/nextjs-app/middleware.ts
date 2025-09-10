@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server"
 import { getCookieCache } from "better-auth/cookies";
 
 const publicRoutes = ["/landing","/api/workflows","/public","/api/payments/dodo/webhook",
-    "/api/payments/stripe/webhook"]
+    "/api/payments/stripe/webhook","/api/streamio","/api/inngest"]
 
 const authRoutes =["/sign-in","/sign-up","/error","/forgot-password","/reset-password",'/email-verified']
 
