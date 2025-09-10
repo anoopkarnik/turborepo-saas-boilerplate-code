@@ -7,8 +7,79 @@ import { meetingsInsertSchema, meetingsUpdateSchema } from "../_utils/zod";
 import {AgentMeetingStatus} from '@prisma/client'
 import { streamVideo } from "../_utils/stream-video";
 import { generateAvatarUri } from "../_utils/avatar";
+import JSONL from "jsonl-parse-stringify";
+import { StreamTranscriptItem } from "../_utils/types";
+import { streamChat } from "../_utils/stream-chat";
 
 export const meetingsRouter = createTRPCRouter({
+    generateChatToken: protectedProcedure
+        .mutation(async ({ctx}) =>{
+            const token = streamChat.createToken(ctx.auth.user.id);
+            await streamChat.upsertUser({
+                id: ctx.auth.user.id,
+                role: "admin"
+            });
+            return token;
+        }),
+    getTranscript: protectedProcedure
+        .input(z.object({id: z.string()}))
+        .query(async ({input, ctx}) =>{
+            const existingMeeting = await db.meetings.findFirst({
+                where: {
+                    id: input.id,
+                    userId: ctx.auth.user.id
+                }
+            });
+            if (!existingMeeting) {
+                throw new TRPCError({ code: 'NOT_FOUND', message: 'Meeting not found' });
+            }
+            if (!existingMeeting.transcriptUrl){
+                return [];
+            }
+            const transcript = await fetch(existingMeeting.transcriptUrl)
+                .then(res => res.text())
+                .then((text) => JSONL.parse<StreamTranscriptItem>(text))
+                .catch(() => {
+                    return []
+                });
+        
+            const speakersIds = [
+                ...new Set(transcript.map(item => item.speaker_id))
+            ]
+            const userSpeakers = await db.user.findMany({
+                where: { id: { in: speakersIds } },
+            }).then((users) => users.map(user => ({ 
+                ...user, image: user.image ?? generateAvatarUri({seed: user.name, variant: "initials" }) })));
+
+            const agentSpeakers = await db.agents.findMany({
+                where: { id: { in: speakersIds } },
+            }).then((agents) => agents.map(agent => ({ 
+                ...agent, image: generateAvatarUri({seed: agent.name, variant: "botttsNeutral" }) })));
+
+            const speakers = [...userSpeakers, ...agentSpeakers];
+
+            const transcriptWithSpeakers = transcript.map(item => {
+                const speaker = speakers.find(s => s.id === item.speaker_id);
+                if (!speaker) {
+                    return {
+                        ...item,
+                        user: {
+                            name: "Unknown",
+                            image: generateAvatarUri({seed: "Unknown", variant: "initials" })
+                        }
+                    }
+                }
+                return {
+                    ...item,
+                    user: {
+                        name: speaker.name,
+                        image: speaker.image
+                    }
+                }
+            })
+
+            return transcriptWithSpeakers;
+        }),
     generateToken: protectedProcedure
         .mutation(async ({ctx}) =>{
             await streamVideo.upsertUsers([

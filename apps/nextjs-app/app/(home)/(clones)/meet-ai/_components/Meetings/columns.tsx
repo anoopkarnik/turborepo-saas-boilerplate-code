@@ -19,11 +19,11 @@ const statusIconsMap: Record<AgentMeetingStatus, React.ElementType> = {
 }
   
 const statusColorsMap: Record<AgentMeetingStatus, string> = {
-  [AgentMeetingStatus.UPCOMING]: "bg-yellow-800/20 text-yellow-800 border-yellow-800/5",
-  [AgentMeetingStatus.ONGOING]: "bg-blue-800/20 text-blue-800 border-blue-800/5",
-  [AgentMeetingStatus.COMPLETED]: "bg-emerald-800/20 text-emerald-800 border-emerald-800/5",
-  [AgentMeetingStatus.PROCESSING]: "bg-gray-800/20 text-gray-800 border-gray-800/5",
-  [AgentMeetingStatus.CANCELLED]: "bg-rose-500/20 text-rose-800 border-rose-800/5"
+  [AgentMeetingStatus.UPCOMING]: "bg-yellow-800 text-gray-300 border-yellow-800/5",
+  [AgentMeetingStatus.ONGOING]: "bg-blue-800 text-gray-300 border-blue-800/5",
+  [AgentMeetingStatus.COMPLETED]: "bg-emerald-800 text-gray-300 border-emerald-800/5",
+  [AgentMeetingStatus.PROCESSING]: "bg-gray-800 text-gray-300 border-gray-300/5 ",
+  [AgentMeetingStatus.CANCELLED]: "bg-rose-500 text-rose-800 border-rose-800/5"
 }
 
 type Meeting = MeetingsGetMany['items'][number]

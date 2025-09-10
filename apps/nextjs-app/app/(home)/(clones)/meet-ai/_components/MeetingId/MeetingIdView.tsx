@@ -16,6 +16,7 @@ import UpcomingState from './UpcomingState';
 import OngoingState from './OngoingState';
 import CancelledState from './CancelledState';
 import ProcessingState from './ProcessingState';
+import CompletedState from './CompletedState';
 
 const MeetingIdView = ({ meetingId }: Props) => {
     const trpc = useTRPC();
@@ -70,12 +71,11 @@ const MeetingIdView = ({ meetingId }: Props) => {
         <MeetingIdViewHeader meetingId={meetingId} meetingname={data.name}
             onEdit={() => setUpdateMeetingDialogOpen(true)} onRemove={handleRemoveMeeting} />
             {isCancelled && <CancelledState />}
-            {isCompleted && <div>Meeting has been completed</div>}
+            {isCompleted && <CompletedState data={data} />}
             {isOngoing && <OngoingState meetingId={meetingId} />}
             {isProcessing && <ProcessingState />}
             {isUpcoming && <UpcomingState 
                 meetingId={meetingId}
-                onCancelMeeting={() => {}}
                 isCancelling={false}
             />}
 

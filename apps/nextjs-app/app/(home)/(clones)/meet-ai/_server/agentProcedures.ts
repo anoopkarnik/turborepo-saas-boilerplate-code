@@ -41,6 +41,9 @@ export const agentsRouter = createTRPCRouter({
             where: {
                 id: input.id,
                 userId: ctx.auth.user.id
+            },
+            include:{
+                _count: { select: { meetings: true } }
             }
         });
         if (!agent) {
@@ -48,7 +51,7 @@ export const agentsRouter = createTRPCRouter({
         }
          return {
         ...agent,
-        meetingCount: 5, // static for now, replace with dynamic logic later
+        meetingCount: agent._count.meetings,
         };
     }),
     getMany: protectedProcedure
@@ -67,6 +70,9 @@ export const agentsRouter = createTRPCRouter({
             orderBy: {
                 createdAt: 'desc'
             },
+            include: {
+                _count: { select: { meetings: true } }
+            },
             take: pageSize,
             skip: (page - 1) * pageSize
         });
@@ -80,7 +86,7 @@ export const agentsRouter = createTRPCRouter({
         return {
             items: agents.map(agent => ({
                 ...agent,
-                meetingCount: 5, // or some dynamic count logic
+                meetingCount: agent._count.meetings,
             })),
             total: total,
             totalPages
